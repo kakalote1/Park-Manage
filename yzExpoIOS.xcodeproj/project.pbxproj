@@ -70,7 +70,6 @@
 		153C8B04229E529A0042CDCE /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = ../../../../../../../../usr/lib/libsqlite3.dylib; sourceTree = "<group>"; };
 		153C8B06229E52B80042CDCE /* libc++.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.1.dylib"; path = "../../../../../../../../usr/lib/libc++.1.dylib"; sourceTree = "<group>"; };
 		20842B358AE5EBDEFB863FFA /* libPods-ImoocHybridIOSNativeUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ImoocHybridIOSNativeUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		215BA996C351C320BE50B555 /* Pods-ImoocHybridIOSNative.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImoocHybridIOSNative.release.xcconfig"; path = "Target Support Files/Pods-ImoocHybridIOSNative/Pods-ImoocHybridIOSNative.release.xcconfig"; sourceTree = "<group>"; };
 		5AA31254435F9C8A7988414C /* libPods-ImoocHybridIOSNativeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ImoocHybridIOSNativeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E56D2C46661C510B4EF7CDE /* Pods_yzExpoIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_yzExpoIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F508DD62592E449004A0D64 /* TabFourth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabFourth.h; sourceTree = "<group>"; };
@@ -206,7 +205,6 @@
 		3F23B9BFAE9C40F60717A06D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				215BA996C351C320BE50B555 /* Pods-ImoocHybridIOSNative.release.xcconfig */,
 				C1C4BD8592D7378F2E50805E /* Pods-yzExpoIOS.release.xcconfig */,
 			);
 			path = Pods;
