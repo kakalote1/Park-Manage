@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ConversationCell">
+            <connections>
+                <outlet property="headImg" destination="FTQ-Xr-F3m" id="bD9-1Q-3YT"/>
+                <outlet property="messageLabel" destination="tef-IW-cob" id="efc-o1-4jT"/>
+                <outlet property="nameLabel" destination="DKg-4o-09c" id="fz5-e5-jK3"/>
+                <outlet property="timeLabel" destination="xq4-JV-7BP" id="gyv-tr-RYv"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="92" id="UbZ-Th-3qi">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="92"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UbZ-Th-3qi" id="Lal-CN-bWL">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="92"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FTQ-Xr-F3m" userLabel="headImg">
+                        <rect key="frame" x="16" y="13" width="66" height="66"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="66" id="EZB-ql-ATj"/>
+                            <constraint firstAttribute="width" constant="66" id="bHH-bu-awX"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="masksToBounds" value="YES"/>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="6"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="臭豆腐" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DKg-4o-09c" userLabel="nameLabel">
+                        <rect key="frame" x="90" y="13" width="52" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="在干嘛？" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tef-IW-cob" userLabel="messageLabel">
+                        <rect key="frame" x="90" y="42" width="214" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="15:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xq4-JV-7BP" userLabel="timeLabel">
+                        <rect key="frame" x="267" y="15" width="37" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="FTQ-Xr-F3m" firstAttribute="leading" secondItem="Lal-CN-bWL" secondAttribute="leadingMargin" id="6vi-hY-4m3"/>
+                    <constraint firstItem="FTQ-Xr-F3m" firstAttribute="centerY" secondItem="Lal-CN-bWL" secondAttribute="centerY" id="fBU-B4-Kxx"/>
+                    <constraint firstItem="DKg-4o-09c" firstAttribute="leading" secondItem="FTQ-Xr-F3m" secondAttribute="trailing" constant="8" id="fNg-PN-hT1"/>
+                    <constraint firstItem="FTQ-Xr-F3m" firstAttribute="top" secondItem="DKg-4o-09c" secondAttribute="top" id="r7r-KB-vYQ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="-417" y="-89"/>
+        </tableViewCell>
+    </objects>
+</document>
