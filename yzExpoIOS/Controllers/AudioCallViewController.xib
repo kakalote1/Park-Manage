@@ -12,7 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AudioCallViewController">
             <connections>
                 <outlet property="acceptCallBtn" destination="euu-tn-uam" id="czB-S8-VEi"/>
-                <outlet property="stateLbl" destination="6GE-oW-nOy" id="pki-Cc-eFJ"/>
+                <outlet property="stateLbl" destination="6GE-oW-nOy" id="xas-nv-wIv"/>
                 <outlet property="telNumberLbl" destination="2WI-LP-p7H" id="fK3-1p-djO"/>
                 <outlet property="view" destination="dMD-mt-Lzj" id="3KH-Mb-hvg"/>
             </connections>

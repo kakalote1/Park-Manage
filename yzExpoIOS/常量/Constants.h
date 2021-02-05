@@ -13,7 +13,7 @@
 
 //服务地址
 //#define BASE_WEB_URL  @"http://192.168.1.161/yzExpo/#/"
-//#define BASE_WEB_URL  @"http://localhost:8081/#/"
+//#define BASE_WEB_URL  @"http://192.168.1.206:8081/"
 #define BASE_WEB_URL @"http://123.207.189.27:7108/yzExpo/"
 
 

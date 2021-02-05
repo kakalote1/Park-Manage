@@ -17,6 +17,5 @@
 
 -(void)serverRequestWithUrl;
 
-
 @end
 

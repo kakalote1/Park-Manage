@@ -47,8 +47,13 @@
     // 创建根控制器
     self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
-    [_window setRootViewController:[ViewController new]];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController: self.window.rootViewController];
+//    [_window setRootViewController:[ViewController new]];
+    ViewController *viewController = [[ViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:viewController];
+    self.window.rootViewController = nav;
+    viewController.navigationController.navigationBarHidden = YES;
+    self.navigationController = (UINavigationController *) self.window.rootViewController;
+    
     [self.window makeKeyAndVisible];
 
 //    创建控制器

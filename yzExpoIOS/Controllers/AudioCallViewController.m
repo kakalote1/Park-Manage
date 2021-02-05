@@ -91,6 +91,7 @@
             [self.navigationController popViewControllerAnimated:YES];
         });
         self.avSession = nil;
+        
     }
 }
 

@@ -15,6 +15,8 @@
 #import <ScPoc/SipRegEvent.h>
 #import "AppDelegate.h"
 #import <AVFoundation/AVFoundation.h>
+#import "CallUtil.h"
+#import <AFNetworking/AFNetworking.h>
 
 @interface ViewController ()<WKNavigationDelegate,WKUIDelegate, WKScriptMessageHandler>
 
@@ -102,6 +104,11 @@
     [self.wkUserContentController addScriptMessageHandler:self name:@"register"];
     [self.wkUserContentController addScriptMessageHandler:self name:@"login"];
     [self.wkUserContentController addScriptMessageHandler:self name:@"logout"];
+    [self.wkUserContentController addScriptMessageHandler:self name:@"makeAudioCall"];
+    [self.wkUserContentController addScriptMessageHandler:self name:@"makeVideoCall"];
+    [self.wkUserContentController addScriptMessageHandler:self name:@"makeAudioGroupCall"];
+    [self.wkUserContentController addScriptMessageHandler:self name:@"makeVideoGroupCall"];
+    [self.wkUserContentController addScriptMessageHandler:self name:@"uidLogin"];
 }
 
 #pragma mark -  Alert弹窗
@@ -164,7 +171,7 @@
 //OC在JS调用方法做的处理
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
 {
-    
+    CallUtil *call = [[CallUtil alloc] init];
     // 根据name做想做的操作
     //前端主动JS发送消息，前端指令动作
     if ([@"register" isEqualToString:message.name]) {
@@ -173,6 +180,21 @@
         [self login:message.body];
     } else if ([@"logout" isEqualToString:message.name]) {
         [self logout:message.body];
+    } else if ([@"makeAudioCall" isEqualToString:message.name]) {
+        NSLog(@"body:%@",message.body);
+        [call makeAudioCall:message.body];
+    } else if ([@"makeVideoCall" isEqualToString:message.name]) {
+        NSLog(@"body:%@",message.body);
+        [call makeVideoCall:message.body];
+    } else if ([@"makeAudioGroupCall" isEqualToString:message.name]) {
+        NSLog(@"body:%@",message.body);
+        [call makeAudioGroupCall:message.body];
+    } else if ([@"makeVideoGroupCall" isEqualToString:message.name]) {
+        NSLog(@"body:%@",message.body);
+        [call makeVideoGroupCall:message.body];
+    } else if ([@"uidLogin" isEqualToString:message.name]) {
+        NSLog(@"body:%@",message.body);
+        [self uidLogin:message.body];
     }
 }
 
@@ -220,8 +242,47 @@
 //    if (![self checkPermission]) {
 //        return;
 //    }
-    [[self getSipContext] loginToSip:@"3001" pass:@"abc123" host:@"122.224.180.122" port:12379 tls:TRUE];
-    NSLog(@"hhhhhhh");
+//    [[self getSipContext] loginToSip:@"3001" pass:@"abc123" host:@"122.224.180.122" port:12379 tls:TRUE];
+//    NSLog(@"hhhhhhh");
+}
+
+// sip登录
+- (void)uidLogin:(NSString *)uid {
+    NSLog(@"uid: %@",uid);
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        NSString *ip = @"122.224.180.122";
+        NSString *port = @"12381";
+        NSString *urlStr = [[NSString alloc] initWithFormat:@"http://%@:%@/zlw/data/thirdPartLogin/getSipUserInfoByUid?uid=%@",ip,port,uid];
+        NSLog(@"url: %@", urlStr);
+        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+        NSURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:urlStr parameters:nil error:nil];
+        NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse *response, NSData *responseObject, NSError *error) {
+            if (error) {
+                NSLog(@"Error: %@", error);
+            } else {
+//                NSLog(@"请求数据%@  \n\n\n data%@", response, responseObject);
+                NSLog(@"12222%@",responseObject);
+                NSData *jsonStr = (NSData *)responseObject;
+                NSLog(@"jsonStr: %@",jsonStr);
+                NSDictionary *dict = (NSDictionary *) jsonStr;
+                NSDictionary *data = [dict objectForKey:@"data"];
+                NSLog(@"dict: %@", data);
+                NSString *sipTel = [data objectForKey:@"sipTel"];
+                NSString *ip = [data objectForKey:@"natIp"];
+                NSString *pwd = [data objectForKey:@"sipPwd"];
+                NSString *portStr = [data objectForKey:@"tlsPort"];
+                int port = [portStr intValue];
+                [[self getSipContext] loginToSip:sipTel pass:pwd host:ip port:port tls:TRUE];
+            }
+        }];
+        [dataTask resume];
+
+    });
+    if (![self checkPermission]) {
+        return;
+    }
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -247,6 +308,7 @@
 //    });
 }
 
+// 检查权限
 - (BOOL)checkPermission {
     if (![self checkMicrophone]) {
         return  NO;
@@ -257,6 +319,7 @@
     return YES;
 }
 
+// 检查麦克风权限
 - (BOOL)checkMicrophone {
     AVAuthorizationStatus microphoneStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio];
     switch (microphoneStatus) {
@@ -290,6 +353,7 @@
     return YES;
 }
 
+// 跳转麦克风设置
 - (void)goMicrophoneSet {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"您还没有允许麦克风权限" message:@"去设置一下吧" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
@@ -317,6 +381,7 @@
     [session requestRecordPermission:^(BOOL granted) {}];
 }
 
+// 检查相机权限
 - (BOOL)checkCamera {
     AVAuthorizationStatus microphoneStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
     switch (microphoneStatus) {
@@ -335,6 +400,7 @@
     }
 }
 
+// 跳转相机设置
 -(void) goCameraSet {
     UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"您还没有允许录像权限" message:@"去设置一下吧" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction * cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];

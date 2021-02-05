@@ -29,6 +29,7 @@
 		FE2357EE25C80037008C8280 /* AudioCallViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE2357EC25C80037008C8280 /* AudioCallViewController.xib */; };
 		FE23587E25C92EB5008C8280 /* ScPoc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE23587C25C92EA4008C8280 /* ScPoc.framework */; };
 		FE23587F25C92EB5008C8280 /* ScPoc.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FE23587C25C92EA4008C8280 /* ScPoc.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FE2358B925CA9594008C8280 /* CallUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = FE2358B825CA9594008C8280 /* CallUtil.m */; };
 		FE7FBA3C2596E69B00AB45FD /* ConversationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE7FBA3B2596E69B00AB45FD /* ConversationCell.m */; };
 		FE7FBA3F2596E6C200AB45FD /* ConversationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE7FBA3E2596E6C200AB45FD /* ConversationCell.xib */; };
 		FE7FBA52259727D500AB45FD /* ConversationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FE7FBA51259727D500AB45FD /* ConversationModel.m */; };
@@ -90,6 +91,8 @@
 		FE2357EC25C80037008C8280 /* AudioCallViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AudioCallViewController.xib; sourceTree = "<group>"; };
 		FE23587C25C92EA4008C8280 /* ScPoc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScPoc.framework; path = "../../../Library/Containers/com.tencent.xinWeChat/Data/Library/Application Support/com.tencent.xinWeChat/2.0b4.0.9/e7407489f1fc9cb2fb404e37b23bfe3f/Message/MessageTemp/499956408355c48784eaba77a130bb3f/File/ScPoc.xcframework/ios-x86_64-simulator/ScPoc.framework"; sourceTree = "<group>"; };
 		FE23589A25C96EDE008C8280 /* ScPoc.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = ScPoc.xcframework; path = "../../工作/枣林湾/iSOSipTalkDemo/ScPoc/ScPoc.xcframework"; sourceTree = "<group>"; };
+		FE2358B725CA9594008C8280 /* CallUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CallUtil.h; sourceTree = "<group>"; };
+		FE2358B825CA9594008C8280 /* CallUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CallUtil.m; sourceTree = "<group>"; };
 		FE7FBA3A2596E69B00AB45FD /* ConversationCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConversationCell.h; sourceTree = "<group>"; };
 		FE7FBA3B2596E69B00AB45FD /* ConversationCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConversationCell.m; sourceTree = "<group>"; };
 		FE7FBA3E2596E6C200AB45FD /* ConversationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConversationCell.xib; sourceTree = "<group>"; };
@@ -232,6 +235,8 @@
 			isa = PBXGroup;
 			children = (
 				FE7FBA462597229D00AB45FD /* ReactiveView.h */,
+				FE2358B725CA9594008C8280 /* CallUtil.h */,
+				FE2358B825CA9594008C8280 /* CallUtil.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -390,6 +395,7 @@
 				FE7FBA52259727D500AB45FD /* ConversationModel.m in Sources */,
 				FE2357E625C7FEC4008C8280 /* BaseViewController.m in Sources */,
 				FE7FBDDE259ACEC100AB45FD /* GenerateTestUserSig.m in Sources */,
+				FE2358B925CA9594008C8280 /* CallUtil.m in Sources */,
 				5FC66B622589E24B00312A87 /* TabSecond.m in Sources */,
 				150C8C79229CCFE1004E9B1C /* AppDelegate.m in Sources */,
 			);
