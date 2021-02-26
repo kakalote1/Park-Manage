@@ -17,6 +17,7 @@
 #import <ScPoc/SipRegEvent.h>
 #import <ScPoc/SipInviteEvent.h>
 #import "AudioCallViewController.h"
+#import "VideoCallViewController.h"
 
 @interface AppDelegate ()
 
@@ -248,11 +249,15 @@
     }
 }
 
+// 弹出通话页面
 - (void)showCallView:(SipSession *)session {
     dispatch_sync(dispatch_get_main_queue(), ^{
         UIViewController *vc;
+        // 判断是否为视频通话
         if ([session isVideoCall]) {
-            
+            VideoCallViewController *videoVc = [[VideoCallViewController alloc] init];
+            [videoVc setAvSession:session];
+            vc = videoVc;
         } else {
             AudioCallViewController *audioVc = [[AudioCallViewController alloc] initWithNibName:@"AudioCallViewController" bundle:[NSBundle mainBundle]];
             [audioVc setAvSession:session];

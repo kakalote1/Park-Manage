@@ -9,7 +9,6 @@
 #import "ViewController.h"
 #import <WebKit/WebKit.h>
 #import "Constants.h"
-#import "GenerateTestUserSig.h"
 #import <ScPoc/SipContext.h>
 #import <ScPoc/SipSession.h>
 #import <ScPoc/SipRegEvent.h>
@@ -233,8 +232,6 @@
     [self.userDefaults removeObjectForKey:AUTO_LOGIN];
     [self.webView evaluateJavaScript:@"logoutCallback(true)" completionHandler:nil];
 }
-
-
 
 // 模拟sip登录
 - (void)Login {

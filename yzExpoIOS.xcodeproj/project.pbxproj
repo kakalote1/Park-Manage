@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -24,27 +24,31 @@
 		5FC66B5F2589E23200312A87 /* TabFirst.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FC66B5E2589E23200312A87 /* TabFirst.m */; };
 		5FC66B622589E24B00312A87 /* TabSecond.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FC66B612589E24B00312A87 /* TabSecond.m */; };
 		5FC66B652589E26300312A87 /* TabThird.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FC66B642589E26300312A87 /* TabThird.m */; };
+		E12E18822FEA93F84048527B /* Pods_yzExpoIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E56D2C46661C510B4EF7CDE /* Pods_yzExpoIOS.framework */; };
 		FE2357E625C7FEC4008C8280 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE2357E525C7FEC4008C8280 /* BaseViewController.m */; };
 		FE2357ED25C80037008C8280 /* AudioCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE2357EB25C80037008C8280 /* AudioCallViewController.m */; };
-		FE2357EE25C80037008C8280 /* AudioCallViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE2357EC25C80037008C8280 /* AudioCallViewController.xib */; };
-		FE23587E25C92EB5008C8280 /* ScPoc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE23587C25C92EA4008C8280 /* ScPoc.framework */; };
-		FE23587F25C92EB5008C8280 /* ScPoc.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FE23587C25C92EA4008C8280 /* ScPoc.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FE2358B925CA9594008C8280 /* CallUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = FE2358B825CA9594008C8280 /* CallUtil.m */; };
+		FE2358C325CCDE41008C8280 /* AudioCallViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE2358C225CCDE41008C8280 /* AudioCallViewController.xib */; };
+		FE2358C925CE6CA8008C8280 /* VideoCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE2358C825CE6CA8008C8280 /* VideoCallViewController.m */; };
+		FE2358E025CE8D66008C8280 /* Bugly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE7FBD81259ABBFE00AB45FD /* Bugly.framework */; };
+		FE2358F725CF7A6E008C8280 /* CallKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE2358F525CF7A29008C8280 /* CallKit.framework */; };
+		FE2358F825CF7A73008C8280 /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE2358F625CF7A35008C8280 /* PushKit.framework */; };
+		FE2358FC25CF8996008C8280 /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = FE2358FB25CF8996008C8280 /* UIView+Toast.m */; };
 		FE7FBA3C2596E69B00AB45FD /* ConversationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE7FBA3B2596E69B00AB45FD /* ConversationCell.m */; };
 		FE7FBA3F2596E6C200AB45FD /* ConversationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE7FBA3E2596E6C200AB45FD /* ConversationCell.xib */; };
 		FE7FBA52259727D500AB45FD /* ConversationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FE7FBA51259727D500AB45FD /* ConversationModel.m */; };
-		FE7FBD82259ABBFE00AB45FD /* Bugly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE7FBD81259ABBFE00AB45FD /* Bugly.framework */; };
-		FE7FBDDE259ACEC100AB45FD /* GenerateTestUserSig.m in Sources */ = {isa = PBXBuildFile; fileRef = FE7FBDDD259ACEC100AB45FD /* GenerateTestUserSig.m */; };
+		FE86DD5425E22ADF0004A053 /* ScPoc.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE86DD5225E22A620004A053 /* ScPoc.xcframework */; };
+		FE86DD5525E22ADF0004A053 /* ScPoc.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FE86DD5225E22A620004A053 /* ScPoc.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		FE2357B725C7D525008C8280 /* Embed Frameworks */ = {
+		FE2358D125CE84F4008C8280 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				FE23587F25C92EB5008C8280 /* ScPoc.framework in Embed Frameworks */,
+				FE86DD5525E22ADF0004A053 /* ScPoc.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -52,7 +56,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		150C8C74229CCFE1004E9B1C /* yzExpoIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = yzExpoIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		150C8C74229CCFE1004E9B1C /* 扬州世园会.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "扬州世园会.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		150C8C77229CCFE1004E9B1C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		150C8C78229CCFE1004E9B1C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		150C8C7A229CCFE1004E9B1C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
@@ -83,16 +87,19 @@
 		5FC66B642589E26300312A87 /* TabThird.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabThird.m; sourceTree = "<group>"; };
 		C1C4BD8592D7378F2E50805E /* Pods-yzExpoIOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yzExpoIOS.release.xcconfig"; path = "Target Support Files/Pods-yzExpoIOS/Pods-yzExpoIOS.release.xcconfig"; sourceTree = "<group>"; };
 		FE23579725C7A585008C8280 /* yzExpoIOS.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = yzExpoIOS.entitlements; sourceTree = "<group>"; };
-		FE2357A725C7CD75008C8280 /* AFNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AFNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE2357E425C7FEC4008C8280 /* BaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		FE2357E525C7FEC4008C8280 /* BaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		FE2357EA25C80037008C8280 /* AudioCallViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioCallViewController.h; sourceTree = "<group>"; };
 		FE2357EB25C80037008C8280 /* AudioCallViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioCallViewController.m; sourceTree = "<group>"; };
-		FE2357EC25C80037008C8280 /* AudioCallViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AudioCallViewController.xib; sourceTree = "<group>"; };
-		FE23587C25C92EA4008C8280 /* ScPoc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScPoc.framework; path = "../../../Library/Containers/com.tencent.xinWeChat/Data/Library/Application Support/com.tencent.xinWeChat/2.0b4.0.9/e7407489f1fc9cb2fb404e37b23bfe3f/Message/MessageTemp/499956408355c48784eaba77a130bb3f/File/ScPoc.xcframework/ios-x86_64-simulator/ScPoc.framework"; sourceTree = "<group>"; };
-		FE23589A25C96EDE008C8280 /* ScPoc.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = ScPoc.xcframework; path = "../../工作/枣林湾/iSOSipTalkDemo/ScPoc/ScPoc.xcframework"; sourceTree = "<group>"; };
 		FE2358B725CA9594008C8280 /* CallUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CallUtil.h; sourceTree = "<group>"; };
 		FE2358B825CA9594008C8280 /* CallUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CallUtil.m; sourceTree = "<group>"; };
+		FE2358C225CCDE41008C8280 /* AudioCallViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AudioCallViewController.xib; sourceTree = "<group>"; };
+		FE2358C725CE6CA7008C8280 /* VideoCallViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoCallViewController.h; sourceTree = "<group>"; };
+		FE2358C825CE6CA8008C8280 /* VideoCallViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoCallViewController.m; sourceTree = "<group>"; };
+		FE2358F525CF7A29008C8280 /* CallKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CallKit.framework; path = System/Library/Frameworks/CallKit.framework; sourceTree = SDKROOT; };
+		FE2358F625CF7A35008C8280 /* PushKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PushKit.framework; path = System/Library/Frameworks/PushKit.framework; sourceTree = SDKROOT; };
+		FE2358FA25CF8996008C8280 /* UIView+Toast.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+Toast.h"; sourceTree = "<group>"; };
+		FE2358FB25CF8996008C8280 /* UIView+Toast.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+Toast.m"; sourceTree = "<group>"; };
 		FE7FBA3A2596E69B00AB45FD /* ConversationCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConversationCell.h; sourceTree = "<group>"; };
 		FE7FBA3B2596E69B00AB45FD /* ConversationCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConversationCell.m; sourceTree = "<group>"; };
 		FE7FBA3E2596E6C200AB45FD /* ConversationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConversationCell.xib; sourceTree = "<group>"; };
@@ -103,6 +110,9 @@
 		FE7FBD93259ABC8600AB45FD /* ImSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImSDK.framework; path = Pods/TXIMSDK_iOS/ImSDK.framework; sourceTree = "<group>"; };
 		FE7FBDDC259ACEC100AB45FD /* GenerateTestUserSig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GenerateTestUserSig.h; path = ../../../TIMSDK/iOS/TUIKitDemo/TUIKitDemo/Debug/GenerateTestUserSig.h; sourceTree = "<group>"; };
 		FE7FBDDD259ACEC100AB45FD /* GenerateTestUserSig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GenerateTestUserSig.m; path = ../../../TIMSDK/iOS/TUIKitDemo/TUIKitDemo/Debug/GenerateTestUserSig.m; sourceTree = "<group>"; };
+		FE86DD5225E22A620004A053 /* ScPoc.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = ScPoc.xcframework; sourceTree = "<group>"; };
+		FE86DD5625E22B240004A053 /* ScPoc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScPoc.framework; path = "ScPoc/ScPoc.xcframework/ios-x86_64-simulator/ScPoc.framework"; sourceTree = "<group>"; };
+		FEBB350E25DFCADF00C41A7B /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,16 +120,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FE7FBD82259ABBFE00AB45FD /* Bugly.framework in Frameworks */,
 				153C8B07229E52B80042CDCE /* libc++.1.dylib in Frameworks */,
 				153C8B05229E529A0042CDCE /* libsqlite3.dylib in Frameworks */,
 				153C8B03229E52680042CDCE /* libz.1.dylib in Frameworks */,
 				153C8B01229E51FF0042CDCE /* CoreGraphics.framework in Frameworks */,
+				FE2358F825CF7A73008C8280 /* PushKit.framework in Frameworks */,
+				FE2358E025CE8D66008C8280 /* Bugly.framework in Frameworks */,
 				153C8AFF229E51F80042CDCE /* CFNetwork.framework in Frameworks */,
 				153C8AFD229E51F00042CDCE /* CoreTelephony.framework in Frameworks */,
-				FE23587E25C92EB5008C8280 /* ScPoc.framework in Frameworks */,
+				FE2358F725CF7A6E008C8280 /* CallKit.framework in Frameworks */,
 				153C8AFB229E51E90042CDCE /* Security.framework in Frameworks */,
 				153C8AF9229E51A30042CDCE /* SystemConfiguration.framework in Frameworks */,
+				FE86DD5425E22ADF0004A053 /* ScPoc.xcframework in Frameworks */,
+				E12E18822FEA93F84048527B /* Pods_yzExpoIOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,7 +153,7 @@
 		150C8C75229CCFE1004E9B1C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				150C8C74229CCFE1004E9B1C /* yzExpoIOS.app */,
+				150C8C74229CCFE1004E9B1C /* 扬州世园会.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -148,6 +161,7 @@
 		150C8C76229CCFE1004E9B1C /* yzExpoIOS */ = {
 			isa = PBXGroup;
 			children = (
+				FE2358F925CF86D9008C8280 /* Category */,
 				FE23579725C7A585008C8280 /* yzExpoIOS.entitlements */,
 				FE7FBDDB259ACEA400AB45FD /* Debug */,
 				FE7FBA4C2597278E00AB45FD /* Models */,
@@ -186,8 +200,10 @@
 		2769C1D52D81F1288D212326 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FE23589A25C96EDE008C8280 /* ScPoc.xcframework */,
-				FE2357A725C7CD75008C8280 /* AFNetworking.framework */,
+				FE86DD5625E22B240004A053 /* ScPoc.framework */,
+				FEBB350E25DFCADF00C41A7B /* libc++.tbd */,
+				FE2358F525CF7A29008C8280 /* CallKit.framework */,
+				FE2358F625CF7A35008C8280 /* PushKit.framework */,
 				FE7FBD93259ABC8600AB45FD /* ImSDK.framework */,
 				FE7FBD81259ABBFE00AB45FD /* Bugly.framework */,
 				153C8B06229E52B80042CDCE /* libc++.1.dylib */,
@@ -216,9 +232,18 @@
 		FE2357A325C7ACA4008C8280 /* ScPoc */ = {
 			isa = PBXGroup;
 			children = (
-				FE23587C25C92EA4008C8280 /* ScPoc.framework */,
+				FE86DD5225E22A620004A053 /* ScPoc.xcframework */,
 			);
 			path = ScPoc;
+			sourceTree = "<group>";
+		};
+		FE2358F925CF86D9008C8280 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				FE2358FA25CF8996008C8280 /* UIView+Toast.h */,
+				FE2358FB25CF8996008C8280 /* UIView+Toast.m */,
+			);
+			path = Category;
 			sourceTree = "<group>";
 		};
 		FE7FBA392596E63800AB45FD /* Views */ = {
@@ -248,7 +273,9 @@
 				FE2357E525C7FEC4008C8280 /* BaseViewController.m */,
 				FE2357EA25C80037008C8280 /* AudioCallViewController.h */,
 				FE2357EB25C80037008C8280 /* AudioCallViewController.m */,
-				FE2357EC25C80037008C8280 /* AudioCallViewController.xib */,
+				FE2358C225CCDE41008C8280 /* AudioCallViewController.xib */,
+				FE2358C725CE6CA7008C8280 /* VideoCallViewController.h */,
+				FE2358C825CE6CA8008C8280 /* VideoCallViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -283,7 +310,7 @@
 				150C8C71229CCFE1004E9B1C /* Frameworks */,
 				150C8C72229CCFE1004E9B1C /* Resources */,
 				887C44755A2AEE12CD6C0A54 /* [CP] Embed Pods Frameworks */,
-				FE2357B725C7D525008C8280 /* Embed Frameworks */,
+				FE2358D125CE84F4008C8280 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -291,7 +318,7 @@
 			);
 			name = yzExpoIOS;
 			productName = ImoocHybridIOSNative;
-			productReference = 150C8C74229CCFE1004E9B1C /* yzExpoIOS.app */;
+			productReference = 150C8C74229CCFE1004E9B1C /* 扬州世园会.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -332,7 +359,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE7FBA3F2596E6C200AB45FD /* ConversationCell.xib in Resources */,
-				FE2357EE25C80037008C8280 /* AudioCallViewController.xib in Resources */,
+				FE2358C325CCDE41008C8280 /* AudioCallViewController.xib in Resources */,
 				150C8C81229CCFE3004E9B1C /* Assets.xcassets in Resources */,
 				150C8C7F229CCFE1004E9B1C /* Main.storyboard in Resources */,
 			);
@@ -354,7 +381,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-yzExpoIOS/Pods-yzExpoIOS-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 		E7598147F8D556BC469BA7DF /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -387,6 +413,8 @@
 			files = (
 				FE7FBA3C2596E69B00AB45FD /* ConversationCell.m in Sources */,
 				5FC66B5F2589E23200312A87 /* TabFirst.m in Sources */,
+				FE2358C925CE6CA8008C8280 /* VideoCallViewController.m in Sources */,
+				FE2358FC25CF8996008C8280 /* UIView+Toast.m in Sources */,
 				5F508DD82592E449004A0D64 /* TabFourth.m in Sources */,
 				150C8C7C229CCFE1004E9B1C /* ViewController.m in Sources */,
 				150C8C87229CCFE3004E9B1C /* main.m in Sources */,
@@ -394,7 +422,6 @@
 				FE2357ED25C80037008C8280 /* AudioCallViewController.m in Sources */,
 				FE7FBA52259727D500AB45FD /* ConversationModel.m in Sources */,
 				FE2357E625C7FEC4008C8280 /* BaseViewController.m in Sources */,
-				FE7FBDDE259ACEC100AB45FD /* GenerateTestUserSig.m in Sources */,
 				FE2358B925CA9594008C8280 /* CallUtil.m in Sources */,
 				5FC66B622589E24B00312A87 /* TabSecond.m in Sources */,
 				150C8C79229CCFE1004E9B1C /* AppDelegate.m in Sources */,
@@ -482,18 +509,18 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CODE_SIGN_ENTITLEMENTS = yzExpoIOS/yzExpoIOS.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Yangzhou Yuanbo Investment Development Co., Ltd. (KZW9D97FJ7)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = KZW9D97FJ7;
-				EXCLUDED_ARCHS = "arm64 armv7s armv7";
+				ENABLE_BITCODE = NO;
+				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/ScPoc",
-					"$(USER_LIBRARY_DIR)/Containers/com.tencent.xinWeChat/Data/Library/Application\\ Support/com.tencent.xinWeChat/2.0b4.0.9/e7407489f1fc9cb2fb404e37b23bfe3f/Message/MessageTemp/499956408355c48784eaba77a130bb3f/File/ScPoc.xcframework/ios-x86_64-simulator",
-					"$(USER_LIBRARY_DIR)/Containers/com.tencent.xinWeChat/Data/Library/Application\\ Support/com.tencent.xinWeChat/2.0b4.0.9/e7407489f1fc9cb2fb404e37b23bfe3f/Message/MessageTemp/499956408355c48784eaba77a130bb3f/File/ScPoc.xcframework/ios-x86_64-simulator",
+					"$(PROJECT_DIR)/ScPoc/ScPoc.xcframework/ios-x86_64-simulator",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -507,11 +534,19 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				MARKETING_VERSION = 1.0.3;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"$(inherited)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.data.yzExpo;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "扬州世园会";
 				PROVISIONING_PROFILE_SPECIFIER = yzExpo;
+				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = 1;
+				VALIDATE_WORKSPACE = YES;
 			};
 			name = Release;
 		};
