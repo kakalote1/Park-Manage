@@ -18,8 +18,12 @@
 #import <ScPoc/SipInviteEvent.h>
 #import "AudioCallViewController.h"
 #import "VideoCallViewController.h"
+#import "XGPush.h"
+#import "XGPushPrivate.h"
+#import <UserNotifications/UserNotifications.h>
+#import "LoginViewController.h"
 
-@interface AppDelegate ()
+@interface AppDelegate () <XGPushDelegate>
 
 @property (strong, nonatomic) AFHTTPSessionManager *sessionManager;
 
@@ -31,6 +35,10 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+	[[XGPush defaultManager] configureClusterDomainName:@"tpns.sh.tencent.com"];
+	[[XGPush defaultManager] startXGWithAccessID:1680003686 accessKey:@"IR5D9D6I6KFW" delegate:nil];
+
     
     // 初始化sc_sip核心类库
     NSLog(@"didFinishLaunchingWithOptions");
@@ -49,12 +57,19 @@
     self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
 //    [_window setRootViewController:[ViewController new]];
-    ViewController *viewController = [[ViewController alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:viewController];
+    
+    LoginViewController *loginViewController = [[LoginViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginViewController];
     self.window.rootViewController = nav;
-    viewController.navigationController.navigationBarHidden = YES;
+    loginViewController.navigationController.navigationBarHidden = YES;
     self.navigationController = (UINavigationController *) self.window.rootViewController;
     
+//    ViewController *viewController = [[ViewController alloc] init];
+//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:viewController];
+//    self.window.rootViewController = nav;
+//    viewController.navigationController.navigationBarHidden = YES;
+//    self.navigationController = (UINavigationController *) self.window.rootViewController;
+//    
     [self.window makeKeyAndVisible];
 
 //    创建控制器
@@ -264,7 +279,11 @@
             vc = audioVc;
         }
         [self.navigationController pushViewController:vc animated:YES];
+//        ViewController *vc2 = [[ViewController alloc] init];
+//        [vc2 presentViewController:vc animated:YES completion:nil];
     });
 }
 
 @end
+
+

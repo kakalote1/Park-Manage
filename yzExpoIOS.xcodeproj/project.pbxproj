@@ -20,10 +20,14 @@
 		153C8B03229E52680042CDCE /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 153C8B02229E52680042CDCE /* libz.1.dylib */; };
 		153C8B05229E529A0042CDCE /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 153C8B04229E529A0042CDCE /* libsqlite3.dylib */; };
 		153C8B07229E52B80042CDCE /* libc++.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 153C8B06229E52B80042CDCE /* libc++.1.dylib */; };
+		1B302795E9BAA3D1D8848D4A /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FA294665B8769902668284C6 /* libsqlite3.0.tbd */; };
 		5F508DD82592E449004A0D64 /* TabFourth.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F508DD72592E449004A0D64 /* TabFourth.m */; };
 		5FC66B5F2589E23200312A87 /* TabFirst.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FC66B5E2589E23200312A87 /* TabFirst.m */; };
 		5FC66B622589E24B00312A87 /* TabSecond.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FC66B612589E24B00312A87 /* TabSecond.m */; };
 		5FC66B652589E26300312A87 /* TabThird.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FC66B642589E26300312A87 /* TabThird.m */; };
+		7203E9202737CEDFEEEE7EDF /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F09527A495DDA11A1F04ACC /* libz.tbd */; };
+		86E6256E8E67C42972C118FE /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87E9D2D3CD22548864D7AD65 /* CoreData.framework */; };
+		C1768C51FA255861232FAD4E /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E72312FEAAADACE7BEDD158 /* UserNotifications.framework */; };
 		E12E18822FEA93F84048527B /* Pods_yzExpoIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E56D2C46661C510B4EF7CDE /* Pods_yzExpoIOS.framework */; };
 		FE2357E625C7FEC4008C8280 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE2357E525C7FEC4008C8280 /* BaseViewController.m */; };
 		FE2357ED25C80037008C8280 /* AudioCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE2357EB25C80037008C8280 /* AudioCallViewController.m */; };
@@ -34,21 +38,26 @@
 		FE2358F725CF7A6E008C8280 /* CallKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE2358F525CF7A29008C8280 /* CallKit.framework */; };
 		FE2358F825CF7A73008C8280 /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE2358F625CF7A35008C8280 /* PushKit.framework */; };
 		FE2358FC25CF8996008C8280 /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = FE2358FB25CF8996008C8280 /* UIView+Toast.m */; };
+		FE2DFFDB25EC95A7006FF01F /* ScPoc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE2DFFDA25EC95A7006FF01F /* ScPoc.framework */; };
+		FE50798E25FEF6850013FFCB /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE50798D25FEF6850013FFCB /* LoginViewController.m */; };
+		FE50799025FF09700013FFCB /* TPNSInAppMessage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE50798F25FF09700013FFCB /* TPNSInAppMessage.framework */; };
+		FE50799225FF09CA0013FFCB /* libXG-SDK-Cloud.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AC2C28E49FA7AC42C85BDE /* libXG-SDK-Cloud.a */; };
+		FE50799325FF09EC0013FFCB /* XGMTACloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8EBB7233C16C94802477FD3 /* XGMTACloud.framework */; };
 		FE7FBA3C2596E69B00AB45FD /* ConversationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE7FBA3B2596E69B00AB45FD /* ConversationCell.m */; };
 		FE7FBA3F2596E6C200AB45FD /* ConversationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE7FBA3E2596E6C200AB45FD /* ConversationCell.xib */; };
 		FE7FBA52259727D500AB45FD /* ConversationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FE7FBA51259727D500AB45FD /* ConversationModel.m */; };
-		FE86DD5425E22ADF0004A053 /* ScPoc.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE86DD5225E22A620004A053 /* ScPoc.xcframework */; };
-		FE86DD5525E22ADF0004A053 /* ScPoc.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FE86DD5225E22A620004A053 /* ScPoc.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FE999C41260098E5003F2239 /* ScPoc.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE4B4C5925F5F7D300409335 /* ScPoc.xcframework */; };
+		FE999C42260098E5003F2239 /* ScPoc.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FE4B4C5925F5F7D300409335 /* ScPoc.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		FE2358D125CE84F4008C8280 /* Embed Frameworks */ = {
+		FE999C43260098E5003F2239 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				FE86DD5525E22ADF0004A053 /* ScPoc.xcframework in Embed Frameworks */,
+				FE999C42260098E5003F2239 /* ScPoc.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -74,9 +83,13 @@
 		153C8B02229E52680042CDCE /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = ../../../../../../../../usr/lib/libz.1.dylib; sourceTree = "<group>"; };
 		153C8B04229E529A0042CDCE /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = ../../../../../../../../usr/lib/libsqlite3.dylib; sourceTree = "<group>"; };
 		153C8B06229E52B80042CDCE /* libc++.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.1.dylib"; path = "../../../../../../../../usr/lib/libc++.1.dylib"; sourceTree = "<group>"; };
+		1B6455F3F8932648CC0C29B9 /* XGPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XGPush.h; sourceTree = "<group>"; };
 		20842B358AE5EBDEFB863FFA /* libPods-ImoocHybridIOSNativeUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ImoocHybridIOSNativeUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4066EDD88CD328CABB078DEA /* NotificationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationService.m; sourceTree = "<group>"; };
+		49AC2C28E49FA7AC42C85BDE /* libXG-SDK-Cloud.a */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = archive.ar; path = "libXG-SDK-Cloud.a"; sourceTree = "<group>"; };
 		5AA31254435F9C8A7988414C /* libPods-ImoocHybridIOSNativeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ImoocHybridIOSNativeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E56D2C46661C510B4EF7CDE /* Pods_yzExpoIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_yzExpoIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5EC359C4EAFE66DFC29B8B17 /* libXGExtension.a */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = archive.ar; path = libXGExtension.a; sourceTree = "<group>"; };
 		5F508DD62592E449004A0D64 /* TabFourth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabFourth.h; sourceTree = "<group>"; };
 		5F508DD72592E449004A0D64 /* TabFourth.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabFourth.m; sourceTree = "<group>"; };
 		5FC66B5D2589E23200312A87 /* TabFirst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabFirst.h; sourceTree = "<group>"; };
@@ -85,7 +98,16 @@
 		5FC66B612589E24B00312A87 /* TabSecond.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabSecond.m; sourceTree = "<group>"; };
 		5FC66B632589E26300312A87 /* TabThird.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabThird.h; sourceTree = "<group>"; };
 		5FC66B642589E26300312A87 /* TabThird.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabThird.m; sourceTree = "<group>"; };
+		6362B691BEB1D9049123E57F /* XGExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XGExtension.h; sourceTree = "<group>"; };
+		6F09527A495DDA11A1F04ACC /* libz.tbd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libz.tbd; sourceTree = "<group>"; };
+		7CE8995A8880F7F2A1DB3E49 /* XGPushPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XGPushPrivate.h; sourceTree = "<group>"; };
+		7E72312FEAAADACE7BEDD158 /* UserNotifications.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/UserNotifications.framework; sourceTree = "<group>"; };
+		83434C7CB47C217A925B2116 /* NotificationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationService.h; sourceTree = "<group>"; };
+		87E9D2D3CD22548864D7AD65 /* CoreData.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CoreData.framework; sourceTree = "<group>"; };
+		AC197A02A87A51A939546251 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Info.plist; sourceTree = "<group>"; };
 		C1C4BD8592D7378F2E50805E /* Pods-yzExpoIOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yzExpoIOS.release.xcconfig"; path = "Target Support Files/Pods-yzExpoIOS/Pods-yzExpoIOS.release.xcconfig"; sourceTree = "<group>"; };
+		D8EBB7233C16C94802477FD3 /* XGMTACloud.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = XGMTACloud.framework; path = /Users/bonustrack/XcodeProjects/yzExpoIOS/TPNS/XGMTACloud.framework; sourceTree = "<group>"; };
+		FA294665B8769902668284C6 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libsqlite3.0.tbd; sourceTree = "<group>"; };
 		FE23579725C7A585008C8280 /* yzExpoIOS.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = yzExpoIOS.entitlements; sourceTree = "<group>"; };
 		FE2357E425C7FEC4008C8280 /* BaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		FE2357E525C7FEC4008C8280 /* BaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
@@ -100,6 +122,11 @@
 		FE2358F625CF7A35008C8280 /* PushKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PushKit.framework; path = System/Library/Frameworks/PushKit.framework; sourceTree = SDKROOT; };
 		FE2358FA25CF8996008C8280 /* UIView+Toast.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+Toast.h"; sourceTree = "<group>"; };
 		FE2358FB25CF8996008C8280 /* UIView+Toast.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+Toast.m"; sourceTree = "<group>"; };
+		FE2DFFDA25EC95A7006FF01F /* ScPoc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScPoc.framework; path = "../../Library/Developer/Xcode/DerivedData/yzExpoIOS-cetntlaslizrjzbialxwrdrppcbg/Build/Products/Release-iphoneos/ScPoc.framework"; sourceTree = "<group>"; };
+		FE4B4C5925F5F7D300409335 /* ScPoc.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = ScPoc.xcframework; sourceTree = "<group>"; };
+		FE50798C25FEF6850013FFCB /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		FE50798D25FEF6850013FFCB /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		FE50798F25FF09700013FFCB /* TPNSInAppMessage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TPNSInAppMessage.framework; path = TPNS/InAppMessage/TPNSInAppMessage.framework; sourceTree = "<group>"; };
 		FE7FBA3A2596E69B00AB45FD /* ConversationCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConversationCell.h; sourceTree = "<group>"; };
 		FE7FBA3B2596E69B00AB45FD /* ConversationCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConversationCell.m; sourceTree = "<group>"; };
 		FE7FBA3E2596E6C200AB45FD /* ConversationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConversationCell.xib; sourceTree = "<group>"; };
@@ -107,11 +134,8 @@
 		FE7FBA50259727D500AB45FD /* ConversationModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConversationModel.h; sourceTree = "<group>"; };
 		FE7FBA51259727D500AB45FD /* ConversationModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConversationModel.m; sourceTree = "<group>"; };
 		FE7FBD81259ABBFE00AB45FD /* Bugly.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bugly.framework; sourceTree = "<group>"; };
-		FE7FBD93259ABC8600AB45FD /* ImSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImSDK.framework; path = Pods/TXIMSDK_iOS/ImSDK.framework; sourceTree = "<group>"; };
 		FE7FBDDC259ACEC100AB45FD /* GenerateTestUserSig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GenerateTestUserSig.h; path = ../../../TIMSDK/iOS/TUIKitDemo/TUIKitDemo/Debug/GenerateTestUserSig.h; sourceTree = "<group>"; };
 		FE7FBDDD259ACEC100AB45FD /* GenerateTestUserSig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GenerateTestUserSig.m; path = ../../../TIMSDK/iOS/TUIKitDemo/TUIKitDemo/Debug/GenerateTestUserSig.m; sourceTree = "<group>"; };
-		FE86DD5225E22A620004A053 /* ScPoc.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = ScPoc.xcframework; sourceTree = "<group>"; };
-		FE86DD5625E22B240004A053 /* ScPoc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScPoc.framework; path = "ScPoc/ScPoc.xcframework/ios-x86_64-simulator/ScPoc.framework"; sourceTree = "<group>"; };
 		FEBB350E25DFCADF00C41A7B /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -120,6 +144,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE50799325FF09EC0013FFCB /* XGMTACloud.framework in Frameworks */,
 				153C8B07229E52B80042CDCE /* libc++.1.dylib in Frameworks */,
 				153C8B05229E529A0042CDCE /* libsqlite3.dylib in Frameworks */,
 				153C8B03229E52680042CDCE /* libz.1.dylib in Frameworks */,
@@ -127,12 +152,19 @@
 				FE2358F825CF7A73008C8280 /* PushKit.framework in Frameworks */,
 				FE2358E025CE8D66008C8280 /* Bugly.framework in Frameworks */,
 				153C8AFF229E51F80042CDCE /* CFNetwork.framework in Frameworks */,
+				FE50799225FF09CA0013FFCB /* libXG-SDK-Cloud.a in Frameworks */,
+				FE2DFFDB25EC95A7006FF01F /* ScPoc.framework in Frameworks */,
+				FE999C41260098E5003F2239 /* ScPoc.xcframework in Frameworks */,
 				153C8AFD229E51F00042CDCE /* CoreTelephony.framework in Frameworks */,
 				FE2358F725CF7A6E008C8280 /* CallKit.framework in Frameworks */,
 				153C8AFB229E51E90042CDCE /* Security.framework in Frameworks */,
 				153C8AF9229E51A30042CDCE /* SystemConfiguration.framework in Frameworks */,
-				FE86DD5425E22ADF0004A053 /* ScPoc.xcframework in Frameworks */,
 				E12E18822FEA93F84048527B /* Pods_yzExpoIOS.framework in Frameworks */,
+				7203E9202737CEDFEEEE7EDF /* libz.tbd in Frameworks */,
+				1B302795E9BAA3D1D8848D4A /* libsqlite3.0.tbd in Frameworks */,
+				C1768C51FA255861232FAD4E /* UserNotifications.framework in Frameworks */,
+				86E6256E8E67C42972C118FE /* CoreData.framework in Frameworks */,
+				FE50799025FF09700013FFCB /* TPNSInAppMessage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,6 +179,8 @@
 				150C8C75229CCFE1004E9B1C /* Products */,
 				2769C1D52D81F1288D212326 /* Frameworks */,
 				3F23B9BFAE9C40F60717A06D /* Pods */,
+				260E36DA864D1F2326156EE7 /* TPNS */,
+				45D1595F51DD25A85FB79F09 /* TPNSService */,
 			);
 			sourceTree = "<group>";
 		};
@@ -197,14 +231,24 @@
 			path = "常量";
 			sourceTree = "<group>";
 		};
+		260E36DA864D1F2326156EE7 /* TPNS */ = {
+			isa = PBXGroup;
+			children = (
+				49AC2C28E49FA7AC42C85BDE /* libXG-SDK-Cloud.a */,
+				1B6455F3F8932648CC0C29B9 /* XGPush.h */,
+				7CE8995A8880F7F2A1DB3E49 /* XGPushPrivate.h */,
+			);
+			path = TPNS;
+			sourceTree = "<group>";
+		};
 		2769C1D52D81F1288D212326 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FE86DD5625E22B240004A053 /* ScPoc.framework */,
+				FE50798F25FF09700013FFCB /* TPNSInAppMessage.framework */,
+				FE2DFFDA25EC95A7006FF01F /* ScPoc.framework */,
 				FEBB350E25DFCADF00C41A7B /* libc++.tbd */,
 				FE2358F525CF7A29008C8280 /* CallKit.framework */,
 				FE2358F625CF7A35008C8280 /* PushKit.framework */,
-				FE7FBD93259ABC8600AB45FD /* ImSDK.framework */,
 				FE7FBD81259ABBFE00AB45FD /* Bugly.framework */,
 				153C8B06229E52B80042CDCE /* libc++.1.dylib */,
 				153C8B04229E529A0042CDCE /* libsqlite3.dylib */,
@@ -217,6 +261,11 @@
 				5AA31254435F9C8A7988414C /* libPods-ImoocHybridIOSNativeTests.a */,
 				20842B358AE5EBDEFB863FFA /* libPods-ImoocHybridIOSNativeUITests.a */,
 				5E56D2C46661C510B4EF7CDE /* Pods_yzExpoIOS.framework */,
+				6F09527A495DDA11A1F04ACC /* libz.tbd */,
+				FA294665B8769902668284C6 /* libsqlite3.0.tbd */,
+				7E72312FEAAADACE7BEDD158 /* UserNotifications.framework */,
+				87E9D2D3CD22548864D7AD65 /* CoreData.framework */,
+				D8EBB7233C16C94802477FD3 /* XGMTACloud.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -229,10 +278,30 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		45D1595F51DD25A85FB79F09 /* TPNSService */ = {
+			isa = PBXGroup;
+			children = (
+				AC197A02A87A51A939546251 /* Info.plist */,
+				83434C7CB47C217A925B2116 /* NotificationService.h */,
+				4066EDD88CD328CABB078DEA /* NotificationService.m */,
+				54CDFF556C220AF8BCA4B8AA /* TPNSExtensionLib */,
+			);
+			path = TPNSService;
+			sourceTree = "<group>";
+		};
+		54CDFF556C220AF8BCA4B8AA /* TPNSExtensionLib */ = {
+			isa = PBXGroup;
+			children = (
+				6362B691BEB1D9049123E57F /* XGExtension.h */,
+				5EC359C4EAFE66DFC29B8B17 /* libXGExtension.a */,
+			);
+			path = TPNSExtensionLib;
+			sourceTree = "<group>";
+		};
 		FE2357A325C7ACA4008C8280 /* ScPoc */ = {
 			isa = PBXGroup;
 			children = (
-				FE86DD5225E22A620004A053 /* ScPoc.xcframework */,
+				FE4B4C5925F5F7D300409335 /* ScPoc.xcframework */,
 			);
 			path = ScPoc;
 			sourceTree = "<group>";
@@ -276,6 +345,8 @@
 				FE2358C225CCDE41008C8280 /* AudioCallViewController.xib */,
 				FE2358C725CE6CA7008C8280 /* VideoCallViewController.h */,
 				FE2358C825CE6CA8008C8280 /* VideoCallViewController.m */,
+				FE50798C25FEF6850013FFCB /* LoginViewController.h */,
+				FE50798D25FEF6850013FFCB /* LoginViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -310,7 +381,7 @@
 				150C8C71229CCFE1004E9B1C /* Frameworks */,
 				150C8C72229CCFE1004E9B1C /* Resources */,
 				887C44755A2AEE12CD6C0A54 /* [CP] Embed Pods Frameworks */,
-				FE2358D125CE84F4008C8280 /* Embed Frameworks */,
+				FE999C43260098E5003F2239 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -425,6 +496,7 @@
 				FE2358B925CA9594008C8280 /* CallUtil.m in Sources */,
 				5FC66B622589E24B00312A87 /* TabSecond.m in Sources */,
 				150C8C79229CCFE1004E9B1C /* AppDelegate.m in Sources */,
+				FE50798E25FEF6850013FFCB /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -509,9 +581,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CODE_SIGN_ENTITLEMENTS = yzExpoIOS/yzExpoIOS.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Yangzhou Yuanbo Investment Development Co., Ltd. (KZW9D97FJ7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: wei ni (5Z835M4LPS)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KZW9D97FJ7;
 				ENABLE_BITCODE = NO;
 				EXCLUDED_ARCHS = "";
@@ -520,7 +592,8 @@
 					"$(SRCROOT)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/ScPoc",
-					"$(PROJECT_DIR)/ScPoc/ScPoc.xcframework/ios-x86_64-simulator",
+					"$(PROJECT_DIR)/TPNS/InAppMessage",
+					"$(PROJECT_DIR)/TPNS",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -533,8 +606,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.0.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TPNS",
+				);
+				MARKETING_VERSION = 1.0.4;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				OTHER_LDFLAGS = (
@@ -543,7 +619,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.data.yzExpo;
 				PRODUCT_NAME = "扬州世园会";
-				PROVISIONING_PROFILE_SPECIFIER = yzExpo;
+				PROVISIONING_PROFILE_SPECIFIER = yzExpoTest;
+				REEXPORTED_LIBRARY_PATHS = "";
 				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_WORKSPACE = YES;

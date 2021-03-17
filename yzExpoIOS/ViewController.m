@@ -50,8 +50,6 @@
     
     [self initWebView];
     
-    [self Login];
-    
     [((AppDelegate *) [UIApplication sharedApplication].delegate) serverRequestWithUrl];
 
 }
@@ -245,35 +243,38 @@
 
 // sip登录
 - (void)uidLogin:(NSString *)uid {
+    NSLog(@"登录1234567");
     NSLog(@"uid: %@",uid);
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         NSString *ip = @"122.224.180.122";
         NSString *port = @"12381";
-        NSString *urlStr = [[NSString alloc] initWithFormat:@"http://%@:%@/zlw/data/thirdPartLogin/getSipUserInfoByUid?uid=%@",ip,port,uid];
-        NSLog(@"url: %@", urlStr);
-        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-        AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-        NSURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:urlStr parameters:nil error:nil];
-        NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse *response, NSData *responseObject, NSError *error) {
-            if (error) {
-                NSLog(@"Error: %@", error);
-            } else {
-//                NSLog(@"请求数据%@  \n\n\n data%@", response, responseObject);
-                NSLog(@"12222%@",responseObject);
-                NSData *jsonStr = (NSData *)responseObject;
-                NSLog(@"jsonStr: %@",jsonStr);
-                NSDictionary *dict = (NSDictionary *) jsonStr;
-                NSDictionary *data = [dict objectForKey:@"data"];
-                NSLog(@"dict: %@", data);
-                NSString *sipTel = [data objectForKey:@"sipTel"];
-                NSString *ip = [data objectForKey:@"natIp"];
-                NSString *pwd = [data objectForKey:@"sipPwd"];
-                NSString *portStr = [data objectForKey:@"tlsPort"];
-                int port = [portStr intValue];
-                [[self getSipContext] loginToSip:sipTel pass:pwd host:ip port:port tls:TRUE];
-            }
-        }];
-        [dataTask resume];
+        uint16_t portNum = [port intValue];
+        [[self getSipContext] loginWithUid:uid host:ip port:portNum tls:true];
+//        NSString *urlStr = [[NSString alloc] initWithFormat:@"http://%@:%@/zlw/data/thirdPartLogin/getSipUserInfoByUid?uid=%@",ip,port,uid];
+//        NSLog(@"url: %@", urlStr);
+//        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+//        AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+//        NSURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:urlStr parameters:nil error:nil];
+//        NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse *response, NSData *responseObject, NSError *error) {
+//            if (error) {
+//                NSLog(@"Error: %@", error);
+//            } else {
+////                NSLog(@"请求数据%@  \n\n\n data%@", response, responseObject);
+//                NSLog(@"12222%@",responseObject);
+//                NSData *jsonStr = (NSData *)responseObject;
+//                NSLog(@"jsonStr: %@",jsonStr);
+//                NSDictionary *dict = (NSDictionary *) jsonStr;
+//                NSDictionary *data = [dict objectForKey:@"data"];
+//                NSLog(@"dict: %@", data);
+//                NSString *sipTel = [data objectForKey:@"sipTel"];
+//                NSString *ip = [data objectForKey:@"natIp"];
+//                NSString *pwd = [data objectForKey:@"sipPwd"];
+//                NSString *portStr = [data objectForKey:@"tlsPort"];
+//                int port = [portStr intValue];
+//                [[self getSipContext] loginToSip:sipTel pass:pwd host:ip port:port tls:TRUE];
+//            }
+//        }];
+//        [dataTask resume];
 
     });
     if (![self checkPermission]) {

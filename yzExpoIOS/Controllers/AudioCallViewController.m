@@ -40,6 +40,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 
+    UIImage *img = [UIImage imageNamed:@"background"];
+    
+//    UIEdgeInsets edgeInsets = UIEdgeInsetsMake(self.view.frame.size.width, self.view.frame.size.height, self.view.frame.size.width, self.view.frame.size.height);
+//    UIImage *newImg = [img resizableImageWithCapInsets:edgeInsets resizingMode:UIImageResizingModeStretch];
+    self.view.layer.contents = (__bridge id _Nullable)(img.CGImage);
     _portraitView = [[UIImageView alloc] init];
     [self.portraitView setImage:[UIImage imageNamed:@"PersonalChat"]];
     self.portraitView.layer.masksToBounds = YES;
@@ -62,7 +67,7 @@
             // 通过判断是呼入还是呼出隐藏接听按钮
             self.acceptCallBtn.hidden = YES;
             // 将挂断按钮居中
-            self.buttonLeading.constant = self.view.frame.size.width/2-80/2;
+            self.buttonLeading.constant = self.view.frame.size.width/2-72/2;
         } else {
             self.acceptLbl.hidden = NO;
         }
@@ -128,9 +133,9 @@
             self.audioButton.hidden = NO;
             self.audioLbl.hidden = NO;
             // 将挂断按钮居中
-            self.buttonLeading.constant = self.view.frame.size.width/2-80/2;
+            self.buttonLeading.constant = self.view.frame.size.width/2-72/2;
     
-            self.hangupLbl.frame = CGRectMake(self.view.frame.size.width/2-80/2, self.hangupCallBtn.frame.origin.y + 77, 72, 20);
+            self.hangupLbl.frame = CGRectMake(self.view.frame.size.width/2-72/2, self.hangupCallBtn.frame.origin.y + 77, 72, 20);
         });
     } else if (event.eventType == TERMINATED) {
         dispatch_sync(dispatch_get_main_queue(), ^{
@@ -140,6 +145,7 @@
         // 通话结束后关闭当前页面，并清空session
         dispatch_after(dispatch_time(0ull, (int64_t) (2 * 1000000000ull)),dispatch_get_main_queue(), ^{
             [self.navigationController popViewControllerAnimated:YES];
+//            [self dismissViewControllerAnimated:YES completion:nil];
         });
         self.avSession = nil;
         

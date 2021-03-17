@@ -71,7 +71,6 @@
                 </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fJ3-0j-CKk"/>
-            <color key="backgroundColor" red="0.21625990720139332" green="0.21625990720139332" blue="0.21625990720139332" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="1Pu-GS-xUD" firstAttribute="top" secondItem="euu-tn-uam" secondAttribute="top" id="46d-cd-l7H"/>
                 <constraint firstItem="1Pu-GS-xUD" firstAttribute="leading" secondItem="dMD-mt-Lzj" secondAttribute="leading" constant="79" id="KGv-JI-IrH"/>
