@@ -43,11 +43,12 @@
 		FE50799025FF09700013FFCB /* TPNSInAppMessage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE50798F25FF09700013FFCB /* TPNSInAppMessage.framework */; };
 		FE50799225FF09CA0013FFCB /* libXG-SDK-Cloud.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AC2C28E49FA7AC42C85BDE /* libXG-SDK-Cloud.a */; };
 		FE50799325FF09EC0013FFCB /* XGMTACloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8EBB7233C16C94802477FD3 /* XGMTACloud.framework */; };
-		FE7FBA3C2596E69B00AB45FD /* ConversationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE7FBA3B2596E69B00AB45FD /* ConversationCell.m */; };
-		FE7FBA3F2596E6C200AB45FD /* ConversationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE7FBA3E2596E6C200AB45FD /* ConversationCell.xib */; };
 		FE7FBA52259727D500AB45FD /* ConversationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FE7FBA51259727D500AB45FD /* ConversationModel.m */; };
+		FE94951726088DE8004D2327 /* HttpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FE94951626088DE8004D2327 /* HttpManager.m */; };
 		FE999C41260098E5003F2239 /* ScPoc.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE4B4C5925F5F7D300409335 /* ScPoc.xcframework */; };
 		FE999C42260098E5003F2239 /* ScPoc.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FE4B4C5925F5F7D300409335 /* ScPoc.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FE999C4D2602EF04003F2239 /* FaceLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE999C4C2602EF04003F2239 /* FaceLoginViewController.m */; };
+		FE999C5126083C6D003F2239 /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FE999C5026083C6C003F2239 /* UserModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -127,15 +128,18 @@
 		FE50798C25FEF6850013FFCB /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		FE50798D25FEF6850013FFCB /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		FE50798F25FF09700013FFCB /* TPNSInAppMessage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TPNSInAppMessage.framework; path = TPNS/InAppMessage/TPNSInAppMessage.framework; sourceTree = "<group>"; };
-		FE7FBA3A2596E69B00AB45FD /* ConversationCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConversationCell.h; sourceTree = "<group>"; };
-		FE7FBA3B2596E69B00AB45FD /* ConversationCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConversationCell.m; sourceTree = "<group>"; };
-		FE7FBA3E2596E6C200AB45FD /* ConversationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConversationCell.xib; sourceTree = "<group>"; };
 		FE7FBA462597229D00AB45FD /* ReactiveView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReactiveView.h; sourceTree = "<group>"; };
 		FE7FBA50259727D500AB45FD /* ConversationModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConversationModel.h; sourceTree = "<group>"; };
 		FE7FBA51259727D500AB45FD /* ConversationModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConversationModel.m; sourceTree = "<group>"; };
 		FE7FBD81259ABBFE00AB45FD /* Bugly.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bugly.framework; sourceTree = "<group>"; };
 		FE7FBDDC259ACEC100AB45FD /* GenerateTestUserSig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GenerateTestUserSig.h; path = ../../../TIMSDK/iOS/TUIKitDemo/TUIKitDemo/Debug/GenerateTestUserSig.h; sourceTree = "<group>"; };
 		FE7FBDDD259ACEC100AB45FD /* GenerateTestUserSig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GenerateTestUserSig.m; path = ../../../TIMSDK/iOS/TUIKitDemo/TUIKitDemo/Debug/GenerateTestUserSig.m; sourceTree = "<group>"; };
+		FE94951526088DE8004D2327 /* HttpManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HttpManager.h; sourceTree = "<group>"; };
+		FE94951626088DE8004D2327 /* HttpManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HttpManager.m; sourceTree = "<group>"; };
+		FE999C4B2602EF04003F2239 /* FaceLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FaceLoginViewController.h; sourceTree = "<group>"; };
+		FE999C4C2602EF04003F2239 /* FaceLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FaceLoginViewController.m; sourceTree = "<group>"; };
+		FE999C4F26083C6C003F2239 /* UserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
+		FE999C5026083C6C003F2239 /* UserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
 		FEBB350E25DFCADF00C41A7B /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -195,6 +199,7 @@
 		150C8C76229CCFE1004E9B1C /* yzExpoIOS */ = {
 			isa = PBXGroup;
 			children = (
+				FE94951426088DC1004D2327 /* manager */,
 				FE2358F925CF86D9008C8280 /* Category */,
 				FE23579725C7A585008C8280 /* yzExpoIOS.entitlements */,
 				FE7FBDDB259ACEA400AB45FD /* Debug */,
@@ -318,9 +323,6 @@
 		FE7FBA392596E63800AB45FD /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				FE7FBA3A2596E69B00AB45FD /* ConversationCell.h */,
-				FE7FBA3B2596E69B00AB45FD /* ConversationCell.m */,
-				FE7FBA3E2596E6C200AB45FD /* ConversationCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -347,6 +349,8 @@
 				FE2358C825CE6CA8008C8280 /* VideoCallViewController.m */,
 				FE50798C25FEF6850013FFCB /* LoginViewController.h */,
 				FE50798D25FEF6850013FFCB /* LoginViewController.m */,
+				FE999C4B2602EF04003F2239 /* FaceLoginViewController.h */,
+				FE999C4C2602EF04003F2239 /* FaceLoginViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -356,6 +360,8 @@
 			children = (
 				FE7FBA50259727D500AB45FD /* ConversationModel.h */,
 				FE7FBA51259727D500AB45FD /* ConversationModel.m */,
+				FE999C4F26083C6C003F2239 /* UserModel.h */,
+				FE999C5026083C6C003F2239 /* UserModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -367,6 +373,15 @@
 				FE7FBDDD259ACEC100AB45FD /* GenerateTestUserSig.m */,
 			);
 			path = Debug;
+			sourceTree = "<group>";
+		};
+		FE94951426088DC1004D2327 /* manager */ = {
+			isa = PBXGroup;
+			children = (
+				FE94951526088DE8004D2327 /* HttpManager.h */,
+				FE94951626088DE8004D2327 /* HttpManager.m */,
+			);
+			path = manager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -429,7 +444,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FE7FBA3F2596E6C200AB45FD /* ConversationCell.xib in Resources */,
 				FE2358C325CCDE41008C8280 /* AudioCallViewController.xib in Resources */,
 				150C8C81229CCFE3004E9B1C /* Assets.xcassets in Resources */,
 				150C8C7F229CCFE1004E9B1C /* Main.storyboard in Resources */,
@@ -482,17 +496,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FE7FBA3C2596E69B00AB45FD /* ConversationCell.m in Sources */,
 				5FC66B5F2589E23200312A87 /* TabFirst.m in Sources */,
 				FE2358C925CE6CA8008C8280 /* VideoCallViewController.m in Sources */,
 				FE2358FC25CF8996008C8280 /* UIView+Toast.m in Sources */,
 				5F508DD82592E449004A0D64 /* TabFourth.m in Sources */,
 				150C8C7C229CCFE1004E9B1C /* ViewController.m in Sources */,
 				150C8C87229CCFE3004E9B1C /* main.m in Sources */,
+				FE94951726088DE8004D2327 /* HttpManager.m in Sources */,
+				FE999C5126083C6D003F2239 /* UserModel.m in Sources */,
 				5FC66B652589E26300312A87 /* TabThird.m in Sources */,
 				FE2357ED25C80037008C8280 /* AudioCallViewController.m in Sources */,
 				FE7FBA52259727D500AB45FD /* ConversationModel.m in Sources */,
 				FE2357E625C7FEC4008C8280 /* BaseViewController.m in Sources */,
+				FE999C4D2602EF04003F2239 /* FaceLoginViewController.m in Sources */,
 				FE2358B925CA9594008C8280 /* CallUtil.m in Sources */,
 				5FC66B622589E24B00312A87 /* TabSecond.m in Sources */,
 				150C8C79229CCFE1004E9B1C /* AppDelegate.m in Sources */,

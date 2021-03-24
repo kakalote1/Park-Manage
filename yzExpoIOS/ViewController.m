@@ -16,6 +16,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "CallUtil.h"
 #import <AFNetworking/AFNetworking.h>
+#import "UserModel.h"
 
 @interface ViewController ()<WKNavigationDelegate,WKUIDelegate, WKScriptMessageHandler>
 
@@ -81,16 +82,28 @@
     [self.view addSubview:self.webView];
     [self.view addSubview:self.iv];
     
+    [self uidLogin:@""];
+    
     //OC注册供JS调用的方法
     [self addScriptFunction];
 }
 
 - (void)wkConfiguration {
     self.wkWebViewConfiguration = [[WKWebViewConfiguration alloc]init];
+    self.wkWebViewConfiguration.userContentController = [WKUserContentController new];
     
     WKPreferences *preferences = [[WKPreferences alloc] init];
     preferences.javaScriptCanOpenWindowsAutomatically = YES;
     self.wkWebViewConfiguration.preferences = preferences;
+    
+    
+//    NSMutableDictionary *dic = [NSMutableDictionary new];
+//    dic[@"uid"] = [UserModel shareInstance].uid;
+//    NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:(NSJSONWritingPrettyPrinted) error:nil];
+//
+//    NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    
+
     
 }
 
@@ -106,6 +119,13 @@
     [self.wkUserContentController addScriptMessageHandler:self name:@"makeAudioGroupCall"];
     [self.wkUserContentController addScriptMessageHandler:self name:@"makeVideoGroupCall"];
     [self.wkUserContentController addScriptMessageHandler:self name:@"uidLogin"];
+    [self.wkUserContentController addScriptMessageHandler:self name:@"Login"];
+    
+//    NSString *uid = [UserModel shareInstance].uid;
+//    NSString *js = [NSString stringWithFormat:@"window.IOSInfo = %@", uid];
+//
+//    WKUserScript *script = [[WKUserScript alloc] initWithSource:js injectionTime:(WKUserScriptInjectionTimeAtDocumentStart) forMainFrameOnly:YES];
+//    [self.wkWebViewConfiguration.userContentController addUserScript:script];
 }
 
 #pragma mark -  Alert弹窗
@@ -122,6 +142,7 @@
 #pragma mark - WKWebView
 // 页面开始加载时调用
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {
+    
 }
 // 当内容开始返回时调用
 - (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation {
@@ -132,7 +153,18 @@
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
 //    关闭欢迎图片
     self.iv.hidden = YES;
-    
+    NSString *uid = [UserModel shareInstance].uid;
+    NSLog(@"js uid : %@", uid);
+    // 将分享结果返回给js
+//      NSString *jsStr = [NSString stringWithFormat:@"shareResult('%@','%@','%@')",title,content,url];
+//        NSMutableDictionary *dic = [NSMutableDictionary new];
+//        dic[@"uid"] = [UserModel shareInstance].uid;
+//        NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:(NSJSONWritingPrettyPrinted) error:nil];
+//
+//        NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+      [self.webView evaluateJavaScript:[NSString stringWithFormat: @"localStorage.setItem('uid','%@' );", uid] completionHandler:^(id _Nullable result, NSError * _Nullable error) {
+          NSLog(@"%@----%@",result, error);
+      }];
     [self isAutoLogin];
 }
 // 页面加载失败时调用
@@ -192,6 +224,8 @@
     } else if ([@"uidLogin" isEqualToString:message.name]) {
         NSLog(@"body:%@",message.body);
         [self uidLogin:message.body];
+    } else if ([@"Login" isEqualToString:message.name]) {
+        [self Login];
     }
 }
 
@@ -234,6 +268,13 @@
 // 模拟sip登录
 - (void)Login {
     NSLog(@"登录12345");
+//    NSString *uid = [UserModel shareInstance].uid;
+//    NSLog(@"js uid : %@", uid);
+//    // 将分享结果返回给js
+////      NSString *jsStr = [NSString stringWithFormat:@"shareResult('%@','%@','%@')",title,content,url];
+//      [self.webView evaluateJavaScript:uid completionHandler:^(id _Nullable result, NSError * _Nullable error) {
+//          NSLog(@"%@----%@",result, error);
+//      }];
 //    if (![self checkPermission]) {
 //        return;
 //    }
@@ -245,6 +286,7 @@
 - (void)uidLogin:(NSString *)uid {
     NSLog(@"登录1234567");
     NSLog(@"uid: %@",uid);
+    uid = [UserModel shareInstance].uid;
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         NSString *ip = @"122.224.180.122";
         NSString *port = @"12381";

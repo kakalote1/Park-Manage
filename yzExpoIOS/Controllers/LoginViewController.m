@@ -11,6 +11,12 @@
 #import <AFNetworking/AFNetworking.h>
 #import "UIView+Toast.h"
 #import <WebKit/WebKit.h>
+#import "FaceLoginViewController.h"
+#import "HttpManager.h"
+#import "Constants.h"
+#import "UIView+Toast.h"
+#import "UserModel.h"
+#import "ViewController.h"
 
 //是否iPhoneX YES:iPhoneX屏幕 NO:传统屏幕
 #define kIs_iPhoneX ([UIScreen mainScreen].bounds.size.height == 812.0f ||[UIScreen mainScreen].bounds.size.height == 896.0f ||[UIScreen mainScreen].bounds.size.height == 844.0f ||[UIScreen mainScreen].bounds.size.height == 926.0f)
@@ -51,6 +57,10 @@ alpha:1.0]
 @property (nonatomic, strong) UITapGestureRecognizer *tap;
 
 @property (nonatomic, strong) WKWebViewConfiguration *wkWebViewConfiguration;
+@property (nonatomic, strong) WKUserContentController *wkUserContentController;
+@property (nonatomic, strong) WKWebView *webView;
+
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -60,6 +70,12 @@ alpha:1.0]
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
+    //配置wkWebViewConfiguration
+    [self wkConfiguration];
+    
+    //OC注册供JS调用的方法
+    [self addScriptFunction];
+    
     [self.view endEditing:YES];
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -145,8 +161,61 @@ alpha:1.0]
 }
 
 -(void)login:(UIButton *)sender {
-    self.usernameField.text;
-    self.passwordField.text;
+    NSString *username = self.usernameField.text;
+    NSString *password = self.passwordField.text;
+    NSLog(@"用户名: %@, 密码: %@", username, password);
+    NSString *plistPath = [PATH_OF_DOCUMENT stringByAppendingPathComponent:@"userinfo.plist"];
+    NSDictionary *dic2 = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+    NSLog(@"asdasdas");
+    NSLog(@"%@\n%@",[dic2 objectForKey:@"accessToken"],PATH_OF_DOCUMENT);
+    
+    
+    NSString *url = [@"http://toss.yzyby2018.com/usrv/user/admin/auth-by-account?access_token=" stringByAppendingFormat:@"%@", [dic2 objectForKey:@"accessToken"]];
+    NSLog(@"url : %@", url);
+    NSDictionary *param = @{@"account": username, @"password": password};
+    NSLog(@"param: %@", param);
+    [[HttpManager shareInstance] postRequestWithUrl:url andParam:param andHeaders:nil andSuccess:^(id responseObject) {
+        NSInteger errorcode = [responseObject[@"errorcode"] integerValue];
+        if (errorcode == 0) {
+            [self.view makeToast:@"登录成功"];
+            NSLog(@"登录成功");
+            NSString *url = [@"http://toss.yzyby2018.com/usrv/user/admin/detail-by-username?access_token=" stringByAppendingFormat:@"%@", [dic2 objectForKey:@"accessToken"]];
+            [[HttpManager shareInstance] postRequestWithUrl:url andParam:@{@"username":username} andHeaders:nil andSuccess:^(id responseObject) {
+                UserModel *user = [[UserModel shareInstance] initWithDic:responseObject[@"data"]];
+        
+                NSLog(@"userinfo : %@", user.uid);
+                
+                ViewController *vc = [[ViewController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+                        } andFail:^(id error) {
+                            
+                        }];
+        } else {
+            NSString *message = responseObject[@"msg"];
+            switch (errorcode) {
+                case 11004:
+                    [self.view makeToast:message];
+                case 11027:
+                    [self.view makeToast:message];
+                case 10001:
+                    [self.view makeToast:message];
+                    break;
+                    
+                default:
+                    [self.view makeToast:@"请输入用户名和密码"];
+                    break;
+            }
+        }
+        
+        } andFail:^(id error) {
+            
+        
+            
+        }];
+    
+
+//    FaceLoginViewController *faceLoginVc = [[FaceLoginViewController alloc] init];
+//    [self.navigationController pushViewController:faceLoginVc animated:YES];
 }
 
 
@@ -170,6 +239,7 @@ alpha:1.0]
 {
     [self.usernameField resignFirstResponder];
     [self.passwordField resignFirstResponder];
+    
 }
 
 - (void)returnOnKeyboard:(UITextField *)sender
@@ -193,6 +263,20 @@ alpha:1.0]
     
 }
 
+#pragma mark -  OC注册供JS调用的方法
+- (void)addScriptFunction {
+    [[self.webView configuration].userContentController addScriptMessageHandler:self name:@"login"];
+}
+
+#pragma mark --- WKScriptMessageHandler ---
+//OC在JS调用方法做的处理
+- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
+    // 根据name做想做的操作
+    //前端主动JS发送消息，前端指令动作
+    if ([@"login" isEqualToString:message.name]) {
+        [self login:message.body];
+    }
+}
 
 /*
 #pragma mark - Navigation

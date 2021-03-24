@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)setAvSession:(SipSession *)avSession;
 
++ (instancetype)shareAudioCallViewController;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -22,6 +22,10 @@
 #import "XGPushPrivate.h"
 #import <UserNotifications/UserNotifications.h>
 #import "LoginViewController.h"
+#import <ScPoc/IphoneControl.h>
+#import "HttpManager.h"
+#import "UserModel.h"
+#import <WebKit/WebKit.h>
 
 @interface AppDelegate () <XGPushDelegate>
 
@@ -35,6 +39,13 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    NSFileManager *filemanager = [NSFileManager defaultManager];
+    NSString *filePath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject;
+    NSString *plistPath = [filePath stringByAppendingPathComponent:@"userinfo.plist"];
+    
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+    UserModel *model = [[UserModel shareInstance] initWithDic:dic];
 
 	[[XGPush defaultManager] configureClusterDomainName:@"tpns.sh.tencent.com"];
 	[[XGPush defaultManager] startXGWithAccessID:1680003686 accessKey:@"IR5D9D6I6KFW" delegate:nil];
@@ -69,8 +80,8 @@
 //    self.window.rootViewController = nav;
 //    viewController.navigationController.navigationBarHidden = YES;
 //    self.navigationController = (UINavigationController *) self.window.rootViewController;
-//    
-    [self.window makeKeyAndVisible];
+//
+//    [self.window makeKeyAndVisible];
 
 //    创建控制器
 //    TabFirst* tabFirst = [[TabFirst alloc] init];
@@ -128,6 +139,28 @@
 //
 //    //设置分栏控制器的透明度
 //    tbController.tabBar.translucent = NO;
+
+    
+    [filemanager createFileAtPath:plistPath contents:nil attributes:nil];
+    
+    [[HttpManager shareInstance]postRequestWithUrl:@"http://tzg.yzyby2018.com/jiekou/common-api/common/login/getAccessToken" andParam:@{
+        @"source": @"APP"} andHeaders:nil andSuccess:^(id responseObject) {
+        NSLog(@"获取成功：%@", responseObject);
+        NSString *str = responseObject[@"data"];
+        NSLog(@"accessToken: %@",str);
+        NSDictionary *dic = @{@"accessToken":str};
+        [dic writeToFile:plistPath atomically:YES];
+        NSLog(@"%@",dic);
+        NSDictionary *dic2 = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+        NSLog(@"asdasdas");
+        NSLog(@"%@\n%@",[dic2 objectForKey:@"accessToken"],filePath);
+    } andFail:^(id error) {
+                
+            }];
+    
+    NSDictionary *dic2 = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+    NSLog(@"asdasdas");
+    NSLog(@"%@\n%@",[dic2 objectForKey:@"accessToken"],filePath);
     
     return YES;
 }
@@ -177,8 +210,8 @@
 }
 
 - (void)serverRequestWithUrl {
-    NSString *fullUrl = [NSString stringWithFormat:@"%@://%@", @"http", @"www.baidu.com"];
-    NSDictionary *parameters = @{};
+    NSString *fullUrl = [NSString stringWithFormat:@"http://tzg.yzyby2018.com/jiekou/common-api/common/login/getAccessTokenm"];
+    NSDictionary *parameters = @{@"source": @"APP"};
     
     [self postWithUrl:fullUrl withParams:parameters success:nil failure:nil];
 }
@@ -196,6 +229,7 @@
         NSError *error = nil;
         if (responseObject) {
             NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:&error];
+            NSLog(@"数据：%@", responseObject);
             if (dic && success) {
                 success(dic);
                 return;
@@ -235,6 +269,7 @@
     switch (type) {
             // 收到呼入
         case INCOMING:
+            [IphoneControl.shareInstance startRing];
             [self showCallView:sipSession];
             NSLog(@"收到呼入");
             break;

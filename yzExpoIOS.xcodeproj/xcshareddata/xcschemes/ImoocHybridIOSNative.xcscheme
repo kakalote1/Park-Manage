@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "150C8C73229CCFE1004E9B1C"
-               BuildableName = "yzExpoIOS.app"
+               BuildableName = "&#x626c;&#x5dde;&#x4e16;&#x56ed;&#x4f1a;.app"
                BlueprintName = "yzExpoIOS"
                ReferencedContainer = "container:yzExpoIOS.xcodeproj">
             </BuildableReference>
@@ -31,7 +31,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "150C8C73229CCFE1004E9B1C"
-            BuildableName = "yzExpoIOS.app"
+            BuildableName = "&#x626c;&#x5dde;&#x4e16;&#x56ed;&#x4f1a;.app"
             BlueprintName = "yzExpoIOS"
             ReferencedContainer = "container:yzExpoIOS.xcodeproj">
          </BuildableReference>
@@ -74,7 +74,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "150C8C73229CCFE1004E9B1C"
-            BuildableName = "yzExpoIOS.app"
+            BuildableName = "&#x626c;&#x5dde;&#x4e16;&#x56ed;&#x4f1a;.app"
             BlueprintName = "yzExpoIOS"
             ReferencedContainer = "container:yzExpoIOS.xcodeproj">
          </BuildableReference>
@@ -95,7 +95,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "150C8C73229CCFE1004E9B1C"
-            BuildableName = "yzExpoIOS.app"
+            BuildableName = "&#x626c;&#x5dde;&#x4e16;&#x56ed;&#x4f1a;.app"
             BlueprintName = "yzExpoIOS"
             ReferencedContainer = "container:yzExpoIOS.xcodeproj">
          </BuildableReference>
