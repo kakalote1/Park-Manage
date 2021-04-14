@@ -11,6 +11,8 @@
 
 @interface BaseViewController ()
 
+@property (weak, nonatomic) SipContext *sipContext;
+
 @end
 
 @implementation BaseViewController
@@ -18,6 +20,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+}
+
+- (void)dealloc {
+    _sipContext = nil;
 }
 
 - (SipContext *)getSipContext {

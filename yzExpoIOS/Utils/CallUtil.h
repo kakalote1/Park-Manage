@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "BaseViewController.h"
+#import <ScPoc/SipContext.h>
+#import <ScPoc/SipSession.h>
+#import <ScPoc/IphoneControl.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

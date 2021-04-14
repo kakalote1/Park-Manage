@@ -4,13 +4,33 @@
 <dict>
 	<key>files</key>
 	<dict>
-		<key>.DS_Store</key>
+		<key>Headers/InfoMessage.h</key>
 		<data>
-		TP3gi9FUqENOoUtAhknbUZaxiv0=
+		2WHdoO0fAIVPUkXxPLjb4kKZgzY=
 		</data>
 		<key>Headers/IphoneControl.h</key>
 		<data>
 		9y4ufSWKTW2Xocfi/CGYKO4fkNg=
+		</data>
+		<key>Headers/MeetingManager.h</key>
+		<data>
+		3ZuSLk4tvAwGHCKl8NUvCe9aMvk=
+		</data>
+		<key>Headers/MeetingSipSession.h</key>
+		<data>
+		OIeat07euDpDbIfdD+aEvxeSWUA=
+		</data>
+		<key>Headers/NSDictionary+SipUtils.h</key>
+		<data>
+		ZBOMBwgj79yrssy0EXZfnLPxvpw=
+		</data>
+		<key>Headers/NSMutableData+SipUtils.h</key>
+		<data>
+		xiPldZnSDB+TeCSKuH1ZPhdtggI=
+		</data>
+		<key>Headers/NSString+SipUtils.h</key>
+		<data>
+		g8tNfDWkin+aLUOBTI5+Sievs70=
 		</data>
 		<key>Headers/ScPoc.h</key>
 		<data>
@@ -22,15 +42,19 @@
 		</data>
 		<key>Headers/SipContext.h</key>
 		<data>
-		wmVEEgUFexgHZbCODnJvBFNJdxw=
+		E+JH7z9M8r4PcSyjj/5PSnfm/uw=
 		</data>
 		<key>Headers/SipInviteEvent.h</key>
 		<data>
 		klhY2O360sC4bwH1g7ATvdKzg/k=
 		</data>
+		<key>Headers/SipMeetingMessage.h</key>
+		<data>
+		La9tO3sCU+MYCDfkmtE/BVaweY0=
+		</data>
 		<key>Headers/SipParams.h</key>
 		<data>
-		yee3iK3LXabr63XGAPdvTgrw5HU=
+		AVra0X+BpmODQz5JqPuUJGQMT+o=
 		</data>
 		<key>Headers/SipRegEvent.h</key>
 		<data>
@@ -38,15 +62,15 @@
 		</data>
 		<key>Headers/SipSession.h</key>
 		<data>
-		3d9fJ0UL79sxwWVqnYvysMrnlGs=
+		0kbXx7zWcppDwCvRG3mbmxD8/P8=
 		</data>
 		<key>Headers/SipSettings.h</key>
 		<data>
-		wKfZTUN9tIyEvWES/tdJWkxqyrk=
+		e+fN2UoP7RFdw/NxUPvTetE8Vxc=
 		</data>
 		<key>Headers/SipTypes.h</key>
 		<data>
-		mfWUL3qLYadlwtaY3UyfMl0XJ0Y=
+		pbg7P1MDj/R5hTyrvjkXiLnu6n0=
 		</data>
 		<key>Headers/SocketProtocol.h</key>
 		<data>
@@ -62,11 +86,11 @@
 		</data>
 		<key>Headers/VideoManager.h</key>
 		<data>
-		cQuUriUeXZbbum0ELtyrH7dtUw0=
+		c9X2XnVUCMVk4xYKQGAC8desqes=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		+XE6+PDH+Y/7WJB4tvR+UwtfwnM=
+		xuW5Qh0f6chhZw4dROUcEUOyS7c=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -91,11 +115,53 @@
 	</dict>
 	<key>files2</key>
 	<dict>
+		<key>Headers/InfoMessage.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			icZdKq9a3+cmm4gQximt1AV2XCN/FCzQHCPx5mK28IQ=
+			</data>
+		</dict>
 		<key>Headers/IphoneControl.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
 			7TEzBL+fOvUks7xfp5HUbHmOYlWD21wl4jBsovxp8q4=
+			</data>
+		</dict>
+		<key>Headers/MeetingManager.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			S0ONxO3MaRG7iVWlHM+vhPpnlnhvdK9vbrKzpkZWBw4=
+			</data>
+		</dict>
+		<key>Headers/MeetingSipSession.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			9bHz8+AHcOQtoZACZLQ/Pg/r5ygkDkHoRb9v15lBakE=
+			</data>
+		</dict>
+		<key>Headers/NSDictionary+SipUtils.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			pWWxsISbsWoRDu5WPVVAnezrcw0PO36DsKSI4ZD6liI=
+			</data>
+		</dict>
+		<key>Headers/NSMutableData+SipUtils.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			RCCXM9vXFE9LoJ1zBprbLZiqBbPxVxVhlN8I47lmX9E=
+			</data>
+		</dict>
+		<key>Headers/NSString+SipUtils.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Xvx1wmQbmrt3k/RHY80sHvvh2aacA9uQQnDxM1C99pQ=
 			</data>
 		</dict>
 		<key>Headers/ScPoc.h</key>
@@ -116,7 +182,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			FM45lTRf9ieqbToq3Z/9glrryEiaxi8KpKTxDIC/qo8=
+			cTCKpvWXJ14XCOMcil+OCZpcBetIEVRutxPmjmIuLb4=
 			</data>
 		</dict>
 		<key>Headers/SipInviteEvent.h</key>
@@ -126,11 +192,18 @@
 			Na9eRv9/eiLWWImZuYAzqpOgYnX0aFR6+2xYa8MJRYM=
 			</data>
 		</dict>
+		<key>Headers/SipMeetingMessage.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			XkkPmpeZoh4faW9fE4cVXRBKfYRopK4NQwkPiAbqdtQ=
+			</data>
+		</dict>
 		<key>Headers/SipParams.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			7qzb8qga/qRlT7ptYBEYci3Z+tNoUGOkTV0c/daYZvE=
+			ASzvR2TdUU/+/NQNrdE3DbNvMFnjxYFmCQNY1q1QWr8=
 			</data>
 		</dict>
 		<key>Headers/SipRegEvent.h</key>
@@ -144,21 +217,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			4zve/ew26x9fCwIa9DNGDvkwzH4MoQNgObLa37FKp1M=
+			M0C7ePhUwhB3l5Dj1uUBCZH1Ub/qbpD7Lj0DtVFEmXA=
 			</data>
 		</dict>
 		<key>Headers/SipSettings.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			JLUiFOx9fw03/dOiXEzzOyyTfXaE7Wwrnq8TCzigTgQ=
+			vBb53fOKNL3eNg8h6CkQ/Pyy0tmlZt7JCIPD7OlvoP4=
 			</data>
 		</dict>
 		<key>Headers/SipTypes.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			cESS0Hm771mYQ8odYFoABGgjzaqGm14qCTiyMSxlmcA=
+			/6b88I2lYOAimb41IW7VBiEo+Kz3Ho0Z5eVL4rnDXHg=
 			</data>
 		</dict>
 		<key>Headers/SocketProtocol.h</key>
@@ -186,7 +259,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			zxmtgSLnywTx6qlJs+nOtGrGCbd2xwqJ//2Hd2CoHfY=
+			UXYfD2L3bUcRPRtAeXkN/x8BcILfg2G4Z/n5nwiU0hs=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

@@ -20,7 +20,7 @@
 }
 
 
--(void)postRequestWithUrl:(NSString *)url andParam:(NSDictionary *)param andHeaders:(NSString *)header andSuccess:(void (^)(id))success andFail:(void (^)(id))fail{
+-(void)postRequestWithUrl:(NSString *)url andParam:(NSDictionary *)param andHeaders:(NSDictionary *)header andSuccess:(void (^)(id))success andFail:(void (^)(id))fail{
     
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -32,6 +32,30 @@
     NSLog(@"URL:%@\n param:%@\n\n",url,param);
     
     [manager POST:url parameters:param headers:header progress:^(NSProgress * _Nonnull uploadProgress) {
+        //
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
+        success(dic);
+        NSLog(@"%@",dic);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        fail(error);
+        NSLog(@"请求失败%@",error);
+        //
+    }];
+}
+
+-(void)getRequestWithUrl:(NSString *)url andParam:(NSDictionary *)param andHeaders:(NSDictionary *)header andSuccess:(void (^)(id))success andFail:(void (^)(id))fail{
+    
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+//    [manager.requestSerializer setValue:@"PLATE_NUMBER_LIST" forHTTPHeaderField:@"cookie"];
+    [manager.requestSerializer setTimeoutInterval:6];
+    
+    NSLog(@"URL:%@\n param:%@\n\n",url,param);
+    
+    [manager GET:url parameters:param headers:header progress:^(NSProgress * _Nonnull uploadProgress) {
         //
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];

@@ -7,6 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HttpManager.h"
+#import "UserModel.h"
+#import "UIView+Toast.h"
+#import "ViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

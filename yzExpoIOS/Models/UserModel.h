@@ -27,9 +27,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *accessToken;
 @property(nonatomic,strong)NSString *open_id;
 @property(nonatomic,strong)NSString *data;
+@property(nonatomic,strong)NSString *face_id;
+@property(nonatomic,strong)NSString *longitude;
+@property(nonatomic,strong)NSString *latitude;
+@property(nonatomic,strong)NSString *devToken;
 
 
 -(id)initWithDic:(NSDictionary *)dic;
+
+-(id)initWithDicWithoutSave:(NSDictionary *)dic;
 
 +(instancetype)shareInstance;
 

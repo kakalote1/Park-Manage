@@ -17,7 +17,11 @@
 #import "CallUtil.h"
 #import <AFNetworking/AFNetworking.h>
 #import "UserModel.h"
-
+#import "LoginViewController.h"
+#import <CoreLocation/CoreLocation.h>
+#import "WebViewController.h"
+#import <AVKit/AVKit.h>
+#import <AVFoundation/AVFoundation.h>
 @interface ViewController ()<WKNavigationDelegate,WKUIDelegate, WKScriptMessageHandler>
 
 @property (nonatomic, strong) WKWebView *webView;
@@ -25,8 +29,15 @@
 @property (nonatomic, strong) WKUserContentController *wkUserContentController;
 @property (nonatomic, strong) UIImageView *iv;
 @property (nonatomic, strong) NSUserDefaults *userDefaults;
+@property (nonatomic, strong) UserModel *userInfo;
+@property (nonatomic, strong) AVPlayerViewController *avPlayerVc;
+@property (nonatomic, strong) AVPlayerItem *avPlayerItem;
 
 @end
+
+//是否iPhoneX YES:iPhoneX屏幕 NO:传统屏幕
+#define kIs_iPhoneX ([UIScreen mainScreen].bounds.size.height == 812.0f ||[UIScreen mainScreen].bounds.size.height == 896.0f ||[UIScreen mainScreen].bounds.size.height == 844.0f ||[UIScreen mainScreen].bounds.size.height == 926.0f)
+#define kStatusBarAndNavigationBarHeight (kIs_iPhoneX ? 88.f : 64.f)
 
 @implementation ViewController
 
@@ -46,9 +57,31 @@
     return _userDefaults;
 }
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if (kIs_iPhoneX) {
+        self.view.bounds = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 34);
+
+    }
     
+    NSString *uid = [[NSUserDefaults standardUserDefaults] objectForKey:@"uid"];
+    NSString *ip = @"58.220.201.130";
+    NSString *port = @"9999";
+    uint16_t portNum = [port intValue];
+    [[self getSipContext] loginWithUid:uid host:ip port:portNum tls:true];
+
+    NSString *devToken = [UserModel shareInstance].devToken;
+    
+    if (devToken.length > 0 && uid.length > 0) {
+        NSDictionary *param = @{@"uid": uid, @"loginUid": uid, @"devToken": devToken, @"devType": @"1"};
+        NSString *url = @"http://58.220.201.130:12383/zlw/data/thirdPart/saveDevInfo";
+        [[HttpManager shareInstance] getRequestWithUrl:url andParam:param andHeaders:nil andSuccess:^(id responseObject) {
+                NSLog(@"关联设备成功: %@", responseObject);
+            } andFail:^(id error) {
+                
+            }];
+    }
     [self initWebView];
     
     [((AppDelegate *) [UIApplication sharedApplication].delegate) serverRequestWithUrl];
@@ -82,7 +115,7 @@
     [self.view addSubview:self.webView];
     [self.view addSubview:self.iv];
     
-    [self uidLogin:@""];
+//    [self uidLogin:@""];
     
     //OC注册供JS调用的方法
     [self addScriptFunction];
@@ -102,6 +135,10 @@
 //    NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:(NSJSONWritingPrettyPrinted) error:nil];
 //
 //    NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//    NSString *js = [NSString stringWithFormat:@"window.uid = 235", dic[@"uid"]];
+//
+//    WKUserScript *script = [[WKUserScript alloc] initWithSource:js injectionTime:(WKUserScriptInjectionTimeAtDocumentStart) forMainFrameOnly:YES];
+//    [self.webView.configuration.userContentController addUserScript:script];
     
 
     
@@ -120,6 +157,9 @@
     [self.wkUserContentController addScriptMessageHandler:self name:@"makeVideoGroupCall"];
     [self.wkUserContentController addScriptMessageHandler:self name:@"uidLogin"];
     [self.wkUserContentController addScriptMessageHandler:self name:@"Login"];
+    [self.wkUserContentController addScriptMessageHandler:self name:@"goBack"];
+    [self.wkUserContentController addScriptMessageHandler:self name:@"goHome"];
+    [self.wkUserContentController addScriptMessageHandler:self name:@"avplayer"];
     
 //    NSString *uid = [UserModel shareInstance].uid;
 //    NSString *js = [NSString stringWithFormat:@"window.IOSInfo = %@", uid];
@@ -128,15 +168,15 @@
 //    [self.wkWebViewConfiguration.userContentController addUserScript:script];
 }
 
-#pragma mark -  Alert弹窗
-- (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler {
-    UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message ? : @"" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction * action = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        completionHandler();
-    }];
-    [alertController addAction:action];
-    [self presentViewController:alertController animated:YES completion:nil];
-}
+//#pragma mark -  Alert弹窗
+//- (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler {
+//    UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message ? : @"" preferredStyle:UIAlertControllerStyleAlert];
+//    UIAlertAction * action = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//        completionHandler();
+//    }];
+//    [alertController addAction:action];
+//    [self presentViewController:alertController animated:YES completion:nil];
+//}
 
 
 #pragma mark - WKWebView
@@ -153,7 +193,8 @@
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
 //    关闭欢迎图片
     self.iv.hidden = YES;
-    NSString *uid = [UserModel shareInstance].uid;
+    
+    NSString *uid = [[NSUserDefaults standardUserDefaults] objectForKey:@"uid"];
     NSLog(@"js uid : %@", uid);
     // 将分享结果返回给js
 //      NSString *jsStr = [NSString stringWithFormat:@"shareResult('%@','%@','%@')",title,content,url];
@@ -162,9 +203,25 @@
 //        NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:(NSJSONWritingPrettyPrinted) error:nil];
 //
 //        NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-      [self.webView evaluateJavaScript:[NSString stringWithFormat: @"localStorage.setItem('uid','%@' );", uid] completionHandler:^(id _Nullable result, NSError * _Nullable error) {
+      [self.webView evaluateJavaScript:[NSString stringWithFormat: @"localStorage.setItem('iosUid', '%@' );", uid] completionHandler:^(id _Nullable result, NSError * _Nullable error) {
           NSLog(@"%@----%@",result, error);
       }];
+//
+//    [self.webView evaluateJavaScript:[NSString stringWithFormat: @"login('%@')", uid] completionHandler:^(id _Nullable result, NSError * _Nullable error) {
+//        NSLog(@"%@----%@",result, error);
+//    }];
+    
+    NSString *url = @"http://58.220.201.130:12383/scooper-app-msg/gis/updateGis";
+    NSString *longitude = [UserModel shareInstance].longitude;
+    NSString *latitude = [UserModel shareInstance].latitude;
+    NSLog(@"获取位置参数: %@ %@ %@",uid, longitude, latitude);
+    NSDictionary *param  = @{@"uid":uid,@"longitude":longitude,@"latitude":latitude};
+    
+    [[HttpManager shareInstance] getRequestWithUrl:url andParam:param andHeaders:nil andSuccess:^(id responseObject) {
+            NSLog(@"上报位置成功: %@", responseObject);
+        } andFail:^(id error) {
+            
+        }];
     [self isAutoLogin];
 }
 // 页面加载失败时调用
@@ -181,8 +238,48 @@
             [webView loadRequest:navigationAction.request];
             NSLog(@"55555");
         }
-        NSLog(@"5432122");
+    
+    NSString *url = navigationAction.request.URL.absoluteString;
+    NSLog(@"route url : %@", url);
+    NSArray *array = [url componentsSeparatedByString:@"#"];
+    NSLog(@"url array : %@", array);
+    if ([array containsObject:@"/operationalTesting/videoSurveillance"]) {
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:500];
+        [self.webView loadRequest:request];
+
+    }
+    if (url.length > 30) {
+        url = [url substringToIndex:21];
+         
+    }
+    NSLog(@"newurl : %@", url);
+
+    if ([url isEqual:@"http://58.220.201.130"]) {
+        decisionHandler(WKNavigationActionPolicyCancel);
+//        self.hidesBottomBarWhenPushed=YES;
+        WebViewController *webVc = [[WebViewController alloc] init];
+        [webVc initWebView:navigationAction.request.URL.absoluteString withTitle:@"事件列表"];
+        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:nil];
+        [self.navigationController pushViewController:webVc animated:YES];
+//            self.hidesBottomBarWhenPushed=NO;
+    }
+    else if ([url isEqual:@"http://221.181.152.11"]) {
+       decisionHandler(WKNavigationActionPolicyCancel);
+
+        WebViewController *webVc = [[WebViewController alloc] init];
+        [webVc initWebView:navigationAction.request.URL.absoluteString withTitle:@"视频播放"];
+        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:nil];
+        [self.navigationController pushViewController:webVc animated:YES];
+        webVc.navigationController.navigationBarHidden=NO;
+
+   }
+    else{
         decisionHandler(WKNavigationActionPolicyAllow);
+
+    }
+    
+    
+    NSLog(@"5432122: %@", url);
 }
 
 #pragma mark 判断用户自动登录
@@ -214,6 +311,14 @@
         [call makeAudioCall:message.body];
     } else if ([@"makeVideoCall" isEqualToString:message.name]) {
         NSLog(@"body:%@",message.body);
+//        UIAlertController *alter = [UIAlertController alertControllerWithTitle:@"提示" message:@"视频功能正在紧急修复....." preferredStyle:UIAlertControllerStyleAlert];
+//        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+//           UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//               NSLog(@"确定");
+//           }];
+//        [alter addAction:cancelAction];
+//         [alter addAction:okAction];
+//         [self presentViewController:alter animated:YES completion:nil];
         [call makeVideoCall:message.body];
     } else if ([@"makeAudioGroupCall" isEqualToString:message.name]) {
         NSLog(@"body:%@",message.body);
@@ -223,9 +328,31 @@
         [call makeVideoGroupCall:message.body];
     } else if ([@"uidLogin" isEqualToString:message.name]) {
         NSLog(@"body:%@",message.body);
-        [self uidLogin:message.body];
+//        [self uidLogin:message.body];
     } else if ([@"Login" isEqualToString:message.name]) {
         [self Login];
+    } else if ([@"goBack" isEqualToString:message.name]) {
+        [self goBack];
+    } else if ([@"goHome" isEqualToString:message.name]) {
+        [self goHome];
+    } else if ([@"avplayer" isEqualToString:message.name]) {
+        [self avplayer:message.body];
+    }
+}
+
+- (void)goHome {
+    if (self.webView.canGoBack == YES) {
+        [self.webView goBack];
+    } else {
+        [self.webView reload];
+    }
+}
+
+- (void)goBack {
+    if (self.webView.canGoBack == YES) {
+        [self.webView goBack];
+    } else {
+        [self.webView reload];
     }
 }
 
@@ -259,15 +386,52 @@
    [self.webView evaluateJavaScript:@"loginCallback('0')" completionHandler:nil];
 }
 
+- (void)avplayer: (NSString *) sender
+{
+    NSURL *url = [NSURL URLWithString:sender];
+   self.avPlayerVc = [[AVPlayerViewController alloc] init];
+    self.avPlayerItem = [[AVPlayerItem alloc] initWithURL:url];
+    self.avPlayerVc.showsPlaybackControls = YES;
+    self.avPlayerVc.player = [[AVPlayer alloc] initWithPlayerItem:self.avPlayerItem];
+    if (self.avPlayerVc.readyForDisplay) {
+        [self.avPlayerVc.player play];
+    }
+    [self presentViewController:self.avPlayerVc animated:YES completion:nil];
+    
+
+}
+
 #pragma mark - 退出登录
 - (void)logout:(id)body {
-    [self.userDefaults removeObjectForKey:AUTO_LOGIN];
-    [self.webView evaluateJavaScript:@"logoutCallback(true)" completionHandler:nil];
+//    [self.userDefaults removeObjectForKey:AUTO_LOGIN];
+    [self.navigationController popViewControllerAnimated:YES];
+    
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+
+    [[self getSipContext] logoutSip];
+    [user removeObjectForKey:@"uid"];
+    
+    [self.webView evaluateJavaScript:@"window.localStorage.clear()" completionHandler:nil];
 }
 
 // 模拟sip登录
 - (void)Login {
     NSLog(@"登录12345");
+    NSString *uid = [self.userDefaults objectForKey:@"uid"];
+    NSLog(@"js uid : %@", uid);
+    // 将分享结果返回给js
+//      NSString *jsStr = [NSString stringWithFormat:@"shareResult('%@','%@','%@')",title,content,url];
+//        NSMutableDictionary *dic = [NSMutableDictionary new];
+//        dic[@"uid"] = [UserModel shareInstance].uid;
+//        NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:(NSJSONWritingPrettyPrinted) error:nil];
+//
+//        NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+      [self.webView evaluateJavaScript:[NSString stringWithFormat: @"localStorage.setItem('iosUid', '%@' );", uid] completionHandler:^(id _Nullable result, NSError * _Nullable error) {
+          NSLog(@"%@----%@",result, error);
+      }];
+    
+
+    
 //    NSString *uid = [UserModel shareInstance].uid;
 //    NSLog(@"js uid : %@", uid);
 //    // 将分享结果返回给js
@@ -283,55 +447,70 @@
 }
 
 // sip登录
-- (void)uidLogin:(NSString *)uid {
-    NSLog(@"登录1234567");
-    NSLog(@"uid: %@",uid);
-    uid = [UserModel shareInstance].uid;
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        NSString *ip = @"122.224.180.122";
-        NSString *port = @"12381";
-        uint16_t portNum = [port intValue];
-        [[self getSipContext] loginWithUid:uid host:ip port:portNum tls:true];
-//        NSString *urlStr = [[NSString alloc] initWithFormat:@"http://%@:%@/zlw/data/thirdPartLogin/getSipUserInfoByUid?uid=%@",ip,port,uid];
-//        NSLog(@"url: %@", urlStr);
-//        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-//        AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-//        NSURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:urlStr parameters:nil error:nil];
-//        NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse *response, NSData *responseObject, NSError *error) {
-//            if (error) {
-//                NSLog(@"Error: %@", error);
-//            } else {
-////                NSLog(@"请求数据%@  \n\n\n data%@", response, responseObject);
-//                NSLog(@"12222%@",responseObject);
-//                NSData *jsonStr = (NSData *)responseObject;
-//                NSLog(@"jsonStr: %@",jsonStr);
-//                NSDictionary *dict = (NSDictionary *) jsonStr;
-//                NSDictionary *data = [dict objectForKey:@"data"];
-//                NSLog(@"dict: %@", data);
-//                NSString *sipTel = [data objectForKey:@"sipTel"];
-//                NSString *ip = [data objectForKey:@"natIp"];
-//                NSString *pwd = [data objectForKey:@"sipPwd"];
-//                NSString *portStr = [data objectForKey:@"tlsPort"];
-//                int port = [portStr intValue];
-//                [[self getSipContext] loginToSip:sipTel pass:pwd host:ip port:port tls:TRUE];
-//            }
-//        }];
-//        [dataTask resume];
-
-    });
-    if (![self checkPermission]) {
-        return;
-    }
-
-}
+//- (void)uidLogin:(NSString *)uid {
+//    NSLog(@"登录1234567");
+//    NSLog(@"uid: %@",uid);
+////    uid = [UserModel shareInstance].uid;
+//    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+//    uid = [user objectForKey:@"uid"];
+//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//        NSString *ip = @"122.224.180.122";
+//        NSString *port = @"12381";
+//        uint16_t portNum = [port intValue];
+//        [[self getSipContext] loginWithUid:uid host:ip port:portNum tls:true];
+////        NSString *urlStr = [[NSString alloc] initWithFormat:@"http://%@:%@/zlw/data/thirdPartLogin/getSipUserInfoByUid?uid=%@",ip,port,uid];
+////        NSLog(@"url: %@", urlStr);
+////        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+////        AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+////        NSURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:urlStr parameters:nil error:nil];
+////        NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse *response, NSData *responseObject, NSError *error) {
+////            if (error) {
+////                NSLog(@"Error: %@", error);
+////            } else {
+//////                NSLog(@"请求数据%@  \n\n\n data%@", response, responseObject);
+////                NSLog(@"12222%@",responseObject);
+////                NSData *jsonStr = (NSData *)responseObject;
+////                NSLog(@"jsonStr: %@",jsonStr);
+////                NSDictionary *dict = (NSDictionary *) jsonStr;
+////                NSDictionary *data = [dict objectForKey:@"data"];
+////                NSLog(@"dict: %@", data);
+////                NSString *sipTel = [data objectForKey:@"sipTel"];
+////                NSString *ip = [data objectForKey:@"natIp"];
+////                NSString *pwd = [data objectForKey:@"sipPwd"];
+////                NSString *portStr = [data objectForKey:@"tlsPort"];
+////                int port = [portStr intValue];
+////                [[self getSipContext] loginToSip:sipTel pass:pwd host:ip port:port tls:TRUE];
+////            }
+////        }];
+////        [dataTask resume];
+//
+//    });
+//    if (![self checkPermission]) {
+//        return;
+//    }
+//
+//}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    self.navigationController.navigationBarHidden = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationRegEvent:) name:NOTIFY_NAME_REGISTRATION_EVENT object:nil];
+    NSString *uid  = [self.userDefaults objectForKey:@"uid"];
+    if (uid.length == 0 || [uid  isEqual: @"(null)"]) {
+    
+            LoginViewController *loginVc = [[LoginViewController alloc] init];
+        loginVc.modalPresentationStyle = UIModalPresentationFullScreen;
+        [self presentViewController:loginVc animated:YES completion:^{
+                   
+        }];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+
+
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFY_NAME_REGISTRATION_EVENT object:nil];
 }
 
@@ -463,4 +642,25 @@
     [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {}];
 }
 
+// 登录成功后保存设备信息
+- (void)saveDevInfo {
+    NSString *devToken = [UserModel shareInstance].devToken;
+    NSString *uid = [UserModel shareInstance].uid;
+    if (devToken.length > 0 && uid.length > 0) {
+        NSDictionary *param = @{@"uid": uid, @"loginUid": uid, @"devToken": devToken, @"devType": @"1"};
+        NSString *url = @"http://58.220.201.130:12383/zlw/data/thirdPart/saveDevInfo";
+        [[HttpManager shareInstance] getRequestWithUrl:url andParam:param andHeaders:nil andSuccess:^(id responseObject) {
+                NSLog(@"关联设备成功: %@", responseObject);
+            } andFail:^(id error) {
+                
+            }];
+    }
+}
+
+- (UserModel *) userInfo {
+    if (_userInfo) {
+        _userInfo = [UserModel shareInstance];
+    }
+    return _userInfo;
+}
 @end

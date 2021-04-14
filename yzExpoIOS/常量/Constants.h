@@ -15,8 +15,39 @@
 //#define BASE_WEB_URL @"http://192.168.1.161/yzExpo/"
 //#define BASE_WEB_URL @"http://192.168.1.221:8081/"
 //#define BASE_WEB_URL @"http://123.207.189.27:7108/yzExpo/"
+#define BASE_WEB_URL @"http://123.207.189.27:7108/yzExpoFace/"
+//#define BASE_WEB_URL @"http://123.207.189.27:7108/yzExpoFaceNew/"
+
+
+//#define BASE_WEB_URL @"http://192.168.24.104:8081"
+
+
 //#define BASE_WEB_URL @"http://localhost:8081"
-#define BASE_WEB_URL @"http://192.168.1.200:8081/"
+//#define BASE_WEB_URL @"http://192.168.1.200:8081/"
+//#define BASE_WEB_URL @"http://172.20.10.6:8081/"
+
+
+// dev
+//#define WEB_URL @"http://toss.yzyby2018.com/"
+//#define LOGIN_URL @"http://toss.yzyby2018.com/usrv/user/admin/auth-by-account?access_token="
+//#define USER_INFO_URL @"http://toss.yzyby2018.com/usrv/user/admin/detail-by-username?access_token="
+//#define FACE_LOGIN_URL @"http://toss.yzyby2018.com/usrv/uc/iai/iai-search-persons"
+//#define SAVE_FACE_URL @"http://toss.yzyby2018.com/usrv/uc/iai/iai-save"
+//#define FACE_INFO_URL @"http://toss.yzyby2018.com/usrv/uc/iai/iai-get-by-uid?access_token="
+
+
+
+
+// relesde
+#define WEB_URL @"https://oss.yzyby2018.com/"
+#define LOGIN_URL @"https://oss.yzyby2018.com/usrv/user/admin/auth-by-account?access_token="
+#define USER_INFO_URL @"https://oss.yzyby2018.com/usrv/user/admin/detail-by-username?access_token="
+#define FACE_LOGIN_URL @"https://oss.yzyby2018.com/usrv/uc/iai/iai-search-persons?access_token="
+#define SAVE_FACE_URL @"https://oss.yzyby2018.com/usrv/uc/iai/iai-save?access_token="
+#define FACE_INFO_URL @"https://oss.yzyby2018.com/usrv/uc/iai/iai-get-by-uid?access_token="
+
+
+
 
 
 

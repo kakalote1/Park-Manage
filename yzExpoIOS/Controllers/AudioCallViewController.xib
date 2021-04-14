@@ -14,9 +14,9 @@
                 <outlet property="acceptCallBtn" destination="euu-tn-uam" id="czB-S8-VEi"/>
                 <outlet property="buttonLeading" destination="KGv-JI-IrH" id="z5q-nQ-jU7"/>
                 <outlet property="hangupCallBtn" destination="1Pu-GS-xUD" id="dL7-A8-ryZ"/>
-                <outlet property="stateLbl" destination="6GE-oW-nOy" id="xas-nv-wIv"/>
+                <outlet property="stateLbl" destination="2WI-LP-p7H" id="ByW-nI-Utw"/>
                 <outlet property="stateLblLeading" destination="YZr-Iv-Xg8" id="IdA-OQ-ygm"/>
-                <outlet property="telNumberLbl" destination="2WI-LP-p7H" id="fK3-1p-djO"/>
+                <outlet property="telNumberLbl" destination="6GE-oW-nOy" id="JrI-Oi-kgm"/>
                 <outlet property="view" destination="dMD-mt-Lzj" id="3KH-Mb-hvg"/>
             </connections>
         </placeholder>
@@ -40,8 +40,8 @@
                         <action selector="onClickHangup:" destination="-1" eventType="touchUpInside" id="1hP-wF-rgu"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="来电" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6GE-oW-nOy">
-                    <rect key="frame" x="176.5" y="413" width="61" height="36"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="多人会议" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6GE-oW-nOy">
+                    <rect key="frame" x="146" y="413" width="122" height="36"/>
                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                     <color key="textColor" systemColor="systemBackgroundColor"/>
                     <nil key="highlightedColor"/>
@@ -63,7 +63,7 @@
                         <action selector="onClickAcceptCall:" destination="-1" eventType="touchUpInside" id="gAV-5t-qn8"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="号码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2WI-LP-p7H">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="来电" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2WI-LP-p7H">
                     <rect key="frame" x="188.5" y="456.5" width="37" height="21.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

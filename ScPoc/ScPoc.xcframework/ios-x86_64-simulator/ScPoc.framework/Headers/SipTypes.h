@@ -21,11 +21,9 @@
     } while (0)
 //#define SCSIP_RAISE_ERROR3(status, op, pchReason) \
 //    do { \
-//        uint32_t exceptStatus = (status); \
-//        NSString *exceptOp = [NSString stringWithCString:(op) encoding:NSUTF8StringEncoding]; \
 //        NSString *exceptReason = [NSString stringWithFormat:@"method: %@, status=%d %s, File %s.%s(line:%d)", \
-//            exceptOp, exceptStatus, pchReason, __FILE__, __FUNCTION__, __LINE__]; \
-//        @throw [NSException exceptionWithName:exceptOp reason:exceptReason userInfo:nil]; \
+//            op, status, pchReason, __FILE__, __FUNCTION__, __LINE__]; \
+//        @throw [NSException exceptionWithName:op reason:exceptReason userInfo:nil]; \
 //    } while (0)
 /** Raise Error exception if the status fails */
 #define SCSIP_CHECK_RAISE_ERROR(status) \
@@ -134,13 +132,13 @@ typedef NS_ENUM(NSInteger, SipStatusCode) {
 /**
  * This enumeration describes invite session state.
  */
-typedef NS_ENUM(NSInteger, SipInvState){
-    SIP_INV_STATE_NULL,	    /**< Before INVITE is sent or received  */
-    SIP_INV_STATE_CALLING,	    /**< After INVITE is sent		    */
-    SIP_INV_STATE_INCOMING,	    /**< After INVITE is received.	    */
-    SIP_INV_STATE_EARLY,	    /**< After response with To tag.	    */
-    SIP_INV_STATE_CONNECTING,	    /**< After 2xx is sent/received.	    */
-    SIP_INV_STATE_CONFIRMED,	    /**< After ACK is sent/received.	    */
+typedef NS_ENUM(NSInteger, SipInvState) {
+    SIP_INV_STATE_NULL,        /**< Before INVITE is sent or received  */
+    SIP_INV_STATE_CALLING,        /**< After INVITE is sent		    */
+    SIP_INV_STATE_INCOMING,        /**< After INVITE is received.	    */
+    SIP_INV_STATE_EARLY,        /**< After response with To tag.	    */
+    SIP_INV_STATE_CONNECTING,        /**< After 2xx is sent/received.	    */
+    SIP_INV_STATE_CONFIRMED,        /**< After ACK is sent/received.	    */
     SIP_INV_STATE_DISCONNECTED,   /**< Session is terminated.		    */
 };
 
@@ -168,13 +166,13 @@ typedef NS_ENUM(NSInteger, SipCallStatus) {
  * Transaction role.
  */
 typedef NS_ENUM(NSInteger, SipRole) {
-    SIP_ROLE_UAC,	/**< Role is UAC. */
-    SIP_ROLE_UAS,	/**< Role is UAS. */
+    SIP_ROLE_UAC,    /**< Role is UAC. */
+    SIP_ROLE_UAS,    /**< Role is UAS. */
 
     /* Alias: */
 
-    SIP_UAC_ROLE = SIP_ROLE_UAC,	/**< Role is UAC. */
-    SIP_UAS_ROLE = SIP_ROLE_UAS	/**< Role is UAS. */
+            SIP_UAC_ROLE = SIP_ROLE_UAC,    /**< Role is UAC. */
+    SIP_UAS_ROLE = SIP_ROLE_UAS    /**< Role is UAS. */
 
 };
 
@@ -182,15 +180,15 @@ typedef NS_ENUM(NSInteger, SipRole) {
  * This enumeration represents transaction state.
  */
 typedef NS_ENUM(NSInteger, SipTsxState) {
-    SIP_TSX_STATE_NULL,	/**< For UAC, before any message is sent.   */
-    SIP_TSX_STATE_CALLING,	/**< For UAC, just after request is sent.   */
-    SIP_TSX_STATE_TRYING,	/**< For UAS, just after request is received.*/
-    SIP_TSX_STATE_PROCEEDING,	/**< For UAS/UAC, after provisional response.*/
-    SIP_TSX_STATE_COMPLETED,	/**< For UAS/UAC, after final response.	    */
-    SIP_TSX_STATE_CONFIRMED,	/**< For UAS, after ACK is received.	    */
-    SIP_TSX_STATE_TERMINATED,	/**< For UAS/UAC, before it's destroyed.    */
-    SIP_TSX_STATE_DESTROYED,	/**< For UAS/UAC, will be destroyed now.    */
-    SIP_TSX_STATE_MAX		/**< Number of states.			    */
+    SIP_TSX_STATE_NULL,    /**< For UAC, before any message is sent.   */
+    SIP_TSX_STATE_CALLING,    /**< For UAC, just after request is sent.   */
+    SIP_TSX_STATE_TRYING,    /**< For UAS, just after request is received.*/
+    SIP_TSX_STATE_PROCEEDING,    /**< For UAS/UAC, after provisional response.*/
+    SIP_TSX_STATE_COMPLETED,    /**< For UAS/UAC, after final response.	    */
+    SIP_TSX_STATE_CONFIRMED,    /**< For UAS, after ACK is received.	    */
+    SIP_TSX_STATE_TERMINATED,    /**< For UAS/UAC, before it's destroyed.    */
+    SIP_TSX_STATE_DESTROYED,    /**< For UAS/UAC, will be destroyed now.    */
+    SIP_TSX_STATE_MAX        /**< Number of states.			    */
 };
 
 /**
@@ -198,23 +196,23 @@ typedef NS_ENUM(NSInteger, SipTsxState) {
  */
 typedef NS_ENUM(NSInteger, MediaDir) {
     /** None */
-    MEDIA_DIR_NONE = 0,
+            MEDIA_DIR_NONE = 0,
     /** Encoding (outgoing to network) stream, also known as capture */
-    MEDIA_DIR_ENCODING = 1,
+            MEDIA_DIR_ENCODING = 1,
     /** Same as encoding direction. */
-    MEDIA_DIR_CAPTURE = MEDIA_DIR_ENCODING,
+            MEDIA_DIR_CAPTURE = MEDIA_DIR_ENCODING,
     /** Decoding (incoming from network) stream, also known as playback. */
-    MEDIA_DIR_DECODING = 2,
+            MEDIA_DIR_DECODING = 2,
     /** Same as decoding. */
-    MEDIA_DIR_PLAYBACK = MEDIA_DIR_DECODING,
+            MEDIA_DIR_PLAYBACK = MEDIA_DIR_DECODING,
     /** Same as decoding. */
-    MEDIA_DIR_RENDER = MEDIA_DIR_DECODING,
+            MEDIA_DIR_RENDER = MEDIA_DIR_DECODING,
     /** Incoming and outgoing stream, same as PJMEDIA_DIR_CAPTURE_PLAYBACK */
-    MEDIA_DIR_ENCODING_DECODING = 3,
+            MEDIA_DIR_ENCODING_DECODING = 3,
     /** Same as ENCODING_DECODING */
-    MEDIA_DIR_CAPTURE_PLAYBACK = MEDIA_DIR_ENCODING_DECODING,
+            MEDIA_DIR_CAPTURE_PLAYBACK = MEDIA_DIR_ENCODING_DECODING,
     /** Same as ENCODING_DECODING */
-    MEDIA_DIR_CAPTURE_RENDER = MEDIA_DIR_ENCODING_DECODING
+            MEDIA_DIR_CAPTURE_RENDER = MEDIA_DIR_ENCODING_DECODING
 };
 
 /**
@@ -225,27 +223,27 @@ typedef NS_ENUM(NSInteger, SipCallMediaStatus) {
     /**
      * Call currently has no media, or the media is not used.
      */
-    SIP_CALL_MEDIA_NONE,
+            SIP_CALL_MEDIA_NONE,
 
     /**
      * The media is active
      */
-    SIP_CALL_MEDIA_ACTIVE,
+            SIP_CALL_MEDIA_ACTIVE,
 
     /**
      * The media is currently put on hold by local endpoint
      */
-    SIP_CALL_MEDIA_LOCAL_HOLD,
+            SIP_CALL_MEDIA_LOCAL_HOLD,
 
     /**
      * The media is currently put on hold by remote endpoint
      */
-    SIP_CALL_MEDIA_REMOTE_HOLD,
+            SIP_CALL_MEDIA_REMOTE_HOLD,
 
     /**
      * The media has reported error (e.g. ICE negotiation)
      */
-    SIP_CALL_MEDIA_ERROR
+            SIP_CALL_MEDIA_ERROR
 };
 
 @interface SipTypes : NSObject

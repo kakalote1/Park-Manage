@@ -13,6 +13,8 @@
 #import <ScPoc/VideoManager.h>
 #import <AVFoundation/AVFoundation.h>
 #import <ScPoc/SipSettings.h>
+#import "HttpManager.h"
+#import "AppDelegate.h"
 
 @interface VideoCallViewController ()
 
@@ -39,6 +41,8 @@
 @property (nonatomic, strong) UILabel *switchCameraLbl;
 @property (nonatomic, assign) CGPoint panStartPoint;
 @property (nonatomic, assign) CGRect panStartVideoFrame;
+
+@property (nonatomic, strong) AVAudioSession *audioSession;
 @end
 
 #define SmallVideoView 120
@@ -52,24 +56,48 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    // 默认设为扬声器播放
+    self.audioSession = [AVAudioSession sharedInstance];
+    [self.audioSession setCategory:AVAudioSessionCategoryPlayback error:nil];
+    [self.audioSession setActive:YES error:nil];
     
     self.bigVideoView = [[UIView alloc] initWithFrame:self.view.bounds];
-    UITapGestureRecognizer *tapBigVideo = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onClickedBigVideoView:)];
-    [self.bigVideoView addGestureRecognizer:tapBigVideo];
+//    UITapGestureRecognizer *tapBigVideo = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onClickedBigVideoView:)];
+//    [self.bigVideoView addGestureRecognizer:tapBigVideo];
     [self.view addSubview:self.bigVideoView];
     
-    self.smallVideoView = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width - SmallVideoView, kStatusBarAndNavigationBarHeight, SmallVideoView, SmallVideoView * 4 /3)];
-    [self.smallVideoView addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onSmallVideoPan:)]];
-    [self.smallVideoView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onSmallVideoTaped:)]];
+    self.smallVideoView = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width - SmallVideoView, kStatusBarAndNavigationBarHeight + 30, SmallVideoView, SmallVideoView * 4 /3)];
+//    [self.smallVideoView addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onSmallVideoPan:)]];
+//    [self.smallVideoView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onSmallVideoTaped:)]];
     [self.view addSubview:self.smallVideoView];
     
     [[self getSipContext].settings setVideoTransUseUdp: FALSE];
     [[self getSipContext].settings setQosPrefVideoSize:1];
     [[self getSipContext].settings setVideoEncoderBitrate:1200];
+    
     if (!self.avSession) {
         self.avSession = [self.getSipContext getCurrentSession];
     }
     if (self.avSession) {
+        
+        NSString *url = @"http:///58.220.201.130:12383/zlw/data/thirdPartLogin/getMemberInfoByTel";
+        NSString *tel = [self.avSession getRemotePartyDisplayName];
+        if (![tel isEqualToString: @"998"]) {
+        NSString *uid = [[NSUserDefaults standardUserDefaults] objectForKey:@"uid"];
+        NSDictionary *param = @{@"uid": uid, @"tel": tel};
+        
+        [[HttpManager shareInstance] getRequestWithUrl:url andParam:param andHeaders:nil andSuccess:^(id responseObject) {
+            NSDictionary *data = responseObject[@"data"];
+
+            self.telNumberLbl.text = data[@"memName"];
+
+            } andFail:^(id error) {
+                
+            }];
+            
+        }
+        self.telNumberLbl.text = @"视频会议";
+
         // 通过判断是呼入还是呼出，改变页面的显示方式
         if ([self.avSession isOutgoing]) {
             // 如果是呼出，改变顶部状态文字显示，并隐藏接听按钮
@@ -88,26 +116,46 @@
         self.hangupCallBtn.hidden = NO;
         self.hangupLbl.hidden = NO;
         // 设置来电信息
-        self.telNumberLbl.text = [self.avSession getRemotePartyDisplayName];
+        
     }
 //    self.cameraPreviewContainer.hidden = NO;
 //    self.view.layer.contents = self.cameraPreviewContainer;
     [[[self getSipContext] getVideoManager] initWithRemote:self.bigVideoView local:self.smallVideoView];
-    self.view.backgroundColor = [UIColor blackColor];
+    [[self getSipContext] setSpeakerphoneOn:YES];
+    self.view.backgroundColor = [UIColor grayColor];
 }
 
 // 视图出现前通过通知对页面进行处理
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleInviteEvent:) name:NOTIFY_NAME_INVITE_EVENT object:nil];
+    [[UIDevice currentDevice] setProximityMonitoringEnabled:YES]; 
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleInviteEvent:)
+                                                 name:NOTIFY_NAME_INVITE_EVENT object:nil];
+    
+    //添加监听
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sensorStateChange:) name:@"UIDeviceProximityStateDidChangeNotification" object:nil];
 }
 
 // 视图移除前移除通知
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFY_NAME_INVITE_EVENT object:nil];
+    
+    [[UIDevice currentDevice] setProximityMonitoringEnabled:NO];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:NOTIFY_NAME_INVITE_EVENT object:nil];
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
 }
 
 // 根据广播类型做出响应的处理
@@ -130,26 +178,32 @@
             self.audioButton.hidden = NO;
             self.audioLbl.hidden = NO;
             // 将挂断按钮居中
-            self.hangupCallBtn.frame = CGRectMake(self.view.frame.size.width/2-72/2, self.view.frame.size.height - 60 - 72, 72, 72);
+            self.hangupCallBtn.frame = CGRectMake(self.view.frame.size.width/2-72/2, self.view.frame.size.height - 60 - 72, 72, 72) ;
             self.hangupLbl.frame = CGRectMake(self.view.frame.size.width/2-72/2, self.hangupCallBtn.frame.origin.y + 77, 72, 20);
             self.hangupCallBtn.hidden = NO;
             self.hangupLbl.hidden = NO;
-            self.encodePreviewContainer.frame = self.view.bounds;
-            self.cameraPreviewContainer.frame = CGRectMake(0.75 * self.view.frame.size.width, self.view.frame.size.height - 50, 0.3 * self.view.frame.size.width, 0.3 * self.view.frame.size.height);
+//            self.encodePreviewContainer.frame = self.view.bounds;
+//            self.cameraPreviewContainer.frame = CGRectMake(0.75 * self.view.frame.size.width, self.view.frame.size.height - 50, 0.3 * self.view.frame.size.width, 0.3 * self.view.frame.size.height);
 //            self.encodePreviewContainer.hidden = NO;
 //            self.cameraPreviewContainer.hidden = NO;
 //            [self.encodePreviewContainer addSubview:self.cameraPreviewContainer];
         });
         [[[self getSipContext] getVideoManager] startSocket];
-    } else if (event.eventType == TERMINATED) {
+        [[self getSipContext] setSpeakerphoneOn:YES];
+
+    }
+    else if (event.eventType == TERMINATED) {
         NSLog(@"video TERMINATED");
         [[[self getSipContext] getVideoManager] destroy];
+        [self.avSession hangupCall:@"AudioCall click hangup"];
+
         // 通话结束后关闭当前页面，并清空session
         dispatch_sync(dispatch_get_main_queue(), ^{
-            [self.navigationController popViewControllerAnimated:YES];
+//            [self.navigationController popViewControllerAnimated:YES];
+            [self dismissViewControllerAnimated:YES completion:nil];
         });
         self.avSession = nil;
-        
+
     }
 }
 
@@ -211,7 +265,7 @@
         [_hangupCallBtn setBackgroundImage:[UIImage imageNamed:@"hangup_hover"] forState:UIControlStateHighlighted];
         [_hangupCallBtn setBackgroundImage:[UIImage imageNamed:@"hangup_hover"] forState:UIControlStateSelected];
         [_hangupCallBtn setBackgroundColor:[UIColor clearColor]];
-        [_hangupCallBtn addTarget:self action:@selector(hangupButtonDidTap:) forControlEvents:UIControlEventTouchDown];
+        [_hangupCallBtn addTarget:self action:@selector(hangupButtonDidTap:) forControlEvents:UIControlEventTouchUpInside];
         _hangupCallBtn.hidden = YES;
         [self.view addSubview:_hangupCallBtn];
     }
@@ -269,7 +323,7 @@
         [_switchCameraButton setBackgroundImage:[UIImage imageNamed:@"switchcamera_hover"] forState:UIControlStateHighlighted];
         [_switchCameraButton setBackgroundImage:[UIImage imageNamed:@"switchcamera_hover"] forState:UIControlStateSelected];
         [_switchCameraButton setBackgroundColor:[UIColor clearColor]];
-        [_switchCameraButton addTarget:self action:@selector(switchCameraButtonDidTap:) forControlEvents:UIControlEventTouchDown];
+        [_switchCameraButton addTarget:self action:@selector(switchCameraButtonDidTap:) forControlEvents:UIControlEventTouchUpInside];
         _switchCameraButton.hidden = YES;
         [self.view addSubview:_switchCameraButton];
     }
@@ -323,11 +377,34 @@
 - (void)hangupButtonDidTap:(UIButton *)button {
     [self.avSession hangupCall:@"AudioCall click hangup"];
     [[[self getSipContext] getVideoManager] destroy];
+    [[SipContext sharedInstance] logoutSip];
+    [[SipContext sharedInstance] shutdown];
+
+    [[self getSipContext] removeCurrentSession];
+    [[[self getSipContext] getVideoManager] destroy];
+    
+    self.avSession = nil;
+
+    
+
+//    [[SipContext sharedInstance] startup];
+//    NSString *uid = [[NSUserDefaults standardUserDefaults] objectForKey:@"uid"];
+//    NSString *ip = @"122.224.180.122";
+//    NSString *port = @"12381";
+//    uint16_t portNum = [port intValue];
+//    [[self getSipContext] loginWithUid:uid host:ip port:portNum tls:true];
+    dispatch_async(dispatch_get_main_queue(), ^{
+ 
+        [self dismissViewControllerAnimated:YES completion:nil];
+
+
+    });
+    
 }
 
 // 接听按钮绑定事件
 - (void)acceptButtonDidTap:(UIButton *)button {
-    [[self.getSipContext getCurrentSession] acceptCall];
+    [self.avSession acceptCall];
 }
 
 // 切换摄像头按钮绑定事件
@@ -415,12 +492,18 @@
     }
 }
 
-// 开关麦克风按钮绑定事件
 - (void)audioButtonDidTap:(UIButton *)button {
     // 开关麦克风
-    
-    // 更新按钮状态
-    [self updateAudioButton];
+    float level = [self.avSession getMicrophoneLevel];
+    NSLog(@"麦克风等级: %f", level);
+    if (level != 0) {
+        [self.avSession adjustMicrophoneLevel:0];
+        [_audioButton setBackgroundImage:[UIImage imageNamed:@"mute_hover"] forState:UIControlStateNormal];
+    } else {
+        [self.avSession adjustMicrophoneLevel:3];
+        [_audioButton setBackgroundImage:[UIImage imageNamed:@"mute"] forState:UIControlStateNormal];
+
+    }
 }
 
 // 根据系统麦克风状态更新按钮状态
@@ -428,23 +511,13 @@
     
 }
 
+
+
 - (void)setAvSession:(SipSession *)avSession {
     _avSession = avSession;
 }
 
-+ (instancetype)allocWithZone:(struct _NSZone *)zone
-{
-    static id instance = nil;
-    if (instance == nil) {
-        instance = [super allocWithZone:zone];
-    }
-    return instance;
-}
 
-+ (instancetype)sharedPerson
-{
-    return [self new];
-}
 
 
 /*

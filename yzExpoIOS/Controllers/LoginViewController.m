@@ -66,9 +66,43 @@ alpha:1.0]
 
 @implementation LoginViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSString *uid = [[NSUserDefaults standardUserDefaults] objectForKey:@"uid"];
+        NSLog(@"login uid: %@", uid);
+        if (uid.length > 0 && ![uid isEqual: @"(null)"]) {
+
+//             人脸识别
+            FaceLoginViewController *vc = [[FaceLoginViewController alloc] init];
+//            vc.modalPresentationStyle = UIModalPresentationFullScreen;
+            [self presentViewController:vc animated:YES completion:nil];
+////
+//            ViewController *vc = [[ViewController alloc] init];
+//            [self.navigationController pushViewController:vc animated:YES];
+        }
+    });
+
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+//    [self.activityIndicator stopAnimating];
+
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self
+           selector:@selector(handlePush:)
+                   name:@"push"
+                 object:nil];
+
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
 
     //配置wkWebViewConfiguration
     [self wkConfiguration];
@@ -105,6 +139,9 @@ alpha:1.0]
     self.usernameField.placeholder = @"请输入用户名";
     self.usernameField.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.usernameField.delegate = self;
+    if ([user objectForKey:@"username"]) {
+        self.usernameField.text = [user objectForKey:@"username"];
+    }
     [self.usernameField addTarget:self action:@selector(returnOnKeyboard:) forControlEvents:UIControlEventEditingDidEndOnExit];
     
     self.usernameImgVc.layer.cornerRadius = 7;
@@ -123,6 +160,9 @@ alpha:1.0]
     self.passwordField.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.passwordField.secureTextEntry = TRUE;
     self.passwordField.delegate = self;
+    if ([user objectForKey:@"password"]) {
+        self.passwordField.text = [user objectForKey:@"password"];
+    }
     [self.passwordField addTarget:self action:@selector(returnOnKeyboard:) forControlEvents:UIControlEventEditingDidEndOnExit];
     
     self.passwordImgVc.layer.cornerRadius = 7;
@@ -161,6 +201,7 @@ alpha:1.0]
 }
 
 -(void)login:(UIButton *)sender {
+    [self.activityIndicator startAnimating];
     NSString *username = self.usernameField.text;
     NSString *password = self.passwordField.text;
     NSLog(@"用户名: %@, 密码: %@", username, password);
@@ -170,27 +211,46 @@ alpha:1.0]
     NSLog(@"%@\n%@",[dic2 objectForKey:@"accessToken"],PATH_OF_DOCUMENT);
     
     
-    NSString *url = [@"http://toss.yzyby2018.com/usrv/user/admin/auth-by-account?access_token=" stringByAppendingFormat:@"%@", [dic2 objectForKey:@"accessToken"]];
+    NSString *url = [LOGIN_URL stringByAppendingFormat:@"%@", [dic2 objectForKey:@"accessToken"]];
     NSLog(@"url : %@", url);
     NSDictionary *param = @{@"account": username, @"password": password};
     NSLog(@"param: %@", param);
     [[HttpManager shareInstance] postRequestWithUrl:url andParam:param andHeaders:nil andSuccess:^(id responseObject) {
         NSInteger errorcode = [responseObject[@"errorcode"] integerValue];
         if (errorcode == 0) {
-            [self.view makeToast:@"登录成功"];
+//            [self.view makeToast:@"登录成功"];
+            [self.activityIndicator stopAnimating];
             NSLog(@"登录成功");
-            NSString *url = [@"http://toss.yzyby2018.com/usrv/user/admin/detail-by-username?access_token=" stringByAppendingFormat:@"%@", [dic2 objectForKey:@"accessToken"]];
+            NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+            [user setObject:username forKey:@"username"];
+            [user setObject:password forKey:@"password"];
+            NSString *url = [USER_INFO_URL stringByAppendingFormat:@"%@", [dic2 objectForKey:@"accessToken"]];
             [[HttpManager shareInstance] postRequestWithUrl:url andParam:@{@"username":username} andHeaders:nil andSuccess:^(id responseObject) {
-                UserModel *user = [[UserModel shareInstance] initWithDic:responseObject[@"data"]];
+                [self saveDevInfo];
+                UserModel *userModel = [[UserModel shareInstance] initWithDicWithoutSave:responseObject[@"data"]];
         
-                NSLog(@"userinfo : %@", user.uid);
+                NSString *uid = userModel.uid;
+                NSLog(@"userinfo : %@", uid);
+                [user setObject:uid forKey:@"uid"];
+                [user setObject:username forKey:@"username"];
+//                ViewController *vc = [[ViewController alloc] init];
+//                [self.navigationController pushViewController:vc animated:YES];
+//                [self dismissViewControllerAnimated:YES completion:nil];
+//                [self.activityIndicator stopAnimating];
                 
-                ViewController *vc = [[ViewController alloc] init];
-                [self.navigationController pushViewController:vc animated:YES];
+                FaceLoginViewController *faceVc = [[FaceLoginViewController alloc] init];
+//                [self.navigationController pushViewController:faceVc animated:YES];
+//                faceVc.modalPresentationStyle = UIModalPresentationFullScreen;
+                [self presentViewController:faceVc animated:YES completion:^{
+
+
+                }];
                         } andFail:^(id error) {
                             
                         }];
+            
         } else {
+            [self.activityIndicator stopAnimating];
             NSString *message = responseObject[@"msg"];
             switch (errorcode) {
                 case 11004:
@@ -209,7 +269,8 @@ alpha:1.0]
         
         } andFail:^(id error) {
             
-        
+            [self.activityIndicator stopAnimating];
+
             
         }];
     
@@ -276,6 +337,52 @@ alpha:1.0]
     if ([@"login" isEqualToString:message.name]) {
         [self login:message.body];
     }
+}
+
+// 登录成功后保存设备信息
+- (void)saveDevInfo {
+    NSString *devToken = [UserModel shareInstance].devToken;
+    NSString *uid = [UserModel shareInstance].uid;
+    if (devToken.length > 0 && uid.length > 0) {
+        NSDictionary *param = @{@"uid": uid, @"loginUid": uid, @"devToken": devToken, @"devType": @"1"};
+        NSString *url = @"http://58.220.201.130:12383/zlw/data/thirdPart/saveDevInfo";
+        [[HttpManager shareInstance] getRequestWithUrl:url andParam:param andHeaders:nil andSuccess:^(id responseObject) {
+                NSLog(@"关联设备成功: %@", responseObject);
+            } andFail:^(id error) {
+                
+            }];
+    }
+
+}
+
+
+
+- (void) handlePush: (NSNotification *) notification {
+    NSLog(@"人脸通知回调: %@",[notification object]);
+    [self.activityIndicator startAnimating];
+    ViewController *vc = [[ViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+    [self.activityIndicator stopAnimating];
+}
+
+- (UIActivityIndicatorView *)activityIndicator {
+    if (!_activityIndicator) {
+        _activityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:(UIActivityIndicatorViewStyleWhiteLarge)];
+        _activityIndicator.frame = CGRectMake(0, 0, 100.0f, 100.0f);
+          //设置小菊花的frame
+        _activityIndicator.center = self.view.center;
+          //设置小菊花颜色
+//          _activityIndicator.color = [UIColor redColor];
+          //设置背景颜色
+        _activityIndicator.backgroundColor = [UIColor colorWithWhite:0.33 alpha:0.9];        _activityIndicator.layer.cornerRadius = 10.0f;
+        _activityIndicator.hidesWhenStopped = YES;
+          //刚进入这个界面会显示控件，并且停止旋转也会显示，只是没有在转动而已，没有设置或者设置为YES的时候，刚进入页面不会显示
+//          _activityIndicator.hidesWhenStopped = NO;
+        [self.view addSubview:_activityIndicator];
+    }
+
+    return _activityIndicator;
+  
 }
 
 /*

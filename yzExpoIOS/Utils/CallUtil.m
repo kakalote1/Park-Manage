@@ -11,6 +11,8 @@
 #import <ScPoc/SipContext.h>
 #import <ScPoc/SipSession.h>
 #import <ScPoc/IphoneControl.h>
+#import <ScPoc/MeetingManager.h>
+#import "MeetingModel.h"
 
 @implementation CallUtil
 
@@ -27,9 +29,42 @@
 
 - (void)makeAudioGroupCall:(NSString *)sender {
     NSLog(@"拨打群组语音");
+    NSLog(@"sender: %@", sender);
+    NSData *data = [sender dataUsingEncoding:NSUTF8StringEncoding];
+//    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
+    
+    NSArray *array = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+    NSLog(@"listcount: %lu",(unsigned long)array.count);
+    NSMutableArray *telList = [NSMutableArray new];
+    for (NSDictionary *dic in array) {
+   
+        [telList addObject:dic[@"tel"]];
+               NSLog(@"sender list: %@",dic);
+    }
+    NSLog(@"meetingdic ： %@", telList);
+    MeetingModel *meetingModel = [MeetingModel shareInstance];
+    [meetingModel initWithDic:telList];
+    [meetingModel initWithArray:array];
+    [[[self getSipContext] getMeetingManager] createMeeting:NO];
 }
 
 - (void)makeVideoGroupCall:(NSString *)sender {
     NSLog(@"拨打群组视频");
+    NSData *data = [sender dataUsingEncoding:NSUTF8StringEncoding];
+//    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
+    
+    NSArray *array = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+    NSLog(@"listcount: %lu",(unsigned long)array.count);
+    NSMutableArray *telList = [NSMutableArray new];
+    for (NSDictionary *dic in array) {
+   
+        [telList addObject:dic[@"tel"]];
+               NSLog(@"sender list: %@",dic);
+    }
+    NSLog(@"meetingdic ： %@", telList);
+    MeetingModel *meetingModel = [MeetingModel shareInstance];
+    [meetingModel initWithDic:telList];
+    [meetingModel initWithArray:array];
+    [[[self getSipContext] getMeetingManager] createMeeting:YES];
 }
 @end

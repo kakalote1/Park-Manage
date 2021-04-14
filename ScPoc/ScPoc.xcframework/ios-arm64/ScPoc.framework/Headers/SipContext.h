@@ -13,6 +13,7 @@
 @class SipConfigurationService;
 @class VideoManager;
 @class VideoManager;
+@class MeetingManager;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -40,9 +41,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (SipConfigurationService *)getConfigurationService;
 
-- (void)libRegisterThread:(NSString *)name;
++ (void)libRegisterThread:(NSString *)name;
 
-- (BOOL)isLibRegister;
++ (BOOL)isLibRegister;
 
 - (void)loginWithUid:(NSString *)uid
                 host:(NSString *)host
@@ -61,6 +62,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)makeCall:(NSString *)tel isVideoCall:(BOOL)videoCall;
 
+- (void)makeMeeting:(NSString *)tel isVideoCall:(BOOL)videoCall;
+
 - (SipSession *)getCurrentSession;
 
 - (void)setCurrentSession:(SipSession *)currentSession;
@@ -68,6 +71,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)removeCurrentSession;
 
 - (VideoManager *)getVideoManager;
+
+- (MeetingManager *)getMeetingManager;
+
+- (void)meetingStop;
+
+- (NSString *)getLoginUser;
+
+- (NSString *)getLoginServer;
 
 - (BOOL)isStarted;
 
@@ -80,6 +91,10 @@ NS_ASSUME_NONNULL_BEGIN
  * 已成功注册过
  */
 - (BOOL)hasSuccessRegister;
+
+- (BOOL)isSpeakerphoneOn;
+
+- (void)setSpeakerphoneOn:(BOOL)speakerphoneOn;
 
 - (SipApp *)sipApp;
 

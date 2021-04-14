@@ -3,6 +3,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SipInviteEvent.h"
 
 @class SipCall;
 
@@ -13,11 +14,21 @@
 
 - (void)destroy;
 
-- (int)makeCall;
-
 - (void)acceptCall;
 
 - (void)hangupCall:(NSString *)reason;
+
+- (void)sendDTMF:(NSString *)digits;
+
+- (void)sendInfo:(NSString *)content contentType:(NSString *)contentType;
+
+- (float)getMicrophoneLevel;
+
+- (void)adjustMicrophoneLevel:(float)level;
+
+- (float)getVolumeLevel;
+
+- (void)adjustVolumeLevel:(float)level;
 
 - (int)getId;
 
@@ -29,7 +40,10 @@
 
 - (NSString *)getCallIDString;
 
+- (SipInviteEventType)getState;
+
 - (BOOL)isTerminated;
 
+- (BOOL)isMeeting;
 
 @end

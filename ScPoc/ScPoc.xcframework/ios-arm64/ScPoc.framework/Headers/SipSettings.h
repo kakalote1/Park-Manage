@@ -33,4 +33,12 @@
 
 - (void)setVideoTransUseUdp:(BOOL)udp;
 
+- (BOOL)meetingMedia;
+
+- (void)setMeetingMedia:(BOOL)meetingMedia;
+
+- (NSString *)dispatchNum;
+
+- (void)setDispatchNum:(NSString *)dispatchNum;
+
 @end

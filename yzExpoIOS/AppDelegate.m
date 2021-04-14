@@ -8,9 +8,6 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
-#import "TabFirst.h"
-#import "TabSecond.h"
-#import "TabThird.h"
 #import "TabFourth.h"
 #import <AFNetworking.h>
 #import <ScPoc/SipSession.h>
@@ -26,12 +23,27 @@
 #import "HttpManager.h"
 #import "UserModel.h"
 #import <WebKit/WebKit.h>
+#import <Bugly/Bugly.h>
+#import "FaceLoginViewController.h"
+#import <CoreLocation/CoreLocation.h>
+#import "AudioMeetingViewController.h"
+#import "VideoMeetingViewController.h"
 
-@interface AppDelegate () <XGPushDelegate>
+@interface AppDelegate () <XGPushDelegate, CLLocationManagerDelegate>
+
+{
+CLLocationManager *locationmanager;//定位服务
+
+NSString *strlatitude;//经度
+
+NSString *strlongitude;//纬度
+}
 
 @property (strong, nonatomic) AFHTTPSessionManager *sessionManager;
 
 @property (strong, nonatomic) UINavigationController *navigationController;
+
+@property (strong, nonatomic) UserModel *userInfo;
 
 
 @end
@@ -40,15 +52,45 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    [Bugly startWithAppId:@"3bdfb2eb2c"];
+    [self startLocation];
+    
     NSFileManager *filemanager = [NSFileManager defaultManager];
     NSString *filePath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject;
     NSString *plistPath = [filePath stringByAppendingPathComponent:@"userinfo.plist"];
     
+    [filemanager createFileAtPath:plistPath contents:nil attributes:nil];
+    
+    [[HttpManager shareInstance]postRequestWithUrl:@"https://service.yzyby2018.com/jiekou/common-api/common/login/getAccessToken" andParam:@{
+        @"source": @"APP"} andHeaders:nil andSuccess:^(id responseObject) {
+        NSLog(@"获取成功：%@", responseObject);
+        NSString *str = responseObject[@"data"];
+        NSLog(@"accessToken: %@",str);
+        NSDictionary *dic = @{@"accessToken":str};
+        [dic writeToFile:plistPath atomically:YES];
+        NSLog(@"%@",dic);
+        NSDictionary *dic2 = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+        NSLog(@"asdasdas");
+        NSLog(@"%@\n%@",[dic2 objectForKey:@"accessToken"],filePath);
+        NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+        [user setObject:str forKey:@"accessToken"];
+    } andFail:^(id error) {
+                
+            }];
+    
+    NSDictionary *dic2 = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+    NSLog(@"asdasdas");
+    NSLog(@"%@\n%@",[dic2 objectForKey:@"accessToken"],filePath);
+    
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:plistPath];
-    UserModel *model = [[UserModel shareInstance] initWithDic:dic];
+    self.userInfo = [UserModel shareInstance];
+    
+    [self.userInfo addObserver:self forKeyPath:@"uid" options:NSKeyValueObservingOptionNew context:nil];
 
 	[[XGPush defaultManager] configureClusterDomainName:@"tpns.sh.tencent.com"];
-	[[XGPush defaultManager] startXGWithAccessID:1680003686 accessKey:@"IR5D9D6I6KFW" delegate:nil];
+	[[XGPush defaultManager] startXGWithAccessID:1680003686 accessKey:@"IR5D9D6I6KFW" delegate:self];
+//    打开 debug 开关
+    [[XGPush defaultManager] setEnableDebug:YES];
 
     
     // 初始化sc_sip核心类库
@@ -68,12 +110,39 @@
     self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
 //    [_window setRootViewController:[ViewController new]];
-    
-    LoginViewController *loginViewController = [[LoginViewController alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-    self.window.rootViewController = nav;
-    loginViewController.navigationController.navigationBarHidden = YES;
+//    LoginViewController *loginVc = [[LoginViewController alloc] init];
+//    self.window.rootViewController = loginVc;
+    NSUserDefaults *userInfo = [NSUserDefaults standardUserDefaults];
+    NSString *uid = [userInfo objectForKey:@"uid"];
+    NSLog(@"uid: %@", uid);
+//        ViewController *vc = [[ViewController alloc] init];
+//        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+//        self.window.rootViewController = nav;
+
+    NSLog(@"uid length : %lu", (unsigned long)uid.length);
+//    if (uid.length == 0 || [uid  isEqual: @"(null)"]) {
+//       
+//        LoginViewController *loginVc = [[LoginViewController alloc] init];
+//        [self.window.rootViewController presentViewController:loginVc animated:YES completion:^{
+//            loginVc.modalPresentationStyle = UIModalPresentationFullScreen;
+//        }];
+//    }
+//    else {
+        LoginViewController *loginVc = [[LoginViewController alloc] init];
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVc];
+        self.window.rootViewController = nav;
+//    }
+
+   
+    loginVc.navigationController.navigationBarHidden = YES;
     self.navigationController = (UINavigationController *) self.window.rootViewController;
+    
+
+//    FaceLoginViewController *faceLoginViewController = [[FaceLoginViewController alloc] init];
+//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:faceLoginViewController];
+//    self.window.rootViewController = nav;
+//    faceLoginViewController.navigationController.navigationBarHidden = YES;
+//    self.navigationController = (UINavigationController *) self.window.rootViewController;
     
 //    ViewController *viewController = [[ViewController alloc] init];
 //    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:viewController];
@@ -141,29 +210,52 @@
 //    tbController.tabBar.translucent = NO;
 
     
-    [filemanager createFileAtPath:plistPath contents:nil attributes:nil];
-    
-    [[HttpManager shareInstance]postRequestWithUrl:@"http://tzg.yzyby2018.com/jiekou/common-api/common/login/getAccessToken" andParam:@{
-        @"source": @"APP"} andHeaders:nil andSuccess:^(id responseObject) {
-        NSLog(@"获取成功：%@", responseObject);
-        NSString *str = responseObject[@"data"];
-        NSLog(@"accessToken: %@",str);
-        NSDictionary *dic = @{@"accessToken":str};
-        [dic writeToFile:plistPath atomically:YES];
-        NSLog(@"%@",dic);
-        NSDictionary *dic2 = [NSDictionary dictionaryWithContentsOfFile:plistPath];
-        NSLog(@"asdasdas");
-        NSLog(@"%@\n%@",[dic2 objectForKey:@"accessToken"],filePath);
-    } andFail:^(id error) {
-                
-            }];
-    
-    NSDictionary *dic2 = [NSDictionary dictionaryWithContentsOfFile:plistPath];
-    NSLog(@"asdasdas");
-    NSLog(@"%@\n%@",[dic2 objectForKey:@"accessToken"],filePath);
+
     
     return YES;
 }
+
+/// 统一接收消息的回调
+/// @param notification 消息对象(有2种类型NSDictionary和UNNotification具体解析参考示例代码)
+/// @note 此回调为前台收到通知消息及所有状态下收到静默消息的回调（消息点击需使用统一点击回调）
+/// 区分消息类型说明：xg字段里的msgtype为1则代表通知消息msgtype为2则代表静默消息
+- (void)xgPushDidReceiveRemoteNotification:(nonnull id)notification withCompletionHandler:(nullable void (^)(NSUInteger))completionHandler{
+/// code
+    NSLog(@"信鸽推送: %@", notification);
+}
+/// 统一点击回调
+/// @param response 如果iOS 10+/macOS 10.14+则为UNNotificationResponse，低于目标版本则为NSDictionary
+- (void)xgPushDidReceiveNotificationResponse:(nonnull id)response withCompletionHandler:(nonnull void (^)(void))completionHandler {
+/// code
+}
+
+- (void)xgPushDidRegisteredDeviceToken:(NSString *)deviceToken xgToken:(NSString *)xgToken error:(NSError *)error{
+    NSLog(@"deviceToken : %@", deviceToken);
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    [user setObject:deviceToken forKey:@"deviceToken"];
+    
+    NSString *uid = [user objectForKey:@"uid"];
+    
+    if (uid.length > 6) {
+        NSDictionary *param = @{@"uid": uid, @"loginUid": uid, @"devToken": deviceToken, @"devType": @"1"};
+        NSString *url = @"http://58.220.201.130:12383/zlw/data/thirdPart/saveDevInfo";
+        [[HttpManager shareInstance] getRequestWithUrl:url andParam:param andHeaders:nil andSuccess:^(id responseObject) {
+                NSLog(@"关联设备成功: %@", responseObject);
+            } andFail:^(id error) {
+                
+            }];
+    }
+     
+}
+
+/// 注册推送服务失败回调
+/// @param error 注册失败错误信息
+/// @note TPNS SDK1.2.7.1+
+- (void)xgPushDidFailToRegisterDeviceTokenWithError:(nullable NSError *)error {
+    NSLog(@"信鸽注册失败: %@", error);
+}
+
+
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -175,11 +267,23 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    // 1. 创建 dispatch source，指定检测事件为定时
+    UserModel *user = [UserModel shareInstance];
+    if (user.uid != nil && user.uid.length != 0) {
+        [self startLoop];
+    }
 }
 
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+   
+//    UserModel *user = [UserModel shareInstance];
+//    if (user.uid != nil && user.uid.length != 0) {
+//        [self startLoop];
+//    }
+
 }
 
 
@@ -210,7 +314,7 @@
 }
 
 - (void)serverRequestWithUrl {
-    NSString *fullUrl = [NSString stringWithFormat:@"http://tzg.yzyby2018.com/jiekou/common-api/common/login/getAccessTokenm"];
+    NSString *fullUrl = [NSString stringWithFormat:@"https://service.yzyby2018.com/jiekou/common-api/common/login/getAccessTokenm"];
     NSDictionary *parameters = @{@"source": @"APP"};
     
     [self postWithUrl:fullUrl withParams:parameters success:nil failure:nil];
@@ -248,7 +352,17 @@
 }
 
 #pragma mark - event handle
-
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
+{
+    if([keyPath isEqualToString:@"uid"] && object == self.userInfo)
+    {
+        [self startLoop];
+    }
+}
+// 登录监听
+- (void)handleLoginNotify: (NSNotification *)notifacation {
+    
+}
 // 处理登入/登出sip服务器的通知
 - (void)handleRegistrationNotify: (NSNotification *)notification {
     SipRegEvent *event = [notification object];
@@ -258,7 +372,7 @@
 // 处理呼叫事件通知
 - (void)handleInviteEventNotify: (NSNotification *)notification {
     SipInviteEvent *event = [notification object];
-    NSLog(@"Invite：id[%u] eventTYpe[%u] ringing[%@]", event.sessionId, event.eventType, (event.ringing ? @"YES" : @"NO"));
+    NSLog(@"Invite：id[%u] eventTYpe[%ld] ringing[%@]", event.sessionId, (long)event.eventType, (event.ringing ? @"YES" : @"NO"));
     
     SipSession *sipSession = [[SipContext sharedInstance] getCurrentSession];
     if (!sipSession || [sipSession getId] != [event sessionId]) {
@@ -269,14 +383,21 @@
     switch (type) {
             // 收到呼入
         case INCOMING:
-            [IphoneControl.shareInstance startRing];
-            [self showCallView:sipSession];
-            NSLog(@"收到呼入");
+            if ([sipSession isMeeting]) {
+                [self showMeetingView:sipSession];
+            } else {
+                [self showCallView:sipSession];
+            }
             break;
             // 呼出正在处理
         case INPROGRESS:
-            [self showCallView:sipSession];
-            NSLog(@"呼出正在处理");
+            [[IphoneControl shareInstance] startRing];
+            [[IphoneControl shareInstance] startVibrator];
+            if ([sipSession isMeeting]) {
+                [self showMeetingView:sipSession];
+            } else {
+                [self showCallView:sipSession];
+            }
             break;
             // 开始传输媒体流
         case EARLY_MEDIA:
@@ -284,6 +405,8 @@
             break;
             // 建立通话中
         case CONNECTING:
+            [[IphoneControl shareInstance] stopRing];
+            [[IphoneControl shareInstance] stopVibrator];
             NSLog(@"建立通话中");
             break;
             // 建立通话
@@ -293,6 +416,8 @@
             // 通话结束
         case TERMINATED:
             // 移除当前通话的session
+            [[IphoneControl shareInstance] stopRing];
+            [[IphoneControl shareInstance] stopVibrator];
             [[SipContext sharedInstance] removeCurrentSession];
             NSLog(@"通话结束");
             break;
@@ -313,10 +438,136 @@
             [audioVc setAvSession:session];
             vc = audioVc;
         }
-        [self.navigationController pushViewController:vc animated:YES];
+//        loginVc.modalPresentationStyle = UIModalPresentationFullScreen;
+//        [self.navigationController pushViewController:vc animated:YES];
+        vc.modalPresentationStyle = UIModalPresentationFullScreen;
+        [self.navigationController presentViewController:vc animated:YES completion:nil];
 //        ViewController *vc2 = [[ViewController alloc] init];
 //        [vc2 presentViewController:vc animated:YES completion:nil];
     });
+}
+
+- (void)showMeetingView:(SipSession *)session {
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        UIViewController *vc;
+        if ([session isVideoCall]) {
+            VideoMeetingViewController *videoVc = [[VideoMeetingViewController alloc] init];
+            vc = videoVc;
+
+        } else {
+            AudioMeetingViewController *audioVc = [[AudioMeetingViewController alloc] init];
+            vc = audioVc;
+        }
+        vc.modalPresentationStyle = UIModalPresentationFullScreen;
+        [self.navigationController presentViewController:vc animated:YES completion:nil];
+    });
+}
+
+#pragma mark - 定位
+//开始定位
+-(void) startLocation
+{
+    //判断定位功能是否打开
+    if ([CLLocationManager locationServicesEnabled]) {
+        locationmanager = [[CLLocationManager alloc]init];
+        locationmanager.delegate = self;
+        [locationmanager requestAlwaysAuthorization];
+        [locationmanager requestWhenInUseAuthorization];
+        
+        //设置寻址精度
+        locationmanager.desiredAccuracy = kCLLocationAccuracyBest;
+        locationmanager.distanceFilter = 5.0;
+        [locationmanager startUpdatingLocation];
+    }
+}
+
+#pragma mark CoreLocation delegate (定位失败)
+//定位失败后调用此代理方法
+-(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    //设置提示提醒用户打开定位服务
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"允许定位提示" message:@"请在设置中打开定位" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"打开定位" style:UIAlertActionStyleDefault handler:nil];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    [alert addAction:okAction];
+    [alert addAction:cancelAction];
+    [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
+}
+
+#pragma mark 定位成功后则执行此代理方法
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
+{
+    [locationmanager stopUpdatingHeading];
+    //旧址
+    CLLocation *currentLocation = [locations lastObject];
+    CLGeocoder *geoCoder = [[CLGeocoder alloc]init];
+    //打印当前的经度与纬度
+    NSLog(@"经纬度%f,%f",currentLocation.coordinate.latitude,currentLocation.coordinate.longitude);
+    NSString *latitude = [NSString stringWithFormat:@"%f", currentLocation.coordinate.latitude];
+    NSString *longitude = [NSString stringWithFormat:@"%f", currentLocation.coordinate.longitude];
+    
+    [self.userInfo setLatitude:latitude];
+    [self.userInfo setLongitude:longitude];
+    //反地理编码
+    [geoCoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error)
+    {
+//        NSLog(@"反地理编码");
+//        NSLog(@"反地理编码%ld",placemarks.count);
+//        if (placemarks.count > 0) {
+//            CLPlacemark *placeMark = placemarks[0];
+//            self.label_city.text = placeMark.locality;
+//            if (!self.label_city.text) {
+//                self.label_city.text = @"无法定位当前城市";
+//            }
+//            /*看需求定义一个全局变量来接收赋值*/
+//            NSLog(@"城市----%@",placeMark.country);//当前国家
+//            NSLog(@"城市%@",self.label_city.text);//当前的城市
+//            NSLog(@"%@",placeMark.subLocality);//当前的位置
+//            NSLog(@"%@",placeMark.thoroughfare);//当前街道
+//            NSLog(@"%@",placeMark.name);//具体地址
+//
+//        }
+    }];
+    
+}
+
+- (void)startLoop
+
+{
+
+        [NSThread detachNewThreadSelector:@selector(loopMethod) toTarget:self withObject:nil];
+
+}
+
+- (void)loopMethod
+
+{
+
+    [NSTimer scheduledTimerWithTimeInterval:20.0f target:self selector:@selector(keepAlive) userInfo:nil repeats:YES];
+
+    NSRunLoop *loop = [NSRunLoop currentRunLoop];
+
+    [loop run];
+
+}
+
+- (void)keepAlive {
+    NSString *url = @"http://58.220.201.130:12383/zlw/data/thirdPartLogin/keepAlive";
+    NSString *uid = [UserModel shareInstance].uid;
+    NSDictionary *param = @{@"uid": uid, @"isFirst": @"0"};
+    [[HttpManager shareInstance] getRequestWithUrl:url andParam:param andHeaders:nil andSuccess:^(id responseObject) {
+            NSLog(@"账号正在活动: %@", responseObject);
+        } andFail:^(id error) {
+            NSLog(@"保活失败: %@", error);
+        }];
+}
+
+-(UserModel *)userInfo {
+    if (!_userInfo) {
+        _userInfo = [UserModel shareInstance];
+    }
+    return _userInfo;
 }
 
 @end

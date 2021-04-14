@@ -30,6 +30,8 @@
 
 - (BOOL)isSendPreview;
 
+- (void)sendPreStream;
+
 - (void)destroySocket;
 
 @end

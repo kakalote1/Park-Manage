@@ -14,5 +14,5 @@
 
 -(void)postRequestWithUrl:(NSString *)url andParam:(NSDictionary *)param andHeaders:(NSString *)header andSuccess:(void(^)(id responseObject))success andFail:(void(^)(id error))fail;
 
-
+-(void)getRequestWithUrl:(NSString *)url andParam:(NSDictionary *)param andHeaders:(NSString *)header andSuccess:(void(^)(id responseObject))success andFail:(void(^)(id error))fail;
 @end

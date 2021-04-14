@@ -10,13 +10,17 @@
 #import <ScPoc/SipSession.h>
 #import <ScPoc/SipInviteEvent.h>
 #import "UIView+Toast.h"
+#import "HttpManager.h"
+
+
+
 
 @interface AudioCallViewController ()
 
 @property (strong, nonatomic) SipSession *avSession;
 
-@property (weak, nonatomic) IBOutlet UILabel *stateLbl;
 @property (weak, nonatomic) IBOutlet UILabel *telNumberLbl;
+@property (weak, nonatomic) IBOutlet UILabel *stateLbl;
 @property (weak, nonatomic) IBOutlet UIButton *acceptCallBtn;
 @property (weak, nonatomic) IBOutlet UIButton *hangupCallBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *buttonLeading;
@@ -30,6 +34,9 @@
 @property (nonatomic, strong) UILabel *audioLbl;
 @property (nonatomic, strong) UIImageView *portraitView;
 
+@property (nonatomic, strong) AVAudioSession *avAudioSession;
+
+@property (nonatomic, strong) NSString *memName;
 
 
 @end
@@ -40,6 +47,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 
+
+    self.avAudioSession = [AVAudioSession sharedInstance];
+
+
+
+    
     UIImage *img = [UIImage imageNamed:@"background"];
     
 //    UIEdgeInsets edgeInsets = UIEdgeInsetsMake(self.view.frame.size.width, self.view.frame.size.height, self.view.frame.size.width, self.view.frame.size.height);
@@ -52,7 +65,7 @@
     self.portraitView.layer.borderColor = [UIColor whiteColor].CGColor;
     self.portraitView.layer.borderWidth = 1.0;
     self.portraitView.frame = CGRectMake(self.view.frame.size.width / 3, self.view.frame.size.height / 4, self.view.frame.size.width / 3, self.view.frame.size.width / 3);
-    [self.view addSubview:self.portraitView];
+//    [self.view addSubview:self.portraitView];
     
     self.stateLblLeading.constant = self.portraitView.frame.origin.y + self.portraitView.frame.size.height + 20;
     
@@ -61,6 +74,25 @@
         self.avSession = [self.getSipContext getCurrentSession];
     }
     if (self.avSession) {
+        NSString *url = @"http://58.220.201.130:12383/zlw/data/thirdPartLogin/getMemberInfoByTel";
+        NSString *tel = [self.avSession getRemotePartyDisplayName];
+        NSLog(@"tel : %@", tel);
+        if (![tel isEqualToString: @"998"]) {
+            NSString *uid = [[NSUserDefaults standardUserDefaults] objectForKey:@"uid"];
+            NSDictionary *param = @{@"uid": uid, @"tel": tel};
+            NSLog(@"avsession: %@", [self.avSession getRemotePartyDisplayName]);
+            [[HttpManager shareInstance] getRequestWithUrl:url andParam:param andHeaders:nil andSuccess:^(id responseObject) {
+                NSDictionary *data = responseObject[@"data"];
+
+                self.memName = data[@"memName"];
+                NSLog(@"telInfo: %@", self.memName);
+                self.telNumberLbl.text = data[@"memName"];
+
+                } andFail:^(id error) {
+                    
+                }];
+        }
+      
         if ([self.avSession isOutgoing]) {
             // 通过判断是呼入还是呼出，改变顶部状态文本的文字显示
             self.stateLbl.text = @"去电";
@@ -73,7 +105,6 @@
         }
         self.hangupLbl.hidden = NO;
         // 获取当前呼叫的对端号码
-        self.telNumberLbl.text = [self.avSession getRemotePartyDisplayName];
     }
 }
 
@@ -81,12 +112,17 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [[UIDevice currentDevice] setProximityMonitoringEnabled:YES];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleInviteEvent:) name:NOTIFY_NAME_INVITE_EVENT object:nil];
 }
 
 // 视图移除前移除通知
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    
+    
+    [[UIDevice currentDevice] setProximityMonitoringEnabled:NO];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFY_NAME_INVITE_EVENT object:nil];
 }
@@ -105,6 +141,13 @@
 - (IBAction)onClickHangup:(UIButton *)sender {
     // 向服务器发送通话结束请求
     [[self.getSipContext getCurrentSession] hangupCall:@"AudioCall click hangup"];
+    // 通话结束后关闭当前页面，并清空session
+    dispatch_async(dispatch_get_main_queue(), ^{
+//            [self.navigationController popViewControllerAnimated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    });
+        
+    self.avSession = nil;
 }
 
 - (void)handleInviteEvent:(NSNotification *)notification {
@@ -137,16 +180,17 @@
     
             self.hangupLbl.frame = CGRectMake(self.view.frame.size.width/2-72/2, self.hangupCallBtn.frame.origin.y + 77, 72, 20);
         });
-    } else if (event.eventType == TERMINATED) {
+    }
+    else if (event.eventType == TERMINATED) {
         dispatch_sync(dispatch_get_main_queue(), ^{
             [self.view makeToast:@"已挂断" duration:1.0 position:CSToastPositionDown];
+            [self dismissViewControllerAnimated:YES completion:nil];
         });
 
         // 通话结束后关闭当前页面，并清空session
-        dispatch_after(dispatch_time(0ull, (int64_t) (2 * 1000000000ull)),dispatch_get_main_queue(), ^{
-            [self.navigationController popViewControllerAnimated:YES];
-//            [self dismissViewControllerAnimated:YES completion:nil];
-        });
+//            [self.navigationController popViewControllerAnimated:YES];
+          
+
         self.avSession = nil;
         
     }
@@ -219,6 +263,7 @@
         [_audioButton setBackgroundColor:[UIColor clearColor]];
         [_audioButton addTarget:self action:@selector(audioButtonDidTap:) forControlEvents:UIControlEventTouchDown];
         _audioButton.hidden = YES;
+//        [self updateAudioButton];
         [self.view addSubview:_audioButton];
     }
     return _audioButton;
@@ -241,48 +286,75 @@
 // 扬声器按钮点击事件
 - (void)speakerButtonDidTap:(UIButton *)button {
     // 开关扬声器
-    
+    if ([[self getSipContext] isSpeakerphoneOn]) {
+        [[self getSipContext] setSpeakerphoneOn:NO];
+        [_speakerButton setBackgroundImage:[UIImage imageNamed:@"speaker"] forState:UIControlStateNormal];
+
+    } else {
+        [[self getSipContext] setSpeakerphoneOn:YES];
+        [_speakerButton setBackgroundImage:[UIImage imageNamed:@"speaker_hover"] forState:UIControlStateNormal];
+
+    }
     // 更新按钮状态
-    [self updateSpeakerButton];
+//    [self updateSpeakerButton];
 }
 
 // 根据系统扬声器状态更新按钮状态
--(void)updateSpeakerButton {
-    
-}
+//-(void)updateSpeakerButton {
+//    if ([[self getSipContext] isSpeakerphoneOn]) {
+//        [_speakerButton setBackgroundImage:[UIImage imageNamed:@"speaker_hover"] forState:UIControlStateNormal];
+//    } else {
+//        [_speakerButton setBackgroundImage:[UIImage imageNamed:@"speaker"] forState:UIControlStateNormal];
+//    }
+//}
 
 // 麦克风静音按钮点击事件
 - (void)audioButtonDidTap:(UIButton *)button {
     // 开关麦克风
-    
+    float level = [self.avSession getMicrophoneLevel];
+    NSLog(@"麦克风等级: %f", level);
+    if (level != 0) {
+        [self.avSession adjustMicrophoneLevel:0];
+        [_audioButton setBackgroundImage:[UIImage imageNamed:@"mute_hover"] forState:UIControlStateNormal];
+    } else {
+        [self.avSession adjustMicrophoneLevel:3];
+        [_audioButton setBackgroundImage:[UIImage imageNamed:@"mute"] forState:UIControlStateNormal];
+
+    }
     // 更新按钮状态
-    [self updateAudioButton];
+//    [self updateAudioButton];
 }
 
 // 根据系统麦克风状态更新按钮状态
--(void)updateAudioButton {
-    
-}
+//-(void)updateAudioButton {
+//    if ([self.avSession getMicrophoneLevel] != 0) {
+//        [_audioButton setBackgroundImage:[UIImage imageNamed:@"mute"] forState:UIControlStateNormal];
+//    } else {
+//        [_audioButton setBackgroundImage:[UIImage imageNamed:@"mute_hover"] forState:UIControlStateNormal];
+//    }
+//}
 
+//处理监听触发事件
+-(void)sensorStateChange:(NSNotificationCenter *)notification
+{
+    //如果此时手机靠近面部放在耳朵旁，那么声音将通过听筒输出，并将屏幕变暗（省电啊）
+    if ([[UIDevice currentDevice] proximityState] == YES)
+    {
+    NSLog(@"Device is close to user");
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+    }
+    else
+    {
+    NSLog(@"Device is not close to user");
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+    }
+}
 
 
 - (void)setAvSession:(SipSession *)avSession {
     _avSession = avSession;
 }
 
-+ (instancetype)allocWithZone:(struct _NSZone *)zone
-{
-    static id instance = nil;
-    if (instance == nil) {
-        instance = [super allocWithZone:zone];
-    }
-    return instance;
-}
-
-+ (instancetype)sharedPerson
-{
-    return [self new];
-}
 
 /*
 #pragma mark - Navigation

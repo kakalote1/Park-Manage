@@ -8,6 +8,8 @@
 #import "SdpSession.h"
 #import "Media.h"
 
+@class SipTxOption;
+
 @interface SipParams : NSObject
 @end
 
@@ -35,6 +37,24 @@
 - (instancetype)init:(SipStatusCode)statusCode;
 - (instancetype)init:(SipStatusCode)statusCode reason:(NSString *)reason;
 - (instancetype)initOp:(unsigned)options;
+@end
+
+/**
+ * This structure contains parameters for Call::sendRequest()
+ */
+@interface CallSendRequestParam : NSObject
+
+/**
+ * SIP method of the request.
+ */
+@property (strong, nonatomic) NSString *method;
+
+/**
+ * Message body and/or list of headers etc to be included in
+ * outgoing request.
+ */
+@property (strong, nonatomic) SipTxOption *txOption;
+
 @end
 
 #pragma mark - pjsua callback param
