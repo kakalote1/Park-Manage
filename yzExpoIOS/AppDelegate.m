@@ -53,6 +53,11 @@ NSString *strlongitude;//纬度
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     [Bugly startWithAppId:@"3bdfb2eb2c"];
+    // 初始化sc_sip核心类库
+    NSLog(@"didFinishLaunchingWithOptions");
+    self.sipContext = [SipContext sharedInstance];
+    [self.sipContext startup];
+    
     [self startLocation];
     
     NSFileManager *filemanager = [NSFileManager defaultManager];
@@ -91,12 +96,6 @@ NSString *strlongitude;//纬度
 	[[XGPush defaultManager] startXGWithAccessID:1680003686 accessKey:@"IR5D9D6I6KFW" delegate:self];
 //    打开 debug 开关
     [[XGPush defaultManager] setEnableDebug:YES];
-
-    
-    // 初始化sc_sip核心类库
-    NSLog(@"didFinishLaunchingWithOptions");
-    self.sipContext = [SipContext sharedInstance];
-    [self.sipContext startup];
     
     // 注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -109,49 +108,17 @@ NSString *strlongitude;//纬度
     // 创建根控制器
     self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
-//    [_window setRootViewController:[ViewController new]];
-//    LoginViewController *loginVc = [[LoginViewController alloc] init];
-//    self.window.rootViewController = loginVc;
     NSUserDefaults *userInfo = [NSUserDefaults standardUserDefaults];
     NSString *uid = [userInfo objectForKey:@"uid"];
-    NSLog(@"uid: %@", uid);
-//        ViewController *vc = [[ViewController alloc] init];
-//        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-//        self.window.rootViewController = nav;
 
-    NSLog(@"uid length : %lu", (unsigned long)uid.length);
-//    if (uid.length == 0 || [uid  isEqual: @"(null)"]) {
-//       
-//        LoginViewController *loginVc = [[LoginViewController alloc] init];
-//        [self.window.rootViewController presentViewController:loginVc animated:YES completion:^{
-//            loginVc.modalPresentationStyle = UIModalPresentationFullScreen;
-//        }];
-//    }
-//    else {
-        LoginViewController *loginVc = [[LoginViewController alloc] init];
-        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVc];
-        self.window.rootViewController = nav;
-//    }
 
-   
+    LoginViewController *loginVc = [[LoginViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVc];
+    self.window.rootViewController = nav;
+
     loginVc.navigationController.navigationBarHidden = YES;
     self.navigationController = (UINavigationController *) self.window.rootViewController;
     
-
-//    FaceLoginViewController *faceLoginViewController = [[FaceLoginViewController alloc] init];
-//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:faceLoginViewController];
-//    self.window.rootViewController = nav;
-//    faceLoginViewController.navigationController.navigationBarHidden = YES;
-//    self.navigationController = (UINavigationController *) self.window.rootViewController;
-    
-//    ViewController *viewController = [[ViewController alloc] init];
-//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:viewController];
-//    self.window.rootViewController = nav;
-//    viewController.navigationController.navigationBarHidden = YES;
-//    self.navigationController = (UINavigationController *) self.window.rootViewController;
-//
-//    [self.window makeKeyAndVisible];
-
 //    创建控制器
 //    TabFirst* tabFirst = [[TabFirst alloc] init];
 //    UINavigationController * nav1 = [[UINavigationController alloc]initWithRootViewController:tabFirst];
@@ -209,9 +176,6 @@ NSString *strlongitude;//纬度
 //    //设置分栏控制器的透明度
 //    tbController.tabBar.translucent = NO;
 
-    
-
-    
     return YES;
 }
 
@@ -245,7 +209,6 @@ NSString *strlongitude;//纬度
                 
             }];
     }
-     
 }
 
 /// 注册推送服务失败回调
@@ -434,7 +397,7 @@ NSString *strlongitude;//纬度
             [videoVc setAvSession:session];
             vc = videoVc;
         } else {
-            AudioCallViewController *audioVc = [[AudioCallViewController alloc] initWithNibName:@"AudioCallViewController" bundle:[NSBundle mainBundle]];
+            AudioCallViewController *audioVc = [[AudioCallViewController alloc] init];
             [audioVc setAvSession:session];
             vc = audioVc;
         }
@@ -512,44 +475,48 @@ NSString *strlongitude;//纬度
     //反地理编码
     [geoCoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error)
     {
-//        NSLog(@"反地理编码");
-//        NSLog(@"反地理编码%ld",placemarks.count);
-//        if (placemarks.count > 0) {
-//            CLPlacemark *placeMark = placemarks[0];
-//            self.label_city.text = placeMark.locality;
-//            if (!self.label_city.text) {
-//                self.label_city.text = @"无法定位当前城市";
-//            }
-//            /*看需求定义一个全局变量来接收赋值*/
-//            NSLog(@"城市----%@",placeMark.country);//当前国家
-//            NSLog(@"城市%@",self.label_city.text);//当前的城市
-//            NSLog(@"%@",placeMark.subLocality);//当前的位置
-//            NSLog(@"%@",placeMark.thoroughfare);//当前街道
-//            NSLog(@"%@",placeMark.name);//具体地址
-//
-//        }
+        if (placemarks.count > 0) {
+            CLPlacemark *placemark = [placemarks objectAtIndex:0];
+            NSLog(@"placemark : %@", placemark.postalAddress);
+            
+            NSString *city = placemark.locality;
+            if (!city) {
+                //四大直辖市的城市信息无法通过locality获得，只能通过获取省份的方法来获得（如果city为空，则可知为直辖市）
+                city = placemark.administrativeArea;
+            }
+            // 位置名
+            NSLog(@"name,%@",placemark.name);
+            // 街道
+            NSLog(@"thoroughfare,%@",placemark.thoroughfare);
+            // 子街道
+            NSLog(@"subThoroughfare,%@",placemark.subThoroughfare);
+            // 市
+            NSLog(@"locality,%@",placemark.locality);
+            // 区
+            NSLog(@"subLocality,%@",placemark.subLocality);
+            // 国家
+            NSLog(@"country,%@",placemark.country);
+            NSString *address = [placemark.country stringByAppendingFormat:@"%@%@%@%@%@",placemark.administrativeArea, city,placemark.subLocality,placemark.thoroughfare,placemark.name];
+            NSLog(@"address ： %@", address);
+            [self.userInfo setAddress:address];
+              }else if (error == nil && [placemarks count] == 0) {
+                  NSLog(@"No results were returned.");
+              } else if (error != nil){
+                  NSLog(@"An error occurred = %@", error);
+              }
     }];
-    
 }
 
 - (void)startLoop
-
 {
-
         [NSThread detachNewThreadSelector:@selector(loopMethod) toTarget:self withObject:nil];
-
 }
 
 - (void)loopMethod
-
 {
-
     [NSTimer scheduledTimerWithTimeInterval:20.0f target:self selector:@selector(keepAlive) userInfo:nil repeats:YES];
-
     NSRunLoop *loop = [NSRunLoop currentRunLoop];
-
     [loop run];
-
 }
 
 - (void)keepAlive {

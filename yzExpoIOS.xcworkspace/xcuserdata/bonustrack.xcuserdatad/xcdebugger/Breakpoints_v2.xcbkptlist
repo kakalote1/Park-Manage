@@ -14,8 +14,8 @@
             filePath = "yzExpoIOS/ViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "168"
-            endingLineNumber = "168"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
             landmarkName = "-addScriptFunction"
             landmarkType = "7">
          </BreakpointContent>
@@ -30,8 +30,8 @@
             filePath = "yzExpoIOS/ViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "332"
-            endingLineNumber = "332"
+            startingLineNumber = "331"
+            endingLineNumber = "331"
             landmarkName = "-userContentController:didReceiveScriptMessage:"
             landmarkType = "7">
          </BreakpointContent>
@@ -46,8 +46,8 @@
             filePath = "yzExpoIOS/Controllers/FaceLoginViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "263"
-            endingLineNumber = "263"
+            startingLineNumber = "246"
+            endingLineNumber = "246"
             landmarkName = "-captureOutput:didFinishProcessingPhoto:error:"
             landmarkType = "7">
          </BreakpointContent>
@@ -62,8 +62,8 @@
             filePath = "yzExpoIOS/Controllers/FaceLoginViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "261"
-            endingLineNumber = "261"
+            startingLineNumber = "244"
+            endingLineNumber = "244"
             landmarkName = "-captureOutput:didFinishProcessingPhoto:error:"
             landmarkType = "7">
          </BreakpointContent>
@@ -78,8 +78,8 @@
             filePath = "yzExpoIOS/Controllers/FaceLoginViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "253"
-            endingLineNumber = "253"
+            startingLineNumber = "236"
+            endingLineNumber = "236"
             landmarkName = "-takePhoto"
             landmarkType = "7">
          </BreakpointContent>
@@ -94,8 +94,8 @@
             filePath = "yzExpoIOS/Controllers/FaceLoginViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "326"
-            endingLineNumber = "326"
+            startingLineNumber = "305"
+            endingLineNumber = "305"
             landmarkName = "-captureOutput:didFinishProcessingPhoto:error:"
             landmarkType = "7">
          </BreakpointContent>
@@ -110,8 +110,8 @@
             filePath = "yzExpoIOS/Controllers/FaceLoginViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "364"
-            endingLineNumber = "364"
+            startingLineNumber = "343"
+            endingLineNumber = "343"
             landmarkName = "-haveFaceInfo"
             landmarkType = "7">
             <Locations>
@@ -158,8 +158,8 @@
             filePath = "yzExpoIOS/Controllers/FaceLoginViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "371"
-            endingLineNumber = "371"
+            startingLineNumber = "350"
+            endingLineNumber = "350"
             landmarkName = "-haveFaceInfo"
             landmarkType = "7">
          </BreakpointContent>
@@ -174,8 +174,8 @@
             filePath = "yzExpoIOS/Controllers/FaceLoginViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "381"
-            endingLineNumber = "381"
+            startingLineNumber = "360"
+            endingLineNumber = "360"
             landmarkName = "-haveFaceInfo"
             landmarkType = "7">
          </BreakpointContent>
@@ -190,8 +190,8 @@
             filePath = "yzExpoIOS/Controllers/FaceLoginViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "366"
-            endingLineNumber = "366"
+            startingLineNumber = "345"
+            endingLineNumber = "345"
             landmarkName = "-haveFaceInfo"
             landmarkType = "7">
          </BreakpointContent>
@@ -206,8 +206,8 @@
             filePath = "yzExpoIOS/Controllers/FaceLoginViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "369"
-            endingLineNumber = "369"
+            startingLineNumber = "348"
+            endingLineNumber = "348"
             landmarkName = "-haveFaceInfo"
             landmarkType = "7">
          </BreakpointContent>
@@ -222,8 +222,8 @@
             filePath = "yzExpoIOS/Controllers/FaceLoginViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "329"
-            endingLineNumber = "329"
+            startingLineNumber = "308"
+            endingLineNumber = "308"
             landmarkName = "-captureOutput:didFinishProcessingPhoto:error:"
             landmarkType = "7">
          </BreakpointContent>
@@ -238,57 +238,9 @@
             filePath = "yzExpoIOS/Controllers/FaceLoginViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "330"
-            endingLineNumber = "330"
+            startingLineNumber = "309"
+            endingLineNumber = "309"
             landmarkName = "-captureOutput:didFinishProcessingPhoto:error:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B6DBF005-7110-40B7-8F80-CEAA0048F9E7"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "yzExpoIOS/AppDelegate.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
-            landmarkName = "-application:didFinishLaunchingWithOptions:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "856BD429-077A-44AB-B455-DA235AC59D4E"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "yzExpoIOS/AppDelegate.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
-            landmarkName = "-application:didFinishLaunchingWithOptions:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "2FB12447-2993-484A-8AEF-D3B3804B7B86"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "yzExpoIOS/AppDelegate.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
-            landmarkName = "-application:didFinishLaunchingWithOptions:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -302,8 +254,8 @@
             filePath = "yzExpoIOS/AppDelegate.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
             landmarkName = "-application:didFinishLaunchingWithOptions:"
             landmarkType = "7">
          </BreakpointContent>
@@ -334,24 +286,8 @@
             filePath = "yzExpoIOS/AppDelegate.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
-            landmarkName = "-application:didFinishLaunchingWithOptions:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "15497845-470B-4C5C-B5C0-3A1165ECB9E7"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "yzExpoIOS/AppDelegate.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
             landmarkName = "-application:didFinishLaunchingWithOptions:"
             landmarkType = "7">
          </BreakpointContent>
@@ -382,8 +318,8 @@
             filePath = "yzExpoIOS/ViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "429"
-            endingLineNumber = "429"
+            startingLineNumber = "422"
+            endingLineNumber = "422"
             landmarkName = "-Login"
             landmarkType = "7">
             <Locations>
@@ -430,8 +366,8 @@
             filePath = "yzExpoIOS/ViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "430"
-            endingLineNumber = "430"
+            startingLineNumber = "423"
+            endingLineNumber = "423"
             landmarkName = "-Login"
             landmarkType = "7">
          </BreakpointContent>
@@ -440,6 +376,22 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "2E591B0B-77CF-4387-AFAE-088BDF55C87E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "yzExpoIOS/ViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "208"
+            endingLineNumber = "208"
+            landmarkName = "-webView:didFinishNavigation:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B4169593-1249-4B13-9F9A-DD912ED84E0C"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -455,22 +407,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B4169593-1249-4B13-9F9A-DD912ED84E0C"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "yzExpoIOS/ViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "218"
-            endingLineNumber = "218"
-            landmarkName = "-webView:didFinishNavigation:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "57015AB3-0717-4CFE-8142-AE75C35359E7"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -478,8 +414,8 @@
             filePath = "yzExpoIOS/ViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "260"
-            endingLineNumber = "260"
+            startingLineNumber = "259"
+            endingLineNumber = "259"
             landmarkName = "-webView:decidePolicyForNavigationAction:decisionHandler:"
             landmarkType = "7">
          </BreakpointContent>
@@ -494,8 +430,8 @@
             filePath = "yzExpoIOS/Controllers/WebViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
             landmarkName = "-userContentController:didReceiveScriptMessage:"
             landmarkType = "7">
          </BreakpointContent>
@@ -510,8 +446,8 @@
             filePath = "yzExpoIOS/AppDelegate.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "267"
-            endingLineNumber = "267"
+            startingLineNumber = "230"
+            endingLineNumber = "230"
             landmarkName = "-applicationDidEnterBackground:"
             landmarkType = "7">
          </BreakpointContent>
@@ -526,8 +462,8 @@
             filePath = "yzExpoIOS/AppDelegate.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "279"
-            endingLineNumber = "279"
+            startingLineNumber = "242"
+            endingLineNumber = "242"
             landmarkName = "-applicationWillEnterForeground:"
             landmarkType = "7">
          </BreakpointContent>
@@ -558,8 +494,8 @@
             filePath = "yzExpoIOS/AppDelegate.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
             landmarkName = "-application:didFinishLaunchingWithOptions:"
             landmarkType = "7">
          </BreakpointContent>
@@ -574,8 +510,8 @@
             filePath = "yzExpoIOS/AppDelegate.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
             landmarkName = "-application:didFinishLaunchingWithOptions:"
             landmarkType = "7">
          </BreakpointContent>
@@ -590,8 +526,8 @@
             filePath = "yzExpoIOS/Controllers/FaceLoginViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "278"
-            endingLineNumber = "278"
+            startingLineNumber = "261"
+            endingLineNumber = "261"
             landmarkName = "-captureOutput:didFinishProcessingPhoto:error:"
             landmarkType = "7">
          </BreakpointContent>
@@ -606,8 +542,8 @@
             filePath = "yzExpoIOS/Controllers/FaceLoginViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "292"
-            endingLineNumber = "292"
+            startingLineNumber = "275"
+            endingLineNumber = "275"
             landmarkName = "-captureOutput:didFinishProcessingPhoto:error:"
             landmarkType = "7">
          </BreakpointContent>
@@ -638,8 +574,8 @@
             filePath = "yzExpoIOS/ViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "194"
-            endingLineNumber = "194"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
             landmarkName = "-webView:didFinishNavigation:"
             landmarkType = "7">
          </BreakpointContent>
@@ -654,57 +590,9 @@
             filePath = "yzExpoIOS/ViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "193"
-            endingLineNumber = "193"
+            startingLineNumber = "183"
+            endingLineNumber = "183"
             landmarkName = "-webView:didFinishNavigation:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "4488769D-26EC-4004-B90F-6549FCBDC743"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "yzExpoIOS/ViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
-            landmarkName = "-wkConfiguration"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "D0485FDA-E7B6-44FA-8601-27AC0C36FAF7"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "yzExpoIOS/ViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "141"
-            endingLineNumber = "141"
-            landmarkName = "-wkConfiguration"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "DFA5AF0F-B3F9-4682-BCA1-4E4AD6FAA957"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "yzExpoIOS/ViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "433"
-            endingLineNumber = "433"
-            landmarkName = "-Login"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -718,8 +606,8 @@
             filePath = "yzExpoIOS/ViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "211"
-            endingLineNumber = "211"
+            startingLineNumber = "201"
+            endingLineNumber = "201"
             landmarkName = "-webView:didFinishNavigation:"
             landmarkType = "7">
          </BreakpointContent>
@@ -734,8 +622,8 @@
             filePath = "yzExpoIOS/ViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "206"
-            endingLineNumber = "206"
+            startingLineNumber = "196"
+            endingLineNumber = "196"
             landmarkName = "-webView:didFinishNavigation:"
             landmarkType = "7">
             <Locations>
@@ -798,8 +686,8 @@
             filePath = "yzExpoIOS/AppDelegate.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "375"
-            endingLineNumber = "375"
+            startingLineNumber = "338"
+            endingLineNumber = "338"
             landmarkName = "-handleInviteEventNotify:"
             landmarkType = "7">
          </BreakpointContent>
@@ -830,8 +718,8 @@
             filePath = "yzExpoIOS/Controllers/AudioCallViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "184"
-            endingLineNumber = "184"
+            startingLineNumber = "186"
+            endingLineNumber = "186"
             landmarkName = "-handleInviteEvent:"
             landmarkType = "7">
          </BreakpointContent>
@@ -846,8 +734,8 @@
             filePath = "yzExpoIOS/Controllers/VideoCallViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "195"
-            endingLineNumber = "195"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
             landmarkName = "-handleInviteEvent:"
             landmarkType = "7">
          </BreakpointContent>
@@ -862,8 +750,8 @@
             filePath = "yzExpoIOS/AppDelegate.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "417"
-            endingLineNumber = "417"
+            startingLineNumber = "380"
+            endingLineNumber = "380"
             landmarkName = "-handleInviteEventNotify:"
             landmarkType = "7">
          </BreakpointContent>
@@ -878,8 +766,8 @@
             filePath = "yzExpoIOS/Controllers/FaceLoginViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "335"
-            endingLineNumber = "335"
+            startingLineNumber = "314"
+            endingLineNumber = "314"
             landmarkName = "-captureOutput:didFinishProcessingPhoto:error:"
             landmarkType = "7">
          </BreakpointContent>
@@ -894,8 +782,8 @@
             filePath = "yzExpoIOS/Controllers/FaceLoginViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "333"
-            endingLineNumber = "333"
+            startingLineNumber = "312"
+            endingLineNumber = "312"
             landmarkName = "-captureOutput:didFinishProcessingPhoto:error:"
             landmarkType = "7">
          </BreakpointContent>
@@ -910,8 +798,8 @@
             filePath = "yzExpoIOS/Controllers/FaceLoginViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "332"
-            endingLineNumber = "332"
+            startingLineNumber = "311"
+            endingLineNumber = "311"
             landmarkName = "-captureOutput:didFinishProcessingPhoto:error:"
             landmarkType = "7">
          </BreakpointContent>
@@ -958,8 +846,8 @@
             filePath = "yzExpoIOS/ViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
             landmarkName = "-viewDidLoad"
             landmarkType = "7">
          </BreakpointContent>
@@ -974,8 +862,8 @@
             filePath = "yzExpoIOS/AppDelegate.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "234"
-            endingLineNumber = "234"
+            startingLineNumber = "198"
+            endingLineNumber = "198"
             landmarkName = "-xgPushDidRegisteredDeviceToken:xgToken:error:"
             landmarkType = "7">
          </BreakpointContent>
@@ -990,8 +878,8 @@
             filePath = "yzExpoIOS/ViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
             landmarkName = "-viewDidLoad"
             landmarkType = "7">
          </BreakpointContent>
@@ -1006,24 +894,8 @@
             filePath = "yzExpoIOS/ViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
-            landmarkName = "-viewDidLoad"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "26732F3D-B475-4DF8-9BBB-88D8411AFCBC"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "yzExpoIOS/ViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
             landmarkName = "-viewDidLoad"
             landmarkType = "7">
          </BreakpointContent>
@@ -1038,8 +910,8 @@
             filePath = "yzExpoIOS/ViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
             landmarkName = "-viewDidLoad"
             landmarkType = "7">
          </BreakpointContent>
@@ -1054,8 +926,8 @@
             filePath = "yzExpoIOS/ViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
             landmarkName = "-viewDidLoad"
             landmarkType = "7">
          </BreakpointContent>
@@ -1134,10 +1006,10 @@
             filePath = "yzExpoIOS/Controllers/FaceLoginViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "353"
-            endingLineNumber = "353"
-            landmarkName = "-haveFaceInfo"
-            landmarkType = "7">
+            startingLineNumber = "332"
+            endingLineNumber = "332"
+            landmarkName = "FaceLoginViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1150,8 +1022,8 @@
             filePath = "yzExpoIOS/Controllers/AudioCallViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "289"
-            endingLineNumber = "289"
+            startingLineNumber = "354"
+            endingLineNumber = "354"
             landmarkName = "-speakerButtonDidTap:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1166,8 +1038,8 @@
             filePath = "yzExpoIOS/Controllers/AudioCallViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "293"
-            endingLineNumber = "293"
+            startingLineNumber = "358"
+            endingLineNumber = "358"
             landmarkName = "-speakerButtonDidTap:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1182,8 +1054,8 @@
             filePath = "yzExpoIOS/Controllers/AudioCallViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "290"
-            endingLineNumber = "290"
+            startingLineNumber = "355"
+            endingLineNumber = "355"
             landmarkName = "-speakerButtonDidTap:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1198,8 +1070,8 @@
             filePath = "yzExpoIOS/Controllers/AudioCallViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "316"
-            endingLineNumber = "316"
+            startingLineNumber = "381"
+            endingLineNumber = "381"
             landmarkName = "-audioButtonDidTap:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1214,8 +1086,8 @@
             filePath = "yzExpoIOS/Controllers/AudioCallViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "325"
-            endingLineNumber = "325"
+            startingLineNumber = "390"
+            endingLineNumber = "390"
             landmarkName = "-audioButtonDidTap:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1230,8 +1102,8 @@
             filePath = "yzExpoIOS/Controllers/AudioCallViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "319"
-            endingLineNumber = "319"
+            startingLineNumber = "384"
+            endingLineNumber = "384"
             landmarkName = "-audioButtonDidTap:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1246,8 +1118,8 @@
             filePath = "yzExpoIOS/Controllers/AudioCallViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "320"
-            endingLineNumber = "320"
+            startingLineNumber = "385"
+            endingLineNumber = "385"
             landmarkName = "-audioButtonDidTap:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1262,8 +1134,8 @@
             filePath = "yzExpoIOS/Controllers/AudioCallViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "314"
-            endingLineNumber = "314"
+            startingLineNumber = "379"
+            endingLineNumber = "379"
             landmarkName = "-audioButtonDidTap:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1278,8 +1150,8 @@
             filePath = "yzExpoIOS/Utils/CallUtil.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
             landmarkName = "-makeAudioGroupCall:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1438,8 +1310,8 @@
             filePath = "yzExpoIOS/AppDelegate.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "428"
-            endingLineNumber = "428"
+            startingLineNumber = "391"
+            endingLineNumber = "391"
             landmarkName = "-showCallView:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1454,8 +1326,8 @@
             filePath = "yzExpoIOS/AppDelegate.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "450"
-            endingLineNumber = "450"
+            startingLineNumber = "413"
+            endingLineNumber = "413"
             landmarkName = "-showMeetingView:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1470,8 +1342,8 @@
             filePath = "yzExpoIOS/AppDelegate.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "396"
-            endingLineNumber = "396"
+            startingLineNumber = "359"
+            endingLineNumber = "359"
             landmarkName = "-handleInviteEventNotify:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1486,8 +1358,8 @@
             filePath = "yzExpoIOS/AppDelegate.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "397"
-            endingLineNumber = "397"
+            startingLineNumber = "360"
+            endingLineNumber = "360"
             landmarkName = "-handleInviteEventNotify:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1502,8 +1374,8 @@
             filePath = "yzExpoIOS/AppDelegate.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "399"
-            endingLineNumber = "399"
+            startingLineNumber = "362"
+            endingLineNumber = "362"
             landmarkName = "-handleInviteEventNotify:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1790,8 +1662,8 @@
             filePath = "yzExpoIOS/ViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "242"
-            endingLineNumber = "242"
+            startingLineNumber = "241"
+            endingLineNumber = "241"
             landmarkName = "-webView:decidePolicyForNavigationAction:decisionHandler:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1806,8 +1678,8 @@
             filePath = "yzExpoIOS/ViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "251"
-            endingLineNumber = "251"
+            startingLineNumber = "250"
+            endingLineNumber = "250"
             landmarkName = "-webView:decidePolicyForNavigationAction:decisionHandler:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1822,9 +1694,25 @@
             filePath = "yzExpoIOS/ViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "246"
-            endingLineNumber = "246"
+            startingLineNumber = "245"
+            endingLineNumber = "245"
             landmarkName = "-webView:decidePolicyForNavigationAction:decisionHandler:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A690D462-ADE3-4828-98F5-ADA84946B542"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "yzExpoIOS/Controllers/BaseViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "-viewDidLoad"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

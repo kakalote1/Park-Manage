@@ -19,12 +19,10 @@
 
 @property (strong, nonatomic) SipSession *avSession;
 
-@property (weak, nonatomic) IBOutlet UILabel *telNumberLbl;
-@property (weak, nonatomic) IBOutlet UILabel *stateLbl;
-@property (weak, nonatomic) IBOutlet UIButton *acceptCallBtn;
-@property (weak, nonatomic) IBOutlet UIButton *hangupCallBtn;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *buttonLeading;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *stateLblLeading;
+@property (strong, nonatomic) UILabel *telNumberLbl;
+@property (strong, nonatomic) UILabel *stateLbl;
+@property (strong, nonatomic)  UIButton *acceptCallBtn;
+@property (strong, nonatomic)  UIButton *hangupCallBtn;
 
 @property (nonatomic, strong) UIButton *speakerButton;
 @property (nonatomic, strong) UIButton *audioButton;
@@ -33,6 +31,7 @@
 @property (nonatomic, strong) UILabel *speakerLbl;
 @property (nonatomic, strong) UILabel *audioLbl;
 @property (nonatomic, strong) UIImageView *portraitView;
+@property (nonatomic, strong) UILabel *telNameLbl;
 
 @property (nonatomic, strong) AVAudioSession *avAudioSession;
 
@@ -50,8 +49,6 @@
 
     self.avAudioSession = [AVAudioSession sharedInstance];
 
-
-
     
     UIImage *img = [UIImage imageNamed:@"background"];
     
@@ -66,9 +63,9 @@
     self.portraitView.layer.borderWidth = 1.0;
     self.portraitView.frame = CGRectMake(self.view.frame.size.width / 3, self.view.frame.size.height / 4, self.view.frame.size.width / 3, self.view.frame.size.width / 3);
 //    [self.view addSubview:self.portraitView];
-    
-    self.stateLblLeading.constant = self.portraitView.frame.origin.y + self.portraitView.frame.size.height + 20;
-    
+    self.telNameLbl.hidden = NO;
+    self.telNumberLbl.hidden = NO;
+    self.stateLbl.hidden = NO;
     // 获取当前呼叫的session
     if (!self.avSession) {
         self.avSession = [self.getSipContext getCurrentSession];
@@ -77,6 +74,7 @@
         NSString *url = @"http://58.220.201.130:12383/zlw/data/thirdPartLogin/getMemberInfoByTel";
         NSString *tel = [self.avSession getRemotePartyDisplayName];
         NSLog(@"tel : %@", tel);
+        self.telNumberLbl.text = tel;
         if (![tel isEqualToString: @"998"]) {
             NSString *uid = [[NSUserDefaults standardUserDefaults] objectForKey:@"uid"];
             NSDictionary *param = @{@"uid": uid, @"tel": tel};
@@ -86,11 +84,13 @@
 
                 self.memName = data[@"memName"];
                 NSLog(@"telInfo: %@", self.memName);
-                self.telNumberLbl.text = data[@"memName"];
+                self.telNameLbl.text = data[@"memName"];
 
                 } andFail:^(id error) {
                     
                 }];
+        } else {
+            self.telNameLbl.text = @"音频会议";
         }
       
         if ([self.avSession isOutgoing]) {
@@ -98,11 +98,15 @@
             self.stateLbl.text = @"去电";
             // 通过判断是呼入还是呼出隐藏接听按钮
             self.acceptCallBtn.hidden = YES;
+            self.acceptLbl.hidden = YES;
             // 将挂断按钮居中
-            self.buttonLeading.constant = self.view.frame.size.width/2-72/2;
+            self.hangupCallBtn.frame = CGRectMake(self.view.frame.size.width/2-72/2, self.view.frame.size.height - 60 - 72, 72, 72);
         } else {
+            self.stateLbl.text = @"来电";
+            self.acceptCallBtn.hidden = NO;
             self.acceptLbl.hidden = NO;
         }
+        self.hangupCallBtn.hidden = NO;
         self.hangupLbl.hidden = NO;
         // 获取当前呼叫的对端号码
     }
@@ -121,7 +125,6 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    
     [[UIDevice currentDevice] setProximityMonitoringEnabled:NO];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFY_NAME_INVITE_EVENT object:nil];
@@ -132,22 +135,21 @@
     self.avSession = nil;
 }
 
-- (IBAction)onClickAcceptCall:(UIButton *)sender {
-    // 向服务器发送应答请求
-    [[self.getSipContext getCurrentSession] acceptCall];
 
-}
 
-- (IBAction)onClickHangup:(UIButton *)sender {
+- (void)hangupButtonDidTap:(UIButton *) button {
     // 向服务器发送通话结束请求
-    [[self.getSipContext getCurrentSession] hangupCall:@"AudioCall click hangup"];
+    [self.avSession hangupCall:@"AudioCall click hangup"];
     // 通话结束后关闭当前页面，并清空session
     dispatch_async(dispatch_get_main_queue(), ^{
 //            [self.navigationController popViewControllerAnimated:YES];
         [self dismissViewControllerAnimated:YES completion:nil];
     });
-        
-    self.avSession = nil;
+}
+
+- (void)acceptButtonDidTap:(UIButton *) button {
+    // 向服务器发送应答请求
+    [self.avSession acceptCall];
 }
 
 - (void)handleInviteEvent:(NSNotification *)notification {
@@ -170,30 +172,78 @@
             [self.view makeToast:@"已接通" duration:1.0 position:CSToastPositionDown];
             self.stateLbl.text = @"通话中";
             self.acceptCallBtn.hidden = YES;
+            self.acceptCallBtn.hidden = YES;
             self.acceptLbl.hidden = YES;
             self.speakerButton.hidden = NO;
             self.speakerLbl.hidden = NO;
             self.audioButton.hidden = NO;
             self.audioLbl.hidden = NO;
             // 将挂断按钮居中
-            self.buttonLeading.constant = self.view.frame.size.width/2-72/2;
-    
+            self.hangupCallBtn.frame = CGRectMake(self.view.frame.size.width/2-72/2, self.view.frame.size.height - 60 - 72, 72, 72);
             self.hangupLbl.frame = CGRectMake(self.view.frame.size.width/2-72/2, self.hangupCallBtn.frame.origin.y + 77, 72, 20);
         });
     }
     else if (event.eventType == TERMINATED) {
+        NSLog(@"接收到挂断通知");
         dispatch_sync(dispatch_get_main_queue(), ^{
+            NSLog(@"再次接收到挂断通知");
             [self.view makeToast:@"已挂断" duration:1.0 position:CSToastPositionDown];
             [self dismissViewControllerAnimated:YES completion:nil];
         });
-
         // 通话结束后关闭当前页面，并清空session
-//            [self.navigationController popViewControllerAnimated:YES];
-          
-
         self.avSession = nil;
-        
     }
+}
+
+- (UILabel *)telNameLbl {
+    if (!_telNameLbl) {
+        _telNameLbl = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height / 8, self.view.frame.size.width, 25)];
+        _telNameLbl.textColor = [UIColor whiteColor];
+        _telNameLbl.textAlignment = NSTextAlignmentCenter;
+        _telNameLbl.font = [UIFont systemFontOfSize:25];
+        _telNameLbl.hidden = YES;
+        [self.view addSubview:_telNameLbl];
+    }
+    return _telNameLbl;
+}
+
+- (UILabel *)telNumberLbl {
+    if (!_telNumberLbl) {
+        _telNumberLbl = [[UILabel alloc] initWithFrame:CGRectMake(0, self.telNameLbl.frame.origin.y + 40, self.view.frame.size.width, 20)];
+        _telNumberLbl.textColor = [UIColor whiteColor];
+        _telNumberLbl.textAlignment = NSTextAlignmentCenter;
+        _telNumberLbl.font = [UIFont systemFontOfSize:20];
+        _telNumberLbl.hidden = YES;
+        [self.view addSubview:_telNumberLbl];
+    }
+    return _telNumberLbl;
+}
+
+- (UILabel *)stateLbl {
+    if (!_stateLbl) {
+        _stateLbl = [[UILabel alloc] initWithFrame:CGRectMake(0, self.telNumberLbl.frame.origin.y + 35, self.view.frame.size.width, 20)];
+        _stateLbl.textColor = [UIColor whiteColor];
+        _stateLbl.textAlignment = NSTextAlignmentCenter;
+        _stateLbl.font = [UIFont systemFontOfSize:15];
+        _stateLbl.hidden = YES;
+        [self.view addSubview:_stateLbl];
+    }
+    return _stateLbl;
+}
+
+// 设置接听按钮属性
+- (UIButton *)acceptCallBtn {
+    if (!_acceptCallBtn) {
+        _acceptCallBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 79 - 72, self.view.frame.size.height - 60 - 72, 72, 72)];
+        [_acceptCallBtn setBackgroundImage:[UIImage imageNamed:@"answer"] forState:UIControlStateNormal];
+        [_acceptCallBtn setBackgroundImage:[UIImage imageNamed:@"answer_hover"] forState:UIControlStateHighlighted];
+        [_acceptCallBtn setBackgroundImage:[UIImage imageNamed:@"answer_hover"] forState:UIControlStateSelected];
+        [_acceptCallBtn setBackgroundColor:[UIColor clearColor]];
+        [_acceptCallBtn addTarget:self action:@selector(acceptButtonDidTap:) forControlEvents:UIControlEventTouchDown];
+        _acceptCallBtn.hidden = YES;
+        [self.view addSubview:_acceptCallBtn];
+        }
+    return _acceptCallBtn;
 }
 
 // 设置接听label属性
@@ -210,10 +260,25 @@
     return _acceptLbl;
 }
 
+
+- (UIButton *)hangupCallBtn {
+    if (!_hangupCallBtn) {
+        _hangupCallBtn = [[UIButton alloc] initWithFrame:CGRectMake(79, self.view.frame.size.height - 60 - 72, 72, 72)];
+        [_hangupCallBtn setBackgroundImage:[UIImage imageNamed:@"hangup"] forState:UIControlStateNormal];
+        [_hangupCallBtn setBackgroundImage:[UIImage imageNamed:@"hangup_hover"] forState:UIControlStateHighlighted];
+        [_hangupCallBtn setBackgroundImage:[UIImage imageNamed:@"hangup_hover"] forState:UIControlStateSelected];
+        [_hangupCallBtn setBackgroundColor:[UIColor clearColor]];
+        [_hangupCallBtn addTarget:self action:@selector(hangupButtonDidTap:) forControlEvents:UIControlEventTouchUpInside];
+        _hangupCallBtn.hidden = YES;
+        [self.view addSubview:_hangupCallBtn];
+    }
+    return _hangupCallBtn;
+}
+
 // 设置挂断label属性
 - (UILabel *)hangupLbl {
     if (!_hangupLbl) {
-        _hangupLbl = [[UILabel alloc] initWithFrame:CGRectMake(self.buttonLeading.constant, self.hangupCallBtn.frame.origin.y + 77, 72, 20)];
+        _hangupLbl = [[UILabel alloc] initWithFrame:CGRectMake(self.hangupCallBtn.frame.origin.x, self.hangupCallBtn.frame.origin.y + 77, 72, 20)];
         _hangupLbl.text = @"挂断";
         _hangupLbl.textColor = [UIColor whiteColor];
         _hangupLbl.textAlignment = NSTextAlignmentCenter;

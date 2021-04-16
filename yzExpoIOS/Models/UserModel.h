@@ -31,6 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *longitude;
 @property(nonatomic,strong)NSString *latitude;
 @property(nonatomic,strong)NSString *devToken;
+@property(nonatomic,strong)NSString *address;
 
 
 -(id)initWithDic:(NSDictionary *)dic;

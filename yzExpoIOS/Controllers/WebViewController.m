@@ -41,7 +41,6 @@
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
     
-//    [self initWebView:<#(NSString *)#>];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{

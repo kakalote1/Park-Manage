@@ -22,6 +22,8 @@
 #import "WebViewController.h"
 #import <AVKit/AVKit.h>
 #import <AVFoundation/AVFoundation.h>
+#import <ScPoc/SipSettings.h>
+
 @interface ViewController ()<WKNavigationDelegate,WKUIDelegate, WKScriptMessageHandler>
 
 @property (nonatomic, strong) WKWebView *webView;
@@ -70,6 +72,9 @@
     NSString *port = @"9999";
     uint16_t portNum = [port intValue];
     [[self getSipContext] loginWithUid:uid host:ip port:portNum tls:true];
+    [[self getSipContext].settings setVideoTransUseUdp: FALSE];
+    [[self getSipContext].settings setQosPrefVideoSize:1];
+    [[self getSipContext].settings setVideoEncoderBitrate:1200];
 
     NSString *devToken = [UserModel shareInstance].devToken;
     
@@ -83,7 +88,6 @@
             }];
     }
     [self initWebView];
-    
     [((AppDelegate *) [UIApplication sharedApplication].delegate) serverRequestWithUrl];
 
 }
@@ -128,20 +132,6 @@
     WKPreferences *preferences = [[WKPreferences alloc] init];
     preferences.javaScriptCanOpenWindowsAutomatically = YES;
     self.wkWebViewConfiguration.preferences = preferences;
-    
-    
-//    NSMutableDictionary *dic = [NSMutableDictionary new];
-//    dic[@"uid"] = [UserModel shareInstance].uid;
-//    NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:(NSJSONWritingPrettyPrinted) error:nil];
-//
-//    NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//    NSString *js = [NSString stringWithFormat:@"window.uid = 235", dic[@"uid"]];
-//
-//    WKUserScript *script = [[WKUserScript alloc] initWithSource:js injectionTime:(WKUserScriptInjectionTimeAtDocumentStart) forMainFrameOnly:YES];
-//    [self.webView.configuration.userContentController addUserScript:script];
-    
-
-    
 }
 
 #pragma mark -  OC注册供JS调用的方法
@@ -214,7 +204,16 @@
     NSString *url = @"http://58.220.201.130:12383/scooper-app-msg/gis/updateGis";
     NSString *longitude = [UserModel shareInstance].longitude;
     NSString *latitude = [UserModel shareInstance].latitude;
-    NSLog(@"获取位置参数: %@ %@ %@",uid, longitude, latitude);
+    NSString *address = [UserModel shareInstance].address;
+    NSLog(@"获取位置参数: %@ %@ %@ %@",uid, longitude, latitude, address);
+    NSDictionary *location = @{@"longitude": longitude, @"latitude": latitude, @"address": address};
+    NSData *data = [NSJSONSerialization dataWithJSONObject:location options:kNilOptions error:nil];
+    NSString *locationStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSLog(@"locationStr: %@",locationStr);
+    [self.webView evaluateJavaScript:[NSString stringWithFormat: @"localStorage.setItem('location', '%@' );", locationStr] completionHandler:^(id _Nullable result, NSError * _Nullable error) {
+        NSLog(@"%@----%@",result, error);
+    }];
+    
     NSDictionary *param  = @{@"uid":uid,@"longitude":longitude,@"latitude":latitude};
     
     [[HttpManager shareInstance] getRequestWithUrl:url andParam:param andHeaders:nil andSuccess:^(id responseObject) {
@@ -420,76 +419,10 @@
     NSString *uid = [self.userDefaults objectForKey:@"uid"];
     NSLog(@"js uid : %@", uid);
     // 将分享结果返回给js
-//      NSString *jsStr = [NSString stringWithFormat:@"shareResult('%@','%@','%@')",title,content,url];
-//        NSMutableDictionary *dic = [NSMutableDictionary new];
-//        dic[@"uid"] = [UserModel shareInstance].uid;
-//        NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:(NSJSONWritingPrettyPrinted) error:nil];
-//
-//        NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-      [self.webView evaluateJavaScript:[NSString stringWithFormat: @"localStorage.setItem('iosUid', '%@' );", uid] completionHandler:^(id _Nullable result, NSError * _Nullable error) {
-          NSLog(@"%@----%@",result, error);
-      }];
-    
-
-    
-//    NSString *uid = [UserModel shareInstance].uid;
-//    NSLog(@"js uid : %@", uid);
-//    // 将分享结果返回给js
-////      NSString *jsStr = [NSString stringWithFormat:@"shareResult('%@','%@','%@')",title,content,url];
-//      [self.webView evaluateJavaScript:uid completionHandler:^(id _Nullable result, NSError * _Nullable error) {
-//          NSLog(@"%@----%@",result, error);
-//      }];
-//    if (![self checkPermission]) {
-//        return;
-//    }
-//    [[self getSipContext] loginToSip:@"3001" pass:@"abc123" host:@"122.224.180.122" port:12379 tls:TRUE];
-//    NSLog(@"hhhhhhh");
+    [self.webView evaluateJavaScript:[NSString stringWithFormat: @"localStorage.setItem('iosUid', '%@' );", uid] completionHandler:^(id _Nullable result, NSError * _Nullable error) {
+    NSLog(@"%@----%@",result, error);
+    }];
 }
-
-// sip登录
-//- (void)uidLogin:(NSString *)uid {
-//    NSLog(@"登录1234567");
-//    NSLog(@"uid: %@",uid);
-////    uid = [UserModel shareInstance].uid;
-//    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-//    uid = [user objectForKey:@"uid"];
-//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-//        NSString *ip = @"122.224.180.122";
-//        NSString *port = @"12381";
-//        uint16_t portNum = [port intValue];
-//        [[self getSipContext] loginWithUid:uid host:ip port:portNum tls:true];
-////        NSString *urlStr = [[NSString alloc] initWithFormat:@"http://%@:%@/zlw/data/thirdPartLogin/getSipUserInfoByUid?uid=%@",ip,port,uid];
-////        NSLog(@"url: %@", urlStr);
-////        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-////        AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-////        NSURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:urlStr parameters:nil error:nil];
-////        NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse *response, NSData *responseObject, NSError *error) {
-////            if (error) {
-////                NSLog(@"Error: %@", error);
-////            } else {
-//////                NSLog(@"请求数据%@  \n\n\n data%@", response, responseObject);
-////                NSLog(@"12222%@",responseObject);
-////                NSData *jsonStr = (NSData *)responseObject;
-////                NSLog(@"jsonStr: %@",jsonStr);
-////                NSDictionary *dict = (NSDictionary *) jsonStr;
-////                NSDictionary *data = [dict objectForKey:@"data"];
-////                NSLog(@"dict: %@", data);
-////                NSString *sipTel = [data objectForKey:@"sipTel"];
-////                NSString *ip = [data objectForKey:@"natIp"];
-////                NSString *pwd = [data objectForKey:@"sipPwd"];
-////                NSString *portStr = [data objectForKey:@"tlsPort"];
-////                int port = [portStr intValue];
-////                [[self getSipContext] loginToSip:sipTel pass:pwd host:ip port:port tls:TRUE];
-////            }
-////        }];
-////        [dataTask resume];
-//
-//    });
-//    if (![self checkPermission]) {
-//        return;
-//    }
-//
-//}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -521,10 +454,6 @@
         return;
     }
     NSLog(@"登录成功");
-//    dispatch_sync(dispatch_get_main_queue(), ^{
-//        MainViewController *vc = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:[NSBundle mainBundle]];
-//        [self.navigationController pushViewController:vc animated:YES];
-//    });
 }
 
 // 检查权限

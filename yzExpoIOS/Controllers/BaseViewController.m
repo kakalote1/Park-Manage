@@ -20,6 +20,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+        //主线程执行
+        self.sipContext = ((AppDelegate *) [UIApplication sharedApplication].delegate).sipContext;
 }
 
 - (void)dealloc {
@@ -28,6 +30,7 @@
 
 - (SipContext *)getSipContext {
     return ((AppDelegate *) [UIApplication sharedApplication].delegate).sipContext;
+;
 }
 
 /*

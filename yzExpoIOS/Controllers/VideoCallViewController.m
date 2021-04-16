@@ -56,6 +56,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    UIImage *img = [UIImage imageNamed:@"background"];
+    self.view.layer.contents = (__bridge id _Nullable)(img.CGImage);
     // 默认设为扬声器播放
     self.audioSession = [AVAudioSession sharedInstance];
     [self.audioSession setCategory:AVAudioSessionCategoryPlayback error:nil];
@@ -71,9 +74,7 @@
 //    [self.smallVideoView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onSmallVideoTaped:)]];
     [self.view addSubview:self.smallVideoView];
     
-    [[self getSipContext].settings setVideoTransUseUdp: FALSE];
-    [[self getSipContext].settings setQosPrefVideoSize:1];
-    [[self getSipContext].settings setVideoEncoderBitrate:1200];
+
     
     if (!self.avSession) {
         self.avSession = [self.getSipContext getCurrentSession];
@@ -95,8 +96,9 @@
                 
             }];
             
+        } else {
+            self.telNumberLbl.text = @"视频会议";
         }
-        self.telNumberLbl.text = @"视频会议";
 
         // 通过判断是呼入还是呼出，改变页面的显示方式
         if ([self.avSession isOutgoing]) {
@@ -122,7 +124,6 @@
 //    self.view.layer.contents = self.cameraPreviewContainer;
     [[[self getSipContext] getVideoManager] initWithRemote:self.bigVideoView local:self.smallVideoView];
     [[self getSipContext] setSpeakerphoneOn:YES];
-    self.view.backgroundColor = [UIColor grayColor];
 }
 
 // 视图出现前通过通知对页面进行处理
@@ -134,8 +135,6 @@
                                              selector:@selector(handleInviteEvent:)
                                                  name:NOTIFY_NAME_INVITE_EVENT object:nil];
     
-    //添加监听
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sensorStateChange:) name:@"UIDeviceProximityStateDidChangeNotification" object:nil];
 }
 
 // 视图移除前移除通知
@@ -195,15 +194,12 @@
     else if (event.eventType == TERMINATED) {
         NSLog(@"video TERMINATED");
         [[[self getSipContext] getVideoManager] destroy];
-        [self.avSession hangupCall:@"AudioCall click hangup"];
-
         // 通话结束后关闭当前页面，并清空session
         dispatch_sync(dispatch_get_main_queue(), ^{
 //            [self.navigationController popViewControllerAnimated:YES];
             [self dismissViewControllerAnimated:YES completion:nil];
         });
         self.avSession = nil;
-
     }
 }
 
@@ -377,29 +373,9 @@
 - (void)hangupButtonDidTap:(UIButton *)button {
     [self.avSession hangupCall:@"AudioCall click hangup"];
     [[[self getSipContext] getVideoManager] destroy];
-    [[SipContext sharedInstance] logoutSip];
-    [[SipContext sharedInstance] shutdown];
-
-    [[self getSipContext] removeCurrentSession];
-    [[[self getSipContext] getVideoManager] destroy];
-    
-    self.avSession = nil;
-
-    
-
-//    [[SipContext sharedInstance] startup];
-//    NSString *uid = [[NSUserDefaults standardUserDefaults] objectForKey:@"uid"];
-//    NSString *ip = @"122.224.180.122";
-//    NSString *port = @"12381";
-//    uint16_t portNum = [port intValue];
-//    [[self getSipContext] loginWithUid:uid host:ip port:portNum tls:true];
     dispatch_async(dispatch_get_main_queue(), ^{
- 
         [self dismissViewControllerAnimated:YES completion:nil];
-
-
     });
-    
 }
 
 // 接听按钮绑定事件

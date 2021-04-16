@@ -31,7 +31,6 @@
     NSLog(@"拨打群组语音");
     NSLog(@"sender: %@", sender);
     NSData *data = [sender dataUsingEncoding:NSUTF8StringEncoding];
-//    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
     
     NSArray *array = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
     NSLog(@"listcount: %lu",(unsigned long)array.count);

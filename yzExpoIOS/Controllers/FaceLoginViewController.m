@@ -68,15 +68,7 @@ typedef NS_ENUM(NSInteger, AVCamSetupResult) {
     
     [self haveFaceInfo];
     
-    if (self.code == @"1") {
-        
-    }
-    
     self.view.backgroundColor = [UIColor whiteColor];
-    
-
-    // 创建界面
-//    [self makeUI];
     
     [self configureSession];
 
@@ -86,26 +78,9 @@ typedef NS_ENUM(NSInteger, AVCamSetupResult) {
     self.textLabel.textAlignment = NSTextAlignmentCenter;
     self.textLabel.font = [UIFont systemFontOfSize:25];
     [self.view addSubview:self.textLabel];
-//    self.imagePicker = [[UIImagePickerController alloc] init];
-//    self.imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-//    self.imagePicker.cameraDevice = UIImagePickerControllerCameraDeviceFront;// 此处是关键。
-//    self.imagePicker.delegate = self;
-//    self.cameraVIew = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-////    [self presentViewController:self.imagePicker animated:YES completion:nil];
-//    [self.previewView addSubview:self.cameraVIew];
-//    //button上传图片
-//    [self buttonWithTitle:@"上传图片" frame:CGRectMake(self.view.frame.size.width/2-150, CGRectGetMaxY(imageView.frame)+10, 100, 30) action:@selector(didClickUpPhoto) AddView:self.previewView];
-//
-//    //重拍图片按钮
-//    [self buttonWithTitle:@"重拍" frame:CGRectMake(self.view.frame.size.width/2+50, CGRectGetMaxY(imageView.frame)+10, 100, 30) action:@selector(didClickPhotoAgain) AddView:self.previewView];
-//
-
-
-//    [self configureSession];
 }
 
 #pragma mark --- 创建UI界面
-
 -(instancetype)init
 {
     self = [super init];
@@ -209,8 +184,9 @@ typedef NS_ENUM(NSInteger, AVCamSetupResult) {
     self.videoInput = [[AVCaptureDeviceInput alloc] initWithDevice:[self frontCamera] error:nil];
     
     self.imageOutput = [[AVCapturePhotoOutput alloc] init];
+    
      // 输出流的设置参数AVVideoCodecJPEG参数表示以JPEG的图片格式输出图片
-    NSDictionary *outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys:AVVideoCodecTypeJPEG,AVVideoCodecKey,@(0.1),AVVideoQualityKey,nil];
+//    NSDictionary *outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys:AVVideoCodecTypeJPEG,AVVideoCodecKey,@(0.1),AVVideoQualityKey,nil];
     
 //    [self.imageOutput setOutputSettings:outputSettings];
     
@@ -237,7 +213,7 @@ typedef NS_ENUM(NSInteger, AVCamSetupResult) {
     [self.session startRunning];
     
     UIButton *takeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    takeButton.frame = CGRectMake((self.view.frame.size.width - 70)/2, self.view.frame.size.height - 200, 70, 70);
+    takeButton.frame = CGRectMake((self.view.frame.size.width - 70)/2, self.view.frame.size.height - 250, 70, 70);
     takeButton.layer.masksToBounds = YES;
 //    takeButton.layer.cornerRadius = takeButton.frame.size.height/2;
     takeButton.backgroundColor = [UIColor clearColor];
@@ -248,6 +224,13 @@ typedef NS_ENUM(NSInteger, AVCamSetupResult) {
     [takeButton setTitleColor:[UIColor colorWithRed:40.2f/255 green:180.2f/255 blue:247.2f/255 alpha:0.9] forState:UIControlStateNormal];
     [takeButton addTarget:self action:@selector(takePhoto) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:takeButton];
+    
+    UILabel *takeLbl = [[UILabel alloc] initWithFrame:CGRectMake(0, takeButton.frame.origin.y + 85, self.view.frame.size.width, 30)];
+    takeLbl.text = @"开始识别";
+    takeLbl.font = [UIFont systemFontOfSize:20];
+    takeLbl.textAlignment = NSTextAlignmentCenter;
+    takeLbl.textColor = [UIColor blackColor];
+    [self.view addSubview:takeLbl];
 }
 
 - (void)takePhoto {
@@ -302,11 +285,7 @@ typedef NS_ENUM(NSInteger, AVCamSetupResult) {
                             
                         } else {
                             [self.view makeToast:@"请本人进行人脸识别登录"];
-
                         }
-                        ViewController *vc = [[ViewController alloc] init];
-//                        [self.navigationController pushViewController:vc animated:YES];
-//                        [self.navigationController pushViewController:vc animated:YES];
                       
                         [self.activityIndicator stopAnimating];
                     } else {
@@ -421,34 +400,6 @@ typedef NS_ENUM(NSInteger, AVCamSetupResult) {
     }
     return _userModel;
 }
-
-//- (void)actionStartCamera
-//{
-//    dispatch_async(self.sessionQueue, ^{
-//        AVCaptureConnection *videoConnection = [self.imageOutput connectionWithMediaType:AVMediaTypeVideo];
-//
-//        if (!videoConnection)
-//        {
-//            return;
-//        }
-//
-//        [self.imageOutput  captureStillImageAsynchronouslyFromConnection:videoConnection completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
-//
-//            if (imageDataSampleBuffer == NULL) {
-//
-//                return;
-//
-//            }
-//
-//
-//            NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
-////
-////            UIImage *originalImage = [UIImage imageWithData:imageData];
-////            //1.旋转照片
-////            UIImage *rotateImage = [originalImage rotate:UIImageOrientationRight];
-//        }];
-//    });
-//}
 
 /*
 #pragma mark - Navigation

@@ -32,7 +32,6 @@
 		FE2357E625C7FEC4008C8280 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE2357E525C7FEC4008C8280 /* BaseViewController.m */; };
 		FE2357ED25C80037008C8280 /* AudioCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE2357EB25C80037008C8280 /* AudioCallViewController.m */; };
 		FE2358B925CA9594008C8280 /* CallUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = FE2358B825CA9594008C8280 /* CallUtil.m */; };
-		FE2358C325CCDE41008C8280 /* AudioCallViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE2358C225CCDE41008C8280 /* AudioCallViewController.xib */; };
 		FE2358C925CE6CA8008C8280 /* VideoCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE2358C825CE6CA8008C8280 /* VideoCallViewController.m */; };
 		FE2358E025CE8D66008C8280 /* Bugly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE7FBD81259ABBFE00AB45FD /* Bugly.framework */; };
 		FE2358F725CF7A6E008C8280 /* CallKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE2358F525CF7A29008C8280 /* CallKit.framework */; };
@@ -124,7 +123,6 @@
 		FE2357EB25C80037008C8280 /* AudioCallViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioCallViewController.m; sourceTree = "<group>"; };
 		FE2358B725CA9594008C8280 /* CallUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CallUtil.h; sourceTree = "<group>"; };
 		FE2358B825CA9594008C8280 /* CallUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CallUtil.m; sourceTree = "<group>"; };
-		FE2358C225CCDE41008C8280 /* AudioCallViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AudioCallViewController.xib; sourceTree = "<group>"; };
 		FE2358C725CE6CA7008C8280 /* VideoCallViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoCallViewController.h; sourceTree = "<group>"; };
 		FE2358C825CE6CA8008C8280 /* VideoCallViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoCallViewController.m; sourceTree = "<group>"; };
 		FE2358F525CF7A29008C8280 /* CallKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CallKit.framework; path = System/Library/Frameworks/CallKit.framework; sourceTree = SDKROOT; };
@@ -373,7 +371,6 @@
 				FE2357E525C7FEC4008C8280 /* BaseViewController.m */,
 				FE2357EA25C80037008C8280 /* AudioCallViewController.h */,
 				FE2357EB25C80037008C8280 /* AudioCallViewController.m */,
-				FE2358C225CCDE41008C8280 /* AudioCallViewController.xib */,
 				FE2358C725CE6CA7008C8280 /* VideoCallViewController.h */,
 				FE2358C825CE6CA8008C8280 /* VideoCallViewController.m */,
 				FE50798C25FEF6850013FFCB /* LoginViewController.h */,
@@ -483,7 +480,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FE2358C325CCDE41008C8280 /* AudioCallViewController.xib in Resources */,
 				150C8C81229CCFE3004E9B1C /* Assets.xcassets in Resources */,
 				150C8C7F229CCFE1004E9B1C /* Main.storyboard in Resources */,
 			);
@@ -645,7 +641,7 @@
 				CODE_SIGN_ENTITLEMENTS = yzExpoIOS/yzExpoIOS.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Yangzhou Yuanbo Investment Development Co., Ltd. (KZW9D97FJ7)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KZW9D97FJ7;
 				ENABLE_BITCODE = NO;
 				EXCLUDED_ARCHS = "";
@@ -672,7 +668,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/TPNS",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				OTHER_LDFLAGS = (

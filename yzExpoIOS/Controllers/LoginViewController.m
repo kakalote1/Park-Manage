@@ -128,7 +128,7 @@ alpha:1.0]
     [self.view addSubview:self.titleLbl];
     
     self.usernameImgVc = [[UIView alloc] initWithFrame:CGRectMake(40, self.titleLbl.frame.origin.y + 100, self.view.frame.size.width - 80, 45)];
-    self.usernameImgVc.backgroundColor = [UIColor systemGray6Color];
+    self.usernameImgVc.backgroundColor = [UIColor colorWithWhite:0.8 alpha:0.2];
     UIImageView *usernameImgV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"login_username"]];
     usernameImgV.frame = CGRectMake(20, 10, 25, 25);
     usernameImgV.contentMode = UIViewContentModeScaleAspectFit;
@@ -150,7 +150,7 @@ alpha:1.0]
     [self.view addSubview: self.usernameImgVc];
     
     self.passwordImgVc = [[UIView alloc] initWithFrame:CGRectMake(40, self.usernameImgVc.frame.origin.y + 65, self.view.frame.size.width - 80, 45)];
-    self.passwordImgVc.backgroundColor = [UIColor systemGray6Color];
+    self.passwordImgVc.backgroundColor = [UIColor colorWithWhite:0.8 alpha:0.2];
     UIImageView *passwordImgV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"login_password"]];
     passwordImgV.frame = CGRectMake(20, 10, 25, 25);
     passwordImgV.contentMode = UIViewContentModeScaleAspectFit;
