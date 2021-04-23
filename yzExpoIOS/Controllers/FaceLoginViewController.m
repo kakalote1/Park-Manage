@@ -67,7 +67,7 @@ typedef NS_ENUM(NSInteger, AVCamSetupResult) {
     // Do any additional setup after loading the view.
     
     [self haveFaceInfo];
-    
+
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self configureSession];
@@ -145,7 +145,7 @@ typedef NS_ENUM(NSInteger, AVCamSetupResult) {
 {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
     button.frame = frame;
-    button.backgroundColor = [UIColor lightGrayColor];
+    button.backgroundColor = [UIColor clearColor];
     [button setTitle:title forState:UIControlStateNormal];
     [button addTarget:self action:action forControlEvents:UIControlEventTouchDown];
     [view addSubview:button];
@@ -204,10 +204,11 @@ typedef NS_ENUM(NSInteger, AVCamSetupResult) {
     [self.session commitConfiguration];
     self.previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.session];
     self.previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-    self.previewLayer.frame = CGRectMake((self.view.frame.size.width-250)/2.0, 200, 250, 250);
-    self.previewLayer.cornerRadius = 125;
-    self.previewLayer.borderColor = (__bridge CGColorRef _Nullable)([UIColor grayColor]);
-    self.previewLayer.borderWidth = 3;
+    self.previewLayer.frame = [UIScreen mainScreen].bounds;
+//    self.previewLayer.frame = CGRectMake((self.view.frame.size.width-300)/2.0, 200, 300, 300);
+//    self.previewLayer.cornerRadius = 150;
+//    self.previewLayer.borderColor = (__bridge CGColorRef _Nullable)([UIColor grayColor]);
+//    self.previewLayer.borderWidth = 3;
     //        preview?.frame = self.view.bounds
     [self.view.layer addSublayer:self.previewLayer];
     [self.session startRunning];
@@ -217,6 +218,8 @@ typedef NS_ENUM(NSInteger, AVCamSetupResult) {
     takeButton.layer.masksToBounds = YES;
 //    takeButton.layer.cornerRadius = takeButton.frame.size.height/2;
     takeButton.backgroundColor = [UIColor clearColor];
+    
+    
 //    [takeButton setTitle:@"拍照" forState:UIControlStateNormal];
     [takeButton setBackgroundImage:[UIImage imageNamed:@"faceLogin"] forState:UIControlStateNormal];
 //    takeButton.titleLabel.font = [UIFont systemFontOfSize:16];
@@ -303,7 +306,7 @@ typedef NS_ENUM(NSInteger, AVCamSetupResult) {
     }
     // 没有人脸数据
     else if ([self.code  isEqual: @"1"]) {
-        NSString *url = [SAVE_FACE_URL stringByAppendingFormat:@"%@", accessToken];;
+        NSString *url = [SAVE_FACE_URL stringByAppendingFormat:@"%@", accessToken];
         NSLog(@"Person: %@, %@", [user objectForKey:@"username"], [user objectForKey:@"uid"]);
         NSDictionary *param  =@{@"GroupId": @"yzExpo-App", @"PersonName": [user objectForKey:@"username"], @"PersonId": [user objectForKey:@"uid"], @"Gender": @0, @"Image": image_base64};
         NSLog(@"saveparam: %@", param);
@@ -370,7 +373,6 @@ typedef NS_ENUM(NSInteger, AVCamSetupResult) {
         msg = @"保存图片成功" ;
     }
     NSLog(@"+++++++++++%@", msg);
-    
 }
 
 - (UIActivityIndicatorView *)activityIndicator {

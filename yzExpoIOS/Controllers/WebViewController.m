@@ -40,7 +40,7 @@
     [super viewDidLoad];
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
-    
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -57,7 +57,7 @@
     self.webView.backgroundColor = [UIColor whiteColor];
     
     //关闭左划回退功能
-    self.webView.allowsBackForwardNavigationGestures = YES;
+    self.webView.allowsBackForwardNavigationGestures = NO;
     self.webView.navigationDelegate = self;
     self.webView.UIDelegate = self;
     

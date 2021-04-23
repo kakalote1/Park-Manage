@@ -130,10 +130,10 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFY_NAME_INVITE_EVENT object:nil];
 }
 
-// 视图被销毁后清空sipSession
-- (void)dealloc {
-    self.avSession = nil;
-}
+//// 视图被销毁后清空sipSession
+//- (void)dealloc {
+//    self.avSession = nil;
+//}
 
 
 
@@ -168,7 +168,7 @@
 
     if (event.eventType == CONNECTED) {
         // 建立通话时更改状态文本并隐藏接听按钮
-        dispatch_sync(dispatch_get_main_queue(), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
             [self.view makeToast:@"已接通" duration:1.0 position:CSToastPositionDown];
             self.stateLbl.text = @"通话中";
             self.acceptCallBtn.hidden = YES;
@@ -185,7 +185,7 @@
     }
     else if (event.eventType == TERMINATED) {
         NSLog(@"接收到挂断通知");
-        dispatch_sync(dispatch_get_main_queue(), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
             NSLog(@"再次接收到挂断通知");
             [self.view makeToast:@"已挂断" duration:1.0 position:CSToastPositionDown];
             [self dismissViewControllerAnimated:YES completion:nil];

@@ -67,13 +67,14 @@
 
     }
     
+
     NSString *uid = [[NSUserDefaults standardUserDefaults] objectForKey:@"uid"];
     NSString *ip = @"58.220.201.130";
     NSString *port = @"9999";
     uint16_t portNum = [port intValue];
     [[self getSipContext] loginWithUid:uid host:ip port:portNum tls:true];
     [[self getSipContext].settings setVideoTransUseUdp: FALSE];
-    [[self getSipContext].settings setQosPrefVideoSize:1];
+    [[self getSipContext].settings setQosPrefVideoSize:2];
     [[self getSipContext].settings setVideoEncoderBitrate:1200];
 
     NSString *devToken = [UserModel shareInstance].devToken;
@@ -102,6 +103,7 @@
     
     //关闭左划回退功能
     self.webView.allowsBackForwardNavigationGestures = YES;
+
     self.webView.navigationDelegate = self;
     self.webView.UIDelegate = self;
     
@@ -115,6 +117,11 @@
         
         self.webView.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
+    
+//    self.webView.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+//        [self.webView reload];
+//        [self.webView.scrollView.mj_header endRefreshing];
+//    }];
     
     [self.view addSubview:self.webView];
     [self.view addSubview:self.iv];
@@ -150,6 +157,7 @@
     [self.wkUserContentController addScriptMessageHandler:self name:@"goBack"];
     [self.wkUserContentController addScriptMessageHandler:self name:@"goHome"];
     [self.wkUserContentController addScriptMessageHandler:self name:@"avplayer"];
+    [self.wkUserContentController addScriptMessageHandler:self name:@"reload"];
     
 //    NSString *uid = [UserModel shareInstance].uid;
 //    NSString *js = [NSString stringWithFormat:@"window.IOSInfo = %@", uid];
@@ -193,9 +201,9 @@
 //        NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:(NSJSONWritingPrettyPrinted) error:nil];
 //
 //        NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-      [self.webView evaluateJavaScript:[NSString stringWithFormat: @"localStorage.setItem('iosUid', '%@' );", uid] completionHandler:^(id _Nullable result, NSError * _Nullable error) {
-          NSLog(@"%@----%@",result, error);
-      }];
+//      [self.webView evaluateJavaScript:[NSString stringWithFormat: @"localStorage.setItem('iosUid', '%@' );", uid] completionHandler:^(id _Nullable result, NSError * _Nullable error) {
+//          NSLog(@"%@----%@",result, error);
+//      }];
 //
 //    [self.webView evaluateJavaScript:[NSString stringWithFormat: @"login('%@')", uid] completionHandler:^(id _Nullable result, NSError * _Nullable error) {
 //        NSLog(@"%@----%@",result, error);
@@ -336,6 +344,8 @@
         [self goHome];
     } else if ([@"avplayer" isEqualToString:message.name]) {
         [self avplayer:message.body];
+    } else if ([@"reload" isEqualToString:message.name]) {
+        [self reload];
     }
 }
 
@@ -353,6 +363,10 @@
     } else {
         [self.webView reload];
     }
+}
+
+- (void)reload {
+    [self.webView reload];
 }
 
 #pragma mark - 注册

@@ -381,7 +381,7 @@ NSString *strlongitude;//纬度
             // 移除当前通话的session
             [[IphoneControl shareInstance] stopRing];
             [[IphoneControl shareInstance] stopVibrator];
-            [[SipContext sharedInstance] removeCurrentSession];
+//            [[SipContext sharedInstance] removeCurrentSession];
             NSLog(@"通话结束");
             break;
     }
@@ -389,7 +389,7 @@ NSString *strlongitude;//纬度
 
 // 弹出通话页面
 - (void)showCallView:(SipSession *)session {
-    dispatch_sync(dispatch_get_main_queue(), ^{
+    dispatch_async(dispatch_get_main_queue(), ^{
         UIViewController *vc;
         // 判断是否为视频通话
         if ([session isVideoCall]) {
@@ -411,7 +411,7 @@ NSString *strlongitude;//纬度
 }
 
 - (void)showMeetingView:(SipSession *)session {
-    dispatch_sync(dispatch_get_main_queue(), ^{
+    dispatch_async(dispatch_get_main_queue(), ^{
         UIViewController *vc;
         if ([session isVideoCall]) {
             VideoMeetingViewController *videoVc = [[VideoMeetingViewController alloc] init];
@@ -458,17 +458,63 @@ NSString *strlongitude;//纬度
     [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
 }
 
+#pragma mark 火星坐标转换
+- (CLLocationCoordinate2D)transformFromWGSToGCJ:(CLLocationCoordinate2D)wgsLoc
+{
+    const double a = 6378245.0;
+    const double ee = 0.00669342162296594323;
+    const double pi = 3.14159265358979324;
+    CLLocationCoordinate2D adjustLoc;
+        double adjustLat = [self transformLatWithX:wgsLoc.longitude - 105.0 withY:wgsLoc.latitude - 35.0];
+        double adjustLon = [self transformLonWithX:wgsLoc.longitude - 105.0 withY:wgsLoc.latitude - 35.0];
+        double radLat = wgsLoc.latitude / 180.0 * pi;
+        double magic = sin(radLat);
+        magic = 1 - ee * magic * magic;
+        double sqrtMagic = sqrt(magic);
+        adjustLat = (adjustLat * 180.0) / ((a * (1 - ee)) / (magic * sqrtMagic) * pi);
+        adjustLon = (adjustLon * 180.0) / (a / sqrtMagic * cos(radLat) * pi);
+        adjustLoc.latitude = wgsLoc.latitude + adjustLat;
+        adjustLoc.longitude = wgsLoc.longitude + adjustLon;
+    return adjustLoc;
+}
+
+- (double)transformLatWithX:(double)x withY:(double)y
+{
+    const double pi = 3.14159265358979324;
+    double lat = -100.0 + 2.0 * x + 3.0 * y + 0.2 * y * y + 0.1 * x * y + 0.2 * sqrt(fabs(x));
+    lat += (20.0 * sin(6.0 * x * pi) + 20.0 *sin(2.0 * x * pi)) * 2.0 / 3.0;
+    lat += (20.0 * sin(y * pi) + 40.0 * sin(y / 3.0 * pi)) * 2.0 / 3.0;
+    lat += (160.0 * sin(y / 12.0 * pi) + 3320 * sin(y * pi / 30.0)) * 2.0 / 3.0;
+    return lat;
+}
+
+- (double)transformLonWithX:(double)x withY:(double)y
+{
+    const double pi = 3.14159265358979324;
+    double lon = 300.0 + x + 2.0 * y + 0.1 * x * x + 0.1 * x * y + 0.1 * sqrt(fabs(x));
+    lon += (20.0 * sin(6.0 * x * pi) + 20.0 * sin(2.0 * x * pi)) * 2.0 / 3.0;
+    lon += (20.0 * sin(x * pi) + 40.0 * sin(x / 3.0 * pi)) * 2.0 / 3.0;
+    lon += (150.0 * sin(x / 12.0 * pi) + 300.0 * sin(x / 30.0 * pi)) * 2.0 / 3.0;
+    return lon;
+}
+
 #pragma mark 定位成功后则执行此代理方法
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
 {
-    [locationmanager stopUpdatingHeading];
+    [manager setDesiredAccuracy: kCLLocationAccuracyBest];
+    
+    [manager stopUpdatingHeading];
     //旧址
     CLLocation *currentLocation = [locations lastObject];
+    CLLocationCoordinate2D coord = [self transformFromWGSToGCJ:[currentLocation coordinate]];
+
     CLGeocoder *geoCoder = [[CLGeocoder alloc]init];
     //打印当前的经度与纬度
-    NSLog(@"经纬度%f,%f",currentLocation.coordinate.latitude,currentLocation.coordinate.longitude);
     NSString *latitude = [NSString stringWithFormat:@"%f", currentLocation.coordinate.latitude];
     NSString *longitude = [NSString stringWithFormat:@"%f", currentLocation.coordinate.longitude];
+
+    NSLog(@"经纬度%@,%@",latitude,longitude);
+
     
     [self.userInfo setLatitude:latitude];
     [self.userInfo setLongitude:longitude];

@@ -116,6 +116,7 @@
 		C1C4BD8592D7378F2E50805E /* Pods-yzExpoIOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yzExpoIOS.release.xcconfig"; path = "Target Support Files/Pods-yzExpoIOS/Pods-yzExpoIOS.release.xcconfig"; sourceTree = "<group>"; };
 		D8EBB7233C16C94802477FD3 /* XGMTACloud.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = XGMTACloud.framework; path = /Users/bonustrack/XcodeProjects/yzExpoIOS/TPNS/XGMTACloud.framework; sourceTree = "<group>"; };
 		FA294665B8769902668284C6 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libsqlite3.0.tbd; sourceTree = "<group>"; };
+		FE19FB96262D6DB100CF0F8C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		FE23579725C7A585008C8280 /* yzExpoIOS.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = yzExpoIOS.entitlements; sourceTree = "<group>"; };
 		FE2357E425C7FEC4008C8280 /* BaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		FE2357E525C7FEC4008C8280 /* BaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
@@ -464,6 +465,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 150C8C6B229CCFE0004E9B1C;
 			productRefGroup = 150C8C75229CCFE1004E9B1C /* Products */;
@@ -565,6 +567,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				150C8C7E229CCFE1004E9B1C /* Base */,
+				FE19FB96262D6DB100CF0F8C /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -576,6 +579,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -620,7 +624,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -639,7 +643,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CODE_SIGN_ENTITLEMENTS = yzExpoIOS/yzExpoIOS.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Yangzhou Yuanbo Investment Development Co., Ltd. (KZW9D97FJ7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: wei ni (5Z835M4LPS)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KZW9D97FJ7;
@@ -659,7 +663,7 @@
 					"$(SRCROOT)/Pods/Headers/Public",
 				);
 				INFOPLIST_FILE = yzExpoIOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -668,7 +672,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/TPNS",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.5;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				OTHER_LDFLAGS = (
@@ -677,7 +681,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.data.yzExpo;
 				PRODUCT_NAME = "扬州世园会";
-				PROVISIONING_PROFILE_SPECIFIER = yzExpo;
+				PROVISIONING_PROFILE_SPECIFIER = yzExpoTest;
 				REEXPORTED_LIBRARY_PATHS = "";
 				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = 1;

@@ -14,6 +14,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <ScPoc/SipSettings.h>
 #import "HttpManager.h"
+#import "UIView+Toast.h"
 #import "AppDelegate.h"
 
 @interface VideoCallViewController ()
@@ -69,7 +70,7 @@
 //    [self.bigVideoView addGestureRecognizer:tapBigVideo];
     [self.view addSubview:self.bigVideoView];
     
-    self.smallVideoView = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width - SmallVideoView, kStatusBarAndNavigationBarHeight + 30, SmallVideoView, SmallVideoView * 4 /3)];
+    self.smallVideoView = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width - SmallVideoView - 20, kStatusBarAndNavigationBarHeight + 30, SmallVideoView, SmallVideoView * 4 /3)];
 //    [self.smallVideoView addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onSmallVideoPan:)]];
 //    [self.smallVideoView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onSmallVideoTaped:)]];
     [self.view addSubview:self.smallVideoView];
@@ -81,8 +82,9 @@
     }
     if (self.avSession) {
         
-        NSString *url = @"http:///58.220.201.130:12383/zlw/data/thirdPartLogin/getMemberInfoByTel";
+        NSString *url = @"http://58.220.201.130:12383/zlw/data/thirdPartLogin/getMemberInfoByTel";
         NSString *tel = [self.avSession getRemotePartyDisplayName];
+        NSLog(@"telnum: %@", tel);
         if (![tel isEqualToString: @"998"]) {
         NSString *uid = [[NSUserDefaults standardUserDefaults] objectForKey:@"uid"];
         NSDictionary *param = @{@"uid": uid, @"tel": tel};
@@ -168,7 +170,8 @@
 
     if (event.eventType == CONNECTED) {
         // 建立通话时更改状态文本并隐藏接听按钮
-        dispatch_sync(dispatch_get_main_queue(), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.view makeToast:@"正在加载..." duration:1.0 position:CSToastPositionDown];
             self.switchCameraButton.hidden = NO;
             self.switchCameraLbl.hidden = NO;
             self.stateLbl.text = @"通话中";
@@ -195,7 +198,8 @@
         NSLog(@"video TERMINATED");
         [[[self getSipContext] getVideoManager] destroy];
         // 通话结束后关闭当前页面，并清空session
-        dispatch_sync(dispatch_get_main_queue(), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.view makeToast:@"已挂断" duration:1.0 position:CSToastPositionDown];
 //            [self.navigationController popViewControllerAnimated:YES];
             [self dismissViewControllerAnimated:YES completion:nil];
         });
@@ -229,7 +233,6 @@
 - (UILabel *)telNumberLbl {
     if (!_telNumberLbl) {
         _telNumberLbl = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.size.width / 2, 0.067 * self.view.frame.size.height, self.view.frame.size.width / 2, 20)];
-        _telNumberLbl.text = @"号码";
         _telNumberLbl.textColor = [UIColor whiteColor];
         _telNumberLbl.textAlignment = NSTextAlignmentLeft;
         _telNumberLbl.font = [UIFont systemFontOfSize:20];

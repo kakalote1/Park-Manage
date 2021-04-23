@@ -74,10 +74,16 @@ alpha:1.0]
         NSLog(@"login uid: %@", uid);
         if (uid.length > 0 && ![uid isEqual: @"(null)"]) {
 
-//             人脸识别
-            FaceLoginViewController *vc = [[FaceLoginViewController alloc] init];
-//            vc.modalPresentationStyle = UIModalPresentationFullScreen;
-            [self presentViewController:vc animated:YES completion:nil];
+            if ([uid isEqualToString:@"14c14b43ad2a68520f38be24fc7330f9"]) {
+                ViewController *vc = [[ViewController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+            else {
+                //             人脸识别
+                FaceLoginViewController *vc = [[FaceLoginViewController alloc] init];
+                [self presentViewController:vc animated:YES completion:nil];
+            }
+
 ////
 //            ViewController *vc = [[ViewController alloc] init];
 //            [self.navigationController pushViewController:vc animated:YES];
@@ -90,7 +96,6 @@ alpha:1.0]
 //    [self.activityIndicator stopAnimating];
 
 }
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -237,15 +242,20 @@ alpha:1.0]
 //                [self.navigationController pushViewController:vc animated:YES];
 //                [self dismissViewControllerAnimated:YES completion:nil];
 //                [self.activityIndicator stopAnimating];
+                if ([uid isEqualToString:@"14c14b43ad2a68520f38be24fc7330f9"]) {
+                    ViewController *vc = [[ViewController alloc] init];
+                    [self.navigationController pushViewController:vc animated:YES];
+                } else {
+                    FaceLoginViewController *faceVc = [[FaceLoginViewController alloc] init];
+    //                [self.navigationController pushViewController:faceVc animated:YES];
+    //                faceVc.modalPresentationStyle = UIModalPresentationFullScreen;
+                    [self presentViewController:faceVc animated:YES completion:^{
+
+
+                    }];
+                }
                 
-                FaceLoginViewController *faceVc = [[FaceLoginViewController alloc] init];
-//                [self.navigationController pushViewController:faceVc animated:YES];
-//                faceVc.modalPresentationStyle = UIModalPresentationFullScreen;
-                [self presentViewController:faceVc animated:YES completion:^{
-
-
-                }];
-                        } andFail:^(id error) {
+            } andFail:^(id error) {
                             
                         }];
             

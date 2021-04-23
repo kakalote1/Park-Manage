@@ -12,7 +12,7 @@
 #define HttpConstants_h
 
 //服务地址
-//#define BASE_WEB_URL @"http://192.168.1.161/yzExpo/"
+//#define BASE_WEB_URL @"http://123.207.189.27:7108/yzExpoTest/"
 //#define BASE_WEB_URL @"http://192.168.1.221:8081/"
 //#define BASE_WEB_URL @"http://123.207.189.27:7108/yzExpo/"
 #define BASE_WEB_URL @"http://123.207.189.27:7108/yzExpoFace/"
