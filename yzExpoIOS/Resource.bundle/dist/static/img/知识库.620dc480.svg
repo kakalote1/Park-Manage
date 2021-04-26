@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="46px" height="46px" viewBox="0 0 46 46" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon/知识库</title>
+    <defs>
+        <linearGradient x1="9.74178845%" y1="10.6369081%" x2="100%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#8EE8C4" offset="0%"></stop>
+            <stop stop-color="#43CB88" offset="100%"></stop>
+        </linearGradient>
+        <rect id="path-2" x="0" y="0" width="38" height="38" rx="10"></rect>
+        <filter x="-17.1%" y="-14.5%" width="134.2%" height="134.2%" filterUnits="objectBoundingBox" id="filter-3">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.199310365   0 0 0 0 0.647786458   0 0 0 0 0.430448044  0 0 0 0.2 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <polygon id="path-4" points="0.00026125 0 20.9 0 20.9 20.8998694 0.00026125 20.8998694"></polygon>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="iPhone-11备份-4" transform="translate(-332.000000, -405.000000)">
+            <g id="我的应急" transform="translate(13.000000, 363.000000)">
+                <g id="ul" transform="translate(320.000000, 45.000000)">
+                    <g id="icon/知识库" transform="translate(3.000000, 0.000000)">
+                        <g id="矩形">
+                            <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-2"></use>
+                            <use fill="url(#linearGradient-1)" fill-rule="evenodd" xlink:href="#path-2"></use>
+                        </g>
+                        <g id="编组" transform="translate(8.550000, 8.550000)">
+                            <mask id="mask-5" fill="white">
+                                <use xlink:href="#path-4"></use>
+                            </mask>
+                            <g id="Clip-2"></g>
+                            <path d="M13.3240112,1.82861937 L13.3240112,5.42341938 L14.0764113,4.67101937 C14.3820738,4.36535687 14.8771425,4.36535687 15.1841113,4.67101937 L15.9365113,5.42341938 L15.9365113,1.82861937 L13.3240112,1.82861937 Z M4.18026125,-0.000130625 L16.7202612,-0.000130625 C19.028405,-0.000130625 20.9002612,1.87172562 20.9002612,4.17986937 L20.9002612,16.7198694 C20.9002612,19.0280131 19.028405,20.8998694 16.7202612,20.8998694 L4.18026125,20.8998694 C1.87081125,20.8998694 0.00026125,19.0280131 0.00026125,16.7198694 L0.00026125,4.17986937 C0.00026125,1.87172562 1.87081125,-0.000130625 4.18026125,-0.000130625 L4.18026125,-0.000130625 Z M4.85428625,1.56736937 L4.18026125,1.56736937 C2.736855,1.56736937 1.56776125,2.73646312 1.56776125,4.17986937 L1.56776125,16.7198694 C1.56776125,18.1619694 2.736855,19.3323694 4.18026125,19.3323694 L4.85428625,19.3323694 L4.85428625,1.56736937 Z M11.7565113,1.56736937 L6.42178625,1.56736937 L6.42178625,19.3323694 L16.7202613,19.3323694 C18.1623613,19.3323694 19.3327613,18.1619694 19.3327613,16.7198694 L19.3327613,4.17986937 C19.3327613,3.00946937 18.56338,2.01933187 17.5040113,1.68623812 L17.5040113,7.31486937 C17.502705,7.74723812 17.15263,8.09861938 16.7202613,8.09861938 C16.5112613,8.09731312 16.3127112,8.01501938 16.1664112,7.86871937 L14.6302613,6.33256937 L13.0941113,7.86871937 C12.7871425,8.17438187 12.2907675,8.17438187 11.9864113,7.86871937 C11.838805,7.72111312 11.7565113,7.52256312 11.7565113,7.31486937 L11.7565113,1.56736937 Z" id="Fill-1" fill="#FFFFFF" mask="url(#mask-5)"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

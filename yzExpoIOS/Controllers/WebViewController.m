@@ -58,6 +58,8 @@
     
     //关闭左划回退功能
     self.webView.allowsBackForwardNavigationGestures = NO;
+    self.webView.scrollView.bounces = FALSE;
+    self.webView.scrollView.scrollEnabled = NO;
     self.webView.navigationDelegate = self;
     self.webView.UIDelegate = self;
     

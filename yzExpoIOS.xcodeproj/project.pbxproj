@@ -29,6 +29,7 @@
 		86E6256E8E67C42972C118FE /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87E9D2D3CD22548864D7AD65 /* CoreData.framework */; };
 		C1768C51FA255861232FAD4E /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E72312FEAAADACE7BEDD158 /* UserNotifications.framework */; };
 		E12E18822FEA93F84048527B /* Pods_yzExpoIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E56D2C46661C510B4EF7CDE /* Pods_yzExpoIOS.framework */; };
+		FE19FB9F2632A7E800CF0F8C /* Resource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FE19FB9E2632A7E800CF0F8C /* Resource.bundle */; };
 		FE2357E625C7FEC4008C8280 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE2357E525C7FEC4008C8280 /* BaseViewController.m */; };
 		FE2357ED25C80037008C8280 /* AudioCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE2357EB25C80037008C8280 /* AudioCallViewController.m */; };
 		FE2358B925CA9594008C8280 /* CallUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = FE2358B825CA9594008C8280 /* CallUtil.m */; };
@@ -117,6 +118,7 @@
 		D8EBB7233C16C94802477FD3 /* XGMTACloud.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = XGMTACloud.framework; path = /Users/bonustrack/XcodeProjects/yzExpoIOS/TPNS/XGMTACloud.framework; sourceTree = "<group>"; };
 		FA294665B8769902668284C6 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libsqlite3.0.tbd; sourceTree = "<group>"; };
 		FE19FB96262D6DB100CF0F8C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		FE19FB9E2632A7E800CF0F8C /* Resource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Resource.bundle; sourceTree = "<group>"; };
 		FE23579725C7A585008C8280 /* yzExpoIOS.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = yzExpoIOS.entitlements; sourceTree = "<group>"; };
 		FE2357E425C7FEC4008C8280 /* BaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		FE2357E525C7FEC4008C8280 /* BaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 				150C8CA9229CD06E004E9B1C /* 常量 */,
 				150C8C77229CCFE1004E9B1C /* AppDelegate.h */,
 				150C8C78229CCFE1004E9B1C /* AppDelegate.m */,
+				FE19FB9E2632A7E800CF0F8C /* Resource.bundle */,
 				150C8C7A229CCFE1004E9B1C /* ViewController.h */,
 				150C8C7B229CCFE1004E9B1C /* ViewController.m */,
 				150C8C7D229CCFE1004E9B1C /* Main.storyboard */,
@@ -482,6 +485,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE19FB9F2632A7E800CF0F8C /* Resource.bundle in Resources */,
 				150C8C81229CCFE3004E9B1C /* Assets.xcassets in Resources */,
 				150C8C7F229CCFE1004E9B1C /* Main.storyboard in Resources */,
 			);
@@ -643,9 +647,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CODE_SIGN_ENTITLEMENTS = yzExpoIOS/yzExpoIOS.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: wei ni (5Z835M4LPS)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Yangzhou Yuanbo Investment Development Co., Ltd. (KZW9D97FJ7)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = KZW9D97FJ7;
 				ENABLE_BITCODE = NO;
 				EXCLUDED_ARCHS = "";
@@ -663,7 +667,7 @@
 					"$(SRCROOT)/Pods/Headers/Public",
 				);
 				INFOPLIST_FILE = yzExpoIOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -672,7 +676,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/TPNS",
 				);
-				MARKETING_VERSION = 1.5;
+				MARKETING_VERSION = 1.6;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				OTHER_LDFLAGS = (
@@ -681,7 +685,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.data.yzExpo;
 				PRODUCT_NAME = "扬州世园会";
-				PROVISIONING_PROFILE_SPECIFIER = yzExpoTest;
+				PROVISIONING_PROFILE_SPECIFIER = yzExpo;
 				REEXPORTED_LIBRARY_PATHS = "";
 				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = 1;

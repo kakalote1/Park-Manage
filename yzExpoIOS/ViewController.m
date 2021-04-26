@@ -89,7 +89,6 @@
             }];
     }
     [self initWebView];
-    [((AppDelegate *) [UIApplication sharedApplication].delegate) serverRequestWithUrl];
 
 }
 
@@ -103,6 +102,10 @@
     
     //关闭左划回退功能
     self.webView.allowsBackForwardNavigationGestures = YES;
+    self.webView.scrollView.bounces = FALSE;
+    self.webView.scrollView.scrollEnabled = NO;
+//    [self.webView.scrollView setShowsVerticalScrollIndicator:NO];
+//    [self.webView.scrollView setShowsHorizontalScrollIndicator:NO];
 
     self.webView.navigationDelegate = self;
     self.webView.UIDelegate = self;
@@ -111,26 +114,30 @@
     NSURL *url = [NSURL URLWithString:BASE_WEB_URL];
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:500];
     [self.webView loadRequest:request];
+//    [self localLoad];
     
     //解决 iOS 11 屏幕顶部显示不全
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 11.0) {
-        
         self.webView.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
-    
-//    self.webView.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-//        [self.webView reload];
-//        [self.webView.scrollView.mj_header endRefreshing];
-//    }];
     
     [self.view addSubview:self.webView];
     [self.view addSubview:self.iv];
     
-//    [self uidLogin:@""];
     
     //OC注册供JS调用的方法
     [self addScriptFunction];
 }
+
+//- (void)localLoad {
+//    NSString *path = [[NSBundle mainBundle] resourcePath];
+//    NSString *basePath = [NSString stringWithFormat:@"%@/%@",path, @"Resource.bundle/dist"];
+//    NSString *htmlPath = [NSString stringWithFormat:@"%@/%@",path, @"Resource.bundle/dist/index.html"];
+//    NSURL *fileUrl = [NSURL fileURLWithPath:htmlPath];
+//    NSLog(@"path: %@, basePath: %@, htmlPath: %@, fileUrl: %@", path, basePath, htmlPath, fileUrl);
+//    [self.webView loadFileURL:fileUrl allowingReadAccessToURL:[NSURL fileURLWithPath:basePath isDirectory:YES]];
+//
+//}
 
 - (void)wkConfiguration {
     self.wkWebViewConfiguration = [[WKWebViewConfiguration alloc]init];
@@ -158,6 +165,7 @@
     [self.wkUserContentController addScriptMessageHandler:self name:@"goHome"];
     [self.wkUserContentController addScriptMessageHandler:self name:@"avplayer"];
     [self.wkUserContentController addScriptMessageHandler:self name:@"reload"];
+    [self.wkUserContentController addScriptMessageHandler:self name:@"jumpToStore"];
     
 //    NSString *uid = [UserModel shareInstance].uid;
 //    NSString *js = [NSString stringWithFormat:@"window.IOSInfo = %@", uid];
@@ -214,21 +222,24 @@
     NSString *latitude = [UserModel shareInstance].latitude;
     NSString *address = [UserModel shareInstance].address;
     NSLog(@"获取位置参数: %@ %@ %@ %@",uid, longitude, latitude, address);
-    NSDictionary *location = @{@"longitude": longitude, @"latitude": latitude, @"address": address};
-    NSData *data = [NSJSONSerialization dataWithJSONObject:location options:kNilOptions error:nil];
-    NSString *locationStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    NSLog(@"locationStr: %@",locationStr);
-    [self.webView evaluateJavaScript:[NSString stringWithFormat: @"localStorage.setItem('location', '%@' );", locationStr] completionHandler:^(id _Nullable result, NSError * _Nullable error) {
-        NSLog(@"%@----%@",result, error);
-    }];
-    
-    NSDictionary *param  = @{@"uid":uid,@"longitude":longitude,@"latitude":latitude};
-    
-    [[HttpManager shareInstance] getRequestWithUrl:url andParam:param andHeaders:nil andSuccess:^(id responseObject) {
-            NSLog(@"上报位置成功: %@", responseObject);
-        } andFail:^(id error) {
-            
+    NSLog(@"位置参数长度: %lu %lu %lu", (unsigned long)longitude.length, (unsigned long)latitude.length, (unsigned long)address.length);
+    if (longitude.length > 0 && latitude.length > 0 && address.length > 0) {
+        NSDictionary *location = @{@"longitude": longitude, @"latitude": latitude, @"address": address};
+        NSData *data = [NSJSONSerialization dataWithJSONObject:location options:kNilOptions error:nil];
+        NSString *locationStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"locationStr: %@",locationStr);
+        [self.webView evaluateJavaScript:[NSString stringWithFormat: @"localStorage.setItem('location', '%@' );", locationStr] completionHandler:^(id _Nullable result, NSError * _Nullable error) {
+            NSLog(@"%@----%@",result, error);
         }];
+        
+        NSDictionary *param  = @{@"uid":uid,@"longitude":longitude,@"latitude":latitude};
+        
+        [[HttpManager shareInstance] getRequestWithUrl:url andParam:param andHeaders:nil andSuccess:^(id responseObject) {
+                NSLog(@"上报位置成功: %@", responseObject);
+            } andFail:^(id error) {
+                
+            }];
+    }
     [self isAutoLogin];
 }
 // 页面加载失败时调用
@@ -346,6 +357,8 @@
         [self avplayer:message.body];
     } else if ([@"reload" isEqualToString:message.name]) {
         [self reload];
+    } else if ([@"jumpToStore" isEqualToString:message.name]) {
+        [self jumpToStore];
     }
 }
 
@@ -443,15 +456,20 @@
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     self.navigationController.navigationBarHidden = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationRegEvent:) name:NOTIFY_NAME_REGISTRATION_EVENT object:nil];
-    NSString *uid  = [self.userDefaults objectForKey:@"uid"];
-    if (uid.length == 0 || [uid  isEqual: @"(null)"]) {
-    
-            LoginViewController *loginVc = [[LoginViewController alloc] init];
-        loginVc.modalPresentationStyle = UIModalPresentationFullScreen;
-        [self presentViewController:loginVc animated:YES completion:^{
-                   
-        }];
-    }
+//    NSString *uid  = [self.userDefaults objectForKey:@"uid"];
+//    if (uid.length == 0 || [uid  isEqual: @"(null)"]) {
+//
+//            LoginViewController *loginVc = [[LoginViewController alloc] init];
+//        loginVc.modalPresentationStyle = UIModalPresentationFullScreen;
+//        [self presentViewController:loginVc animated:YES completion:^{
+//
+//        }];
+//    }
+}
+
+- (void)jumpToStore {
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://apps.apple.com/us/app/2021nian-yang-zhou-shi-yuan-hui-zong-he-guan-liapp/id1551534885"]];
+    [[UIApplication sharedApplication] openURL:url options:nil completionHandler:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

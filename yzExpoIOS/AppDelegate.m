@@ -71,23 +71,37 @@ NSString *strlongitude;//纬度
         NSLog(@"获取成功：%@", responseObject);
         NSString *str = responseObject[@"data"];
         NSLog(@"accessToken: %@",str);
-        NSDictionary *dic = @{@"accessToken":str};
-        [dic writeToFile:plistPath atomically:YES];
-        NSLog(@"%@",dic);
-        NSDictionary *dic2 = [NSDictionary dictionaryWithContentsOfFile:plistPath];
-        NSLog(@"asdasdas");
-        NSLog(@"%@\n%@",[dic2 objectForKey:@"accessToken"],filePath);
-        NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-        [user setObject:str forKey:@"accessToken"];
-    } andFail:^(id error) {
-                
+        if (str.length > 0 && ![str isEqualToString:@"null"]) {
+            NSDictionary *dic = @{@"accessToken":str};
+            [dic writeToFile:plistPath atomically:YES];
+            NSLog(@"%@",dic);
+            NSDictionary *dic2 = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+            NSLog(@"asdasdas");
+            NSLog(@"1: %@\n%@",[dic2 objectForKey:@"accessToken"],filePath);
+            NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+            [user setObject:str forKey:@"accessToken"];
+        } else {
+            UIAlertController *alter = [UIAlertController alertControllerWithTitle:@"提示" message:@"服务异常，请稍后重试" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+               NSLog(@"确定");
             }];
-    
-    NSDictionary *dic2 = [NSDictionary dictionaryWithContentsOfFile:plistPath];
-    NSLog(@"asdasdas");
-    NSLog(@"%@\n%@",[dic2 objectForKey:@"accessToken"],filePath);
-    
-    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+            [alter addAction:cancelAction];
+            [alter addAction:okAction];
+            [self.navigationController presentViewController:alter animated:YES completion:nil];
+        }
+            
+    } andFail:^(id error) {
+        UIAlertController *alter = [UIAlertController alertControllerWithTitle:@"提示" message:@"服务异常，请稍后重试" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+           NSLog(@"确定");
+        }];
+        [alter addAction:cancelAction];
+        [alter addAction:okAction];
+        [self.navigationController presentViewController:alter animated:YES completion:nil];
+            }];
+
     self.userInfo = [UserModel shareInstance];
     
     [self.userInfo addObserver:self forKeyPath:@"uid" options:NSKeyValueObservingOptionNew context:nil];
@@ -261,59 +275,6 @@ NSString *strlongitude;//纬度
     self.sipContext = nil;
 }
 
-- (AFHTTPSessionManager *)sessionManager {
-    if (!_sessionManager) {
-        _sessionManager = [AFHTTPSessionManager manager];
-        [_sessionManager setRequestSerializer:[AFHTTPRequestSerializer serializer]];
-        [_sessionManager.requestSerializer setTimeoutInterval:10.0];
-        [_sessionManager.requestSerializer setStringEncoding:NSUTF8StringEncoding];
-        [_sessionManager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
-        [_sessionManager.responseSerializer setAcceptableContentTypes:[NSSet setWithArray:@[
-                    @"application/json", @"text/plain", @"text/javascript",
-                    @"text/json", @"text/html", @"image/jpeg",
-                    @"image/png",@"video/mov", @"application/octet-stream"]]];
-    }
-    return _sessionManager;
-}
-
-- (void)serverRequestWithUrl {
-    NSString *fullUrl = [NSString stringWithFormat:@"https://service.yzyby2018.com/jiekou/common-api/common/login/getAccessTokenm"];
-    NSDictionary *parameters = @{@"source": @"APP"};
-    
-    [self postWithUrl:fullUrl withParams:parameters success:nil failure:nil];
-}
-
-- (void)postWithUrl:(NSString *)urlStr
-         withParams:(NSDictionary *)params
-            success:(nullable void (^)(NSDictionary * _Nonnull)) success
-            failure:(nullable void (^)(NSError *)) failure {
-    NSLog(@"url=%@\tparams=%@",urlStr, params);
-    [self.sessionManager POST:urlStr
-                   parameters:params
-                      headers:nil
-                     progress:nil
-                      success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSError *error = nil;
-        if (responseObject) {
-            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:&error];
-            NSLog(@"数据：%@", responseObject);
-            if (dic && success) {
-                success(dic);
-                return;
-            }
-        } else {
-            error = [[NSError alloc] initWithDomain:NSNetServicesErrorDomain code:-1 userInfo:@{@"message":@"response is null"}];
-        }
-        if (failure) {
-            failure(error);
-        }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        if (failure) {
-            failure(error);
-        }
-    }];
-}
-
 #pragma mark - event handle
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
 {
@@ -449,8 +410,11 @@ NSString *strlongitude;//纬度
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
     //设置提示提醒用户打开定位服务
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"允许定位提示" message:@"请在设置中打开定位" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"打开定位" style:UIAlertActionStyleDefault handler:nil];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"允许定位提示" message:@"请到设置->隐私->定位服务中开启【扬州世园会】定位服务，否则将无法使用签到功能。" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"打开设置" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+    }];
+    
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     [alert addAction:okAction];
@@ -506,7 +470,6 @@ NSString *strlongitude;//纬度
     [manager stopUpdatingHeading];
     //旧址
     CLLocation *currentLocation = [locations lastObject];
-    CLLocationCoordinate2D coord = [self transformFromWGSToGCJ:[currentLocation coordinate]];
 
     CLGeocoder *geoCoder = [[CLGeocoder alloc]init];
     //打印当前的经度与纬度
@@ -565,7 +528,8 @@ NSString *strlongitude;//纬度
     [loop run];
 }
 
-- (void)keepAlive {
+- (void)keepAlive
+{
     NSString *url = @"http://58.220.201.130:12383/zlw/data/thirdPartLogin/keepAlive";
     NSString *uid = [UserModel shareInstance].uid;
     NSDictionary *param = @{@"uid": uid, @"isFirst": @"0"};

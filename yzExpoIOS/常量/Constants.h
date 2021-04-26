@@ -15,15 +15,15 @@
 //#define BASE_WEB_URL @"http://123.207.189.27:7108/yzExpoTest/"
 //#define BASE_WEB_URL @"http://192.168.1.221:8081/"
 //#define BASE_WEB_URL @"http://123.207.189.27:7108/yzExpo/"
-#define BASE_WEB_URL @"http://123.207.189.27:7108/yzExpoFace/"
-//#define BASE_WEB_URL @"http://123.207.189.27:7108/yzExpoFaceNew/"
+//#define BASE_WEB_URL @"http://123.207.189.27:7108/yzExpoFace/"
+//#define BASE_WEB_URL @"http://172.20.10.6:8081"
 
 
 //#define BASE_WEB_URL @"http://192.168.24.104:8081"
 
 
 //#define BASE_WEB_URL @"http://localhost:8081"
-//#define BASE_WEB_URL @"http://192.168.1.200:8081/"
+#define BASE_WEB_URL @"http://192.168.1.200:8081/"
 //#define BASE_WEB_URL @"http://172.20.10.6:8081/"
 
 

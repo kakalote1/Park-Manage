@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="38px" height="39px" viewBox="0 0 38 39" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon/task</title>
+    <defs>
+        <linearGradient x1="15.9824986%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#77A0FE" offset="0%"></stop>
+            <stop stop-color="#5789FE" offset="100%"></stop>
+        </linearGradient>
+        <path d="M22.6351125,11.9691 L22.6351125,4.1256 C22.6351125,1.9161 20.9858625,0.11835 18.9597375,0.11835 L4.0399875,0.11835 C2.0138625,0.11835 0.3646125,1.9161 0.3646125,4.1256 L0.3646125,23.1111 C0.3646125,25.3206 2.0138625,27.11835 4.0399875,27.11835 L18.6908625,27.11835 C20.8699875,27.11835 22.6351125,25.3521 22.6351125,23.172975 L22.6351125,11.9691 Z" id="path-2"></path>
+        <filter x="-29.2%" y="-20.4%" width="158.4%" height="148.1%" filterUnits="objectBoundingBox" id="filter-3">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0.12892169   0 0 0 0 0.425441576  0 0 0 0.2 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <path d="M19.40625,13.0116375 C15.683625,13.0116375 12.65625,16.0390125 12.65625,19.7616375 C12.65625,23.4831375 15.683625,26.5116375 19.40625,26.5116375 C23.128875,26.5116375 26.15625,23.4831375 26.15625,19.7616375 C26.15625,16.0390125 23.128875,13.0116375 19.40625,13.0116375" id="path-4"></path>
+        <filter x="-51.9%" y="-37.0%" width="203.7%" height="203.7%" filterUnits="objectBoundingBox" id="filter-5">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.00587428212   0 0 0 0 0.170736292   0 0 0 0 0.548545063  0 0 0 0.4 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="iPhone-11备份-4" transform="translate(-146.000000, -89.000000)">
+            <g id="我的待办" transform="translate(16.000000, 89.000000)">
+                <g id="icon/task" transform="translate(130.000000, 0.000000)">
+                    <polygon id="Fill-1" fill-opacity="0.01" fill="#FFFFFF" points="0 36 36 36 36 0 0 0"></polygon>
+                    <g id="编组" transform="translate(6.750000, 5.625000)">
+                        <g id="Fill-4">
+                            <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-2"></use>
+                            <use fill="url(#linearGradient-1)" fill-rule="evenodd" xlink:href="#path-2"></use>
+                        </g>
+                        <g id="Fill-2">
+                            <use fill="black" fill-opacity="1" filter="url(#filter-5)" xlink:href="#path-4"></use>
+                            <use fill="#91B2FF" fill-rule="evenodd" xlink:href="#path-4"></use>
+                        </g>
+                        <path d="M16.1224875,7.7074875 L5.7724875,7.7074875 C5.2133625,7.7074875 4.7588625,7.2541125 4.7588625,6.6949875 C4.7588625,6.1358625 5.2133625,5.6824875 5.7724875,5.6824875 L16.1224875,5.6824875 C16.6816125,5.6824875 17.1338625,6.1358625 17.1338625,6.6949875 C17.1338625,7.2541125 16.6816125,7.7074875 16.1224875,7.7074875" id="Fill-6" fill="#FFFFFF"></path>
+                        <path d="M10.4974875,13.1720625 L5.7724875,13.1720625 C5.2133625,13.1720625 4.7588625,12.7186875 4.7588625,12.1595625 C4.7588625,11.6004375 5.2133625,11.1470625 5.7724875,11.1470625 L10.4974875,11.1470625 C11.0566125,11.1470625 11.5088625,11.6004375 11.5088625,12.1595625 C11.5088625,12.7186875 11.0566125,13.1720625 10.4974875,13.1720625" id="Fill-8" fill="#FFFFFF"></path>
+                        <path d="M17.5561875,17.645175 L17.5561875,20.3778 C17.5561875,20.898675 17.9803125,21.3228 18.5011875,21.3228 L22.5995625,21.3228 C23.1204375,21.3228 23.5445625,20.898675 23.5445625,20.3778 C23.5445625,19.856925 23.1204375,19.433925 22.5995625,19.433925 L19.4461875,19.433925 L19.4461875,17.645175 C19.4461875,17.1243 19.0220625,16.700175 18.5011875,16.700175 C17.9803125,16.700175 17.5561875,17.1243 17.5561875,17.645175" id="Fill-10" fill="#FFFFFF"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

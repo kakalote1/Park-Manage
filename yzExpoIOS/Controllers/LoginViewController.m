@@ -81,6 +81,7 @@ alpha:1.0]
             else {
                 //             人脸识别
                 FaceLoginViewController *vc = [[FaceLoginViewController alloc] init];
+                vc.modalPresentationStyle = UIModalPresentationPageSheet;
                 [self presentViewController:vc animated:YES completion:nil];
             }
 
@@ -248,7 +249,7 @@ alpha:1.0]
                 } else {
                     FaceLoginViewController *faceVc = [[FaceLoginViewController alloc] init];
     //                [self.navigationController pushViewController:faceVc animated:YES];
-    //                faceVc.modalPresentationStyle = UIModalPresentationFullScreen;
+                    faceVc.modalPresentationStyle = UIModalPresentationPageSheet;
                     [self presentViewController:faceVc animated:YES completion:^{
 
 
@@ -268,7 +269,7 @@ alpha:1.0]
                 case 11027:
                     [self.view makeToast:message];
                 case 10001:
-                    [self.view makeToast:message];
+                    [self.view makeToast:@"请重新运行app后重试"];
                     break;
                     
                 default:
