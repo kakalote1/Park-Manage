@@ -23,8 +23,9 @@
 #import <AVKit/AVKit.h>
 #import <AVFoundation/AVFoundation.h>
 #import <ScPoc/SipSettings.h>
+#import <QuartzCore/QuartzCore.h>
 
-@interface ViewController ()<WKNavigationDelegate,WKUIDelegate, WKScriptMessageHandler>
+@interface ViewController ()<WKNavigationDelegate,WKUIDelegate, WKScriptMessageHandler,CLLocationManagerDelegate>
 
 @property (nonatomic, strong) WKWebView *webView;
 @property (nonatomic, strong) WKWebViewConfiguration *wkWebViewConfiguration;
@@ -62,20 +63,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(updateLocation:) name:@"updateLocaltion" object:nil];
     if (kIs_iPhoneX) {
         self.view.bounds = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 34);
-
     }
     
-
-    NSString *uid = [[NSUserDefaults standardUserDefaults] objectForKey:@"uid"];
-    NSString *ip = @"58.220.201.130";
-    NSString *port = @"9999";
-    uint16_t portNum = [port intValue];
-    [[self getSipContext] loginWithUid:uid host:ip port:portNum tls:true];
-    [[self getSipContext].settings setVideoTransUseUdp: FALSE];
-    [[self getSipContext].settings setQosPrefVideoSize:2];
-    [[self getSipContext].settings setVideoEncoderBitrate:1200];
+        NSString *uid = [[NSUserDefaults standardUserDefaults] objectForKey:@"uid"];
+        NSString *ip = @"58.220.201.130";
+        NSString *port = @"9999";
+        uint16_t portNum = [port intValue];
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 13.0) {
+        [[self getSipContext] loginWithUid:uid host:ip port:portNum tls:true];
+        [[self getSipContext].settings setVideoTransUseUdp: FALSE];
+        [[self getSipContext].settings setQosPrefVideoSize:2];
+        [[self getSipContext].settings setVideoEncoderBitrate:1200];
+    }
+  
 
     NSString *devToken = [UserModel shareInstance].devToken;
     
@@ -104,8 +109,7 @@
     self.webView.allowsBackForwardNavigationGestures = YES;
     self.webView.scrollView.bounces = FALSE;
     self.webView.scrollView.scrollEnabled = NO;
-//    [self.webView.scrollView setShowsVerticalScrollIndicator:NO];
-//    [self.webView.scrollView setShowsHorizontalScrollIndicator:NO];
+    self.webView.allowsLinkPreview = FALSE;
 
     self.webView.navigationDelegate = self;
     self.webView.UIDelegate = self;
@@ -166,6 +170,7 @@
     [self.wkUserContentController addScriptMessageHandler:self name:@"avplayer"];
     [self.wkUserContentController addScriptMessageHandler:self name:@"reload"];
     [self.wkUserContentController addScriptMessageHandler:self name:@"jumpToStore"];
+    [self.wkUserContentController addScriptMessageHandler:self name:@"shareWorkOrder"];
     
 //    NSString *uid = [UserModel shareInstance].uid;
 //    NSString *js = [NSString stringWithFormat:@"window.IOSInfo = %@", uid];
@@ -209,9 +214,9 @@
 //        NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:(NSJSONWritingPrettyPrinted) error:nil];
 //
 //        NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//      [self.webView evaluateJavaScript:[NSString stringWithFormat: @"localStorage.setItem('iosUid', '%@' );", uid] completionHandler:^(id _Nullable result, NSError * _Nullable error) {
-//          NSLog(@"%@----%@",result, error);
-//      }];
+//    [self.webView evaluateJavaScript:[NSString stringWithFormat: @"localStorage.setItem('iosUid', '%@' );", uid] completionHandler:^(id _Nullable result, NSError * _Nullable error) {
+//              NSLog(@"%@----%@",result, error);
+//          }];
 //
 //    [self.webView evaluateJavaScript:[NSString stringWithFormat: @"login('%@')", uid] completionHandler:^(id _Nullable result, NSError * _Nullable error) {
 //        NSLog(@"%@----%@",result, error);
@@ -264,11 +269,9 @@
     if ([array containsObject:@"/operationalTesting/videoSurveillance"]) {
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:500];
         [self.webView loadRequest:request];
-
     }
     if (url.length > 30) {
         url = [url substringToIndex:21];
-         
     }
     NSLog(@"newurl : %@", url);
 
@@ -329,14 +332,6 @@
         [call makeAudioCall:message.body];
     } else if ([@"makeVideoCall" isEqualToString:message.name]) {
         NSLog(@"body:%@",message.body);
-//        UIAlertController *alter = [UIAlertController alertControllerWithTitle:@"提示" message:@"视频功能正在紧急修复....." preferredStyle:UIAlertControllerStyleAlert];
-//        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-//           UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//               NSLog(@"确定");
-//           }];
-//        [alter addAction:cancelAction];
-//         [alter addAction:okAction];
-//         [self presentViewController:alter animated:YES completion:nil];
         [call makeVideoCall:message.body];
     } else if ([@"makeAudioGroupCall" isEqualToString:message.name]) {
         NSLog(@"body:%@",message.body);
@@ -359,6 +354,8 @@
         [self reload];
     } else if ([@"jumpToStore" isEqualToString:message.name]) {
         [self jumpToStore];
+    } else if ([@"shareWorkOrder" isEqualToString:message.name]) {
+        [self shareWorkOrder];
     }
 }
 
@@ -440,7 +437,6 @@
     [self.webView evaluateJavaScript:@"window.localStorage.clear()" completionHandler:nil];
 }
 
-// 模拟sip登录
 - (void)Login {
     NSLog(@"登录12345");
     NSString *uid = [self.userDefaults objectForKey:@"uid"];
@@ -456,17 +452,39 @@
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     self.navigationController.navigationBarHidden = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationRegEvent:) name:NOTIFY_NAME_REGISTRATION_EVENT object:nil];
-//    NSString *uid  = [self.userDefaults objectForKey:@"uid"];
-//    if (uid.length == 0 || [uid  isEqual: @"(null)"]) {
-//
-//            LoginViewController *loginVc = [[LoginViewController alloc] init];
-//        loginVc.modalPresentationStyle = UIModalPresentationFullScreen;
-//        [self presentViewController:loginVc animated:YES completion:^{
-//
-//        }];
-//    }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateLocation) name:@"updateLocation" object:nil];
 }
 
+// 实时更新位置信息
+-(void)updateLocation {
+    NSLog(@"更新位置信息");
+    NSString *uid = [[NSUserDefaults standardUserDefaults] objectForKey:@"uid"];
+    NSString *url = @"http://58.220.201.130:12383/scooper-app-msg/gis/updateGis";
+    NSString *longitude = [UserModel shareInstance].longitude;
+    NSString *latitude = [UserModel shareInstance].latitude;
+    NSString *address = [UserModel shareInstance].address;
+    NSLog(@"获取位置参数: %@ %@ %@ %@",uid, longitude, latitude, address);
+    NSLog(@"位置参数长度: %lu %lu %lu", (unsigned long)longitude.length, (unsigned long)latitude.length, (unsigned long)address.length);
+    if (longitude.length > 0 && latitude.length > 0 && address.length > 0) {
+        NSDictionary *location = @{@"longitude": longitude, @"latitude": latitude, @"address": address};
+        NSData *data = [NSJSONSerialization dataWithJSONObject:location options:kNilOptions error:nil];
+        NSString *locationStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"locationStr: %@",locationStr);
+        [self.webView evaluateJavaScript:[NSString stringWithFormat: @"localStorage.setItem('location', '%@' );", locationStr] completionHandler:^(id _Nullable result, NSError * _Nullable error) {
+            NSLog(@"%@----%@",result, error);
+        }];
+        
+        NSDictionary *param  = @{@"uid":uid,@"longitude":longitude,@"latitude":latitude};
+        
+        [[HttpManager shareInstance] getRequestWithUrl:url andParam:param andHeaders:nil andSuccess:^(id responseObject) {
+                NSLog(@"更新上报位置成功: %@", responseObject);
+            } andFail:^(id error) {
+                
+            }];
+    }
+}
+
+// 跳转商城
 - (void)jumpToStore {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://apps.apple.com/us/app/2021nian-yang-zhou-shi-yuan-hui-zong-he-guan-liapp/id1551534885"]];
     [[UIApplication sharedApplication] openURL:url options:nil completionHandler:nil];
@@ -477,6 +495,75 @@
 
 
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFY_NAME_REGISTRATION_EVENT object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"updateLocation" object:nil];
+}
+
+#pragma mark 定位成功后则执行此代理方法
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
+{
+    [manager setDesiredAccuracy: kCLLocationAccuracyBest];
+    
+    [manager stopUpdatingHeading];
+    //旧址
+    CLLocation *currentLocation = [locations lastObject];
+
+    CLGeocoder *geoCoder = [[CLGeocoder alloc]init];
+    //打印当前的经度与纬度
+    NSString *latitude = [NSString stringWithFormat:@"%f", currentLocation.coordinate.latitude];
+    NSString *longitude = [NSString stringWithFormat:@"%f", currentLocation.coordinate.longitude];
+
+    NSLog(@"经纬度%@,%@",latitude,longitude);
+
+    
+    [self.userInfo setLatitude:latitude];
+    [self.userInfo setLongitude:longitude];
+    //反地理编码
+    [geoCoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error)
+    {
+        if (placemarks.count > 0) {
+            CLPlacemark *placemark = [placemarks objectAtIndex:0];
+            NSLog(@"placemark : %@", placemark.postalAddress);
+            
+            NSString *city = placemark.locality;
+            if (!city) {
+                //四大直辖市的城市信息无法通过locality获得，只能通过获取省份的方法来获得（如果city为空，则可知为直辖市）
+                city = placemark.administrativeArea;
+            }
+            // 位置名
+            NSLog(@"name,%@",placemark.name);
+            // 街道
+            NSLog(@"thoroughfare,%@",placemark.thoroughfare);
+            // 子街道
+            NSLog(@"subThoroughfare,%@",placemark.subThoroughfare);
+            // 市
+            NSLog(@"locality,%@",placemark.locality);
+            // 区
+            NSLog(@"subLocality,%@",placemark.subLocality);
+            // 国家
+            NSLog(@"country,%@",placemark.country);
+            NSString *address = [placemark.country stringByAppendingFormat:@"%@%@%@%@%@",placemark.administrativeArea, city,placemark.subLocality,placemark.thoroughfare,placemark.name];
+            NSLog(@"address ： %@", address);
+            [self.userInfo setAddress:address];
+            
+              }else if (error == nil && [placemarks count] == 0) {
+                  NSLog(@"No results were returned.");
+              } else if (error != nil){
+                  NSLog(@"An error occurred = %@", error);
+              }
+        NSString *longitude = [UserModel shareInstance].longitude;
+        NSString *latitude = [UserModel shareInstance].latitude;
+        NSString *address = [UserModel shareInstance].address;
+        NSLog(@"位置参数长度: %lu %lu %lu", (unsigned long)longitude.length, (unsigned long)latitude.length, (unsigned long)address.length);
+        if (longitude.length > 0 && latitude.length > 0 && address.length > 0) {
+            NSDictionary *location = @{@"longitude": longitude, @"latitude": latitude, @"address": address};
+            NSData *data = [NSJSONSerialization dataWithJSONObject:location options:kNilOptions error:nil];
+            NSString *locationStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSLog(@"locationStr: %@",locationStr);
+            [self.webView evaluateJavaScript:[NSString stringWithFormat: @"localStorage.setItem('location', '%@' );", locationStr] completionHandler:^(id _Nullable result, NSError * _Nullable error) {
+                NSLog(@"%@----%@更新地址",result, error);
+            }];
+        }
+    }];
 }
 
 - (void)notificationRegEvent:(NSNotification *)notification {
@@ -486,6 +573,21 @@
         return;
     }
     NSLog(@"登录成功");
+}
+
+- (void)shareWorkOrder {
+    UIGraphicsBeginImageContext(self.view.bounds.size); //currentView当前的view
+
+    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+
+    UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
+
+    UIGraphicsEndImageContext();
+
+    UIImageWriteToSavedPhotosAlbum(viewImage, nil, nil, nil);
+
+    [self.view makeToast:@"保存成功!"];
+
 }
 
 // 检查权限
@@ -601,21 +703,6 @@
 
 -(void) requestCameraAuth {
     [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {}];
-}
-
-// 登录成功后保存设备信息
-- (void)saveDevInfo {
-    NSString *devToken = [UserModel shareInstance].devToken;
-    NSString *uid = [UserModel shareInstance].uid;
-    if (devToken.length > 0 && uid.length > 0) {
-        NSDictionary *param = @{@"uid": uid, @"loginUid": uid, @"devToken": devToken, @"devType": @"1"};
-        NSString *url = @"http://58.220.201.130:12383/zlw/data/thirdPart/saveDevInfo";
-        [[HttpManager shareInstance] getRequestWithUrl:url andParam:param andHeaders:nil andSuccess:^(id responseObject) {
-                NSLog(@"关联设备成功: %@", responseObject);
-            } andFail:^(id error) {
-                
-            }];
-    }
 }
 
 - (UserModel *) userInfo {

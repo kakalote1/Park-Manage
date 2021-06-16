@@ -28,6 +28,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "AudioMeetingViewController.h"
 #import "VideoMeetingViewController.h"
+#import "UIView+Toast.h"
 
 @interface AppDelegate () <XGPushDelegate, CLLocationManagerDelegate>
 
@@ -60,11 +61,11 @@ NSString *strlongitude;//纬度
     
     [self startLocation];
     
-    NSFileManager *filemanager = [NSFileManager defaultManager];
-    NSString *filePath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject;
-    NSString *plistPath = [filePath stringByAppendingPathComponent:@"userinfo.plist"];
-    
-    [filemanager createFileAtPath:plistPath contents:nil attributes:nil];
+//    NSFileManager *filemanager = [NSFileManager defaultManager];
+//    NSString *filePath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject;
+//    NSString *plistPath = [filePath stringByAppendingPathComponent:@"userinfo.plist"];
+//
+//    [filemanager createFileAtPath:plistPath contents:nil attributes:nil];
     
     [[HttpManager shareInstance]postRequestWithUrl:@"https://service.yzyby2018.com/jiekou/common-api/common/login/getAccessToken" andParam:@{
         @"source": @"APP"} andHeaders:nil andSuccess:^(id responseObject) {
@@ -72,14 +73,15 @@ NSString *strlongitude;//纬度
         NSString *str = responseObject[@"data"];
         NSLog(@"accessToken: %@",str);
         if (str.length > 0 && ![str isEqualToString:@"null"]) {
-            NSDictionary *dic = @{@"accessToken":str};
-            [dic writeToFile:plistPath atomically:YES];
-            NSLog(@"%@",dic);
-            NSDictionary *dic2 = [NSDictionary dictionaryWithContentsOfFile:plistPath];
-            NSLog(@"asdasdas");
-            NSLog(@"1: %@\n%@",[dic2 objectForKey:@"accessToken"],filePath);
+//            NSDictionary *dic = @{@"accessToken":str};
+//            [dic writeToFile:plistPath atomically:YES];
+//            NSLog(@"%@",dic);
+//            NSDictionary *dic2 = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+//            NSLog(@"asdasdas");
+//            NSLog(@"1: %@\n%@",[dic2 objectForKey:@"accessToken"],filePath);
             NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
             [user setObject:str forKey:@"accessToken"];
+            NSLog(@"accessToken UserDefault: %@", [user objectForKey:@"accessToken"]);
         } else {
             UIAlertController *alter = [UIAlertController alertControllerWithTitle:@"提示" message:@"服务异常，请稍后重试" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
@@ -92,14 +94,7 @@ NSString *strlongitude;//纬度
         }
             
     } andFail:^(id error) {
-        UIAlertController *alter = [UIAlertController alertControllerWithTitle:@"提示" message:@"服务异常，请稍后重试" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-           NSLog(@"确定");
-        }];
-        [alter addAction:cancelAction];
-        [alter addAction:okAction];
-        [self.navigationController presentViewController:alter animated:YES completion:nil];
+        [self.window makeToast:@"网络异常，请稍后重试"];
             }];
 
     self.userInfo = [UserModel shareInstance];
@@ -132,63 +127,6 @@ NSString *strlongitude;//纬度
 
     loginVc.navigationController.navigationBarHidden = YES;
     self.navigationController = (UINavigationController *) self.window.rootViewController;
-    
-//    创建控制器
-//    TabFirst* tabFirst = [[TabFirst alloc] init];
-//    UINavigationController * nav1 = [[UINavigationController alloc]initWithRootViewController:tabFirst];
-//    nav1.navigationBar.barTintColor = [UIColor whiteColor];
-//
-//
-//    TabSecond* tabSecond = [[TabSecond alloc] init];
-//    UINavigationController * nav2 = [[UINavigationController alloc]initWithRootViewController:tabSecond];
-//    nav2.navigationBar.barTintColor = [UIColor whiteColor];
-//
-//    TabThird* tabThird = [[TabThird alloc] init];
-//    UINavigationController * nav3 = [[UINavigationController alloc]initWithRootViewController:tabThird];
-//    nav3.navigationBar.barTintColor = [UIColor whiteColor];
-//
-//    TabFourth* tabFourth = [[TabFourth alloc] init];
-//    UINavigationController * nav4 = [[UINavigationController alloc]initWithRootViewController:tabFourth];
-//    nav4.navigationBar.barTintColor = [UIColor whiteColor];
-//
-//    WebViewController *routeController = [[WebViewController alloc] init];
-//    UINavigationController * nav5 = [[UINavigationController alloc] initWithRootViewController:routeController];
-//    nav5.navigationBar.barTintColor = [UIColor whiteColor];
-//
-//
-//    tabFirst.title = @"工作台";
-//    tabSecond.title = @"消息";
-//    tabThird.title = @"通讯录";
-//    tabFourth.title = @"个人中心";
-//
-//
-//    tabFirst.navigationController.navigationBarHidden = YES;
-//    tabSecond.navigationController.navigationBarHidden = YES;
-//    tabThird.navigationController.navigationBarHidden = YES;
-//    tabFourth.navigationController.navigationBarHidden = YES;
-//    
-//    tabFirst.view.backgroundColor = [UIColor whiteColor];
-//    tabSecond.view.backgroundColor = [UIColor yellowColor];
-//    tabThird.view.backgroundColor = [UIColor blueColor];
-//    tabFourth.view.backgroundColor = [UIColor blueColor];
-    
-//    //创建分栏控制器
-//    UITabBarController* tbController = [[UITabBarController alloc] init];
-//
-//    //创建一个控制器数组对象
-//    //将所有的要被分栏控制器管理的对象添加到数组中
-//    NSArray* arrayVC = [NSArray arrayWithObjects:nav1,
-//                        nav2,
-//                        nav3,
-//                        nav4, nil];
-//    //将分栏视图控制器管理数组赋值
-//    tbController.viewControllers = arrayVC;
-//
-//    //将分栏控制器作为根视图控制器
-//    self.window.rootViewController = tbController;
-//
-//    //设置分栏控制器的透明度
-//    tbController.tabBar.translucent = NO;
 
     return YES;
 }
@@ -481,6 +419,7 @@ NSString *strlongitude;//纬度
     
     [self.userInfo setLatitude:latitude];
     [self.userInfo setLongitude:longitude];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"updateLocation" object:self userInfo:nil];
     //反地理编码
     [geoCoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error)
     {

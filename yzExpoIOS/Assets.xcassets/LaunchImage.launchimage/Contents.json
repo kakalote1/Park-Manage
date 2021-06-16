@@ -47,6 +47,7 @@
     },
     {
       "extent" : "full-screen",
+      "filename" : "2x.png",
       "idiom" : "iphone",
       "minimum-system-version" : "7.0",
       "orientation" : "portrait",
@@ -54,6 +55,7 @@
     },
     {
       "extent" : "full-screen",
+      "filename" : "iphone5.png",
       "idiom" : "iphone",
       "minimum-system-version" : "7.0",
       "orientation" : "portrait",

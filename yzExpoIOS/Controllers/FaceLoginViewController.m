@@ -10,6 +10,12 @@
 #import <AVFoundation/AVFoundation.h>
 #import "Constants.h"
 
+//是否iPhoneX YES:iPhoneX屏幕 NO:传统屏幕
+#define kIs_iPhoneX ([UIScreen mainScreen].bounds.size.height == 812.0f ||[UIScreen mainScreen].bounds.size.height == 896.0f ||[UIScreen mainScreen].bounds.size.height == 844.0f ||[UIScreen mainScreen].bounds.size.height == 926.0f)
+
+#define kStatusBarAndNavigationBarHeight (kIs_iPhoneX ? 44.f : 20.f)
+
+
 typedef NS_ENUM(NSInteger, AVCamSetupResult) {
     AVCamSetupResultSuccess,
     AVCamSetupResultCameraNotAuthorized,
@@ -78,6 +84,23 @@ typedef NS_ENUM(NSInteger, AVCamSetupResult) {
     self.textLabel.textAlignment = NSTextAlignmentCenter;
     self.textLabel.font = [UIFont systemFontOfSize:25];
     [self.view addSubview:self.textLabel];
+    NSString *version = [UIDevice currentDevice].systemVersion;
+    if (version.doubleValue < 13.0f) {
+        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, kStatusBarAndNavigationBarHeight, 60, 40)];
+        [button setTitle:@"返回" forState:UIControlStateNormal];
+        button.titleLabel.font = [UIFont systemFontOfSize:15];
+        [button setImage:[UIImage imageNamed:@"btn_back_normal"] forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(dismissView:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:button];
+        UISwipeGestureRecognizer *down = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(dismissView:)];
+           down.direction=UISwipeGestureRecognizerDirectionDown;
+           [self.view addGestureRecognizer:down];
+    }
+
+}
+
+- (void)dismissView :(UIButton *) button {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark --- 创建UI界面
@@ -214,7 +237,14 @@ typedef NS_ENUM(NSInteger, AVCamSetupResult) {
     [self.session startRunning];
     
     UIButton *takeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    NSString *version = [UIDevice currentDevice].systemVersion;
+
+    
     takeButton.frame = CGRectMake((self.view.frame.size.width - 70)/2, self.view.frame.size.height - 250, 70, 70);
+    
+    if (version.doubleValue < 13.0f) {
+        takeButton.frame = CGRectMake((self.view.frame.size.width - 70)/2, self.view.frame.size.height * 0.7f, 70, 70);
+    }
     takeButton.layer.masksToBounds = YES;
 //    takeButton.layer.cornerRadius = takeButton.frame.size.height/2;
     takeButton.backgroundColor = [UIColor clearColor];

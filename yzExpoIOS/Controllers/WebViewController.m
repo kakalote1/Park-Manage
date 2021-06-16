@@ -40,7 +40,32 @@
     [super viewDidLoad];
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    UIScreenEdgePanGestureRecognizer *screenEdgePan =  [[UIScreenEdgePanGestureRecognizer alloc]initWithTarget:self action:@selector(action:)];
+    screenEdgePan.edges = UIRectEdgeLeft;
+    [self.view addGestureRecognizer:screenEdgePan];
 
+}
+
+-(void)action:(UIScreenEdgePanGestureRecognizer*)sender{
+    if (sender.edges == UIRectEdgeLeft) {
+        NSLog(@"正在从左边滑动");
+        switch (sender.state) {
+            case UIGestureRecognizerStateBegan:
+                NSLog(@"手势开始");
+                break;
+            case UIGestureRecognizerStateChanged:
+                NSLog(@"手势进行中");
+                break;
+            case UIGestureRecognizerStateEnded:
+                NSLog(@"手势结束");
+                [self.navigationController popViewControllerAnimated:YES];
+                break;
+                
+            default:
+                break;
+        }
+        
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated{

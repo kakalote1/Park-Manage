@@ -86,13 +86,11 @@
             [self.muteBtn setBackgroundImage:[UIImage imageNamed:@"mutemeeting_hover"] forState:UIControlStateNormal];
         NSLog(@"member tel : %@", self.member);
     [self.delegate member:self.member.tel audience:self.member.audience];
-            
         } else {
             [self.muteBtn setBackgroundImage:[UIImage imageNamed:@"muteGroup"] forState:UIControlStateNormal];
             [self.delegate member:self.member.tel audience:self.member.audience];
 
         }
-
     }
 }
 
