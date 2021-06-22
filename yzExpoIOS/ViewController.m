@@ -35,6 +35,8 @@
 @property (nonatomic, strong) UserModel *userInfo;
 @property (nonatomic, strong) AVPlayerViewController *avPlayerVc;
 @property (nonatomic, strong) AVPlayerItem *avPlayerItem;
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
+
 
 @end
 
@@ -63,7 +65,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(updateLocation:) name:@"updateLocaltion" object:nil];
     if (kIs_iPhoneX) {
@@ -94,6 +95,7 @@
             }];
     }
     [self initWebView];
+    [self.activityIndicator startAnimating];
 
 }
 
@@ -204,7 +206,8 @@
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
 //    关闭欢迎图片
     self.iv.hidden = YES;
-    
+    [self.activityIndicator stopAnimating];
+
     NSString *uid = [[NSUserDefaults standardUserDefaults] objectForKey:@"uid"];
     NSLog(@"js uid : %@", uid);
     // 将分享结果返回给js
@@ -710,5 +713,26 @@
         _userInfo = [UserModel shareInstance];
     }
     return _userInfo;
+}
+
+#pragma mark - 小菊花
+- (UIActivityIndicatorView *)activityIndicator {
+    if (!_activityIndicator) {
+        _activityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:(UIActivityIndicatorViewStyleWhiteLarge)];
+        _activityIndicator.frame = CGRectMake(0, 0, 100.0f, 100.0f);
+          //设置小菊花的frame
+        _activityIndicator.center = self.view.center;
+          //设置小菊花颜色
+//          _activityIndicator.color = [UIColor redColor];
+          //设置背景颜色
+        _activityIndicator.backgroundColor = [UIColor colorWithWhite:0.33 alpha:0.9];        _activityIndicator.layer.cornerRadius = 10.0f;
+        _activityIndicator.hidesWhenStopped = YES;
+          //刚进入这个界面会显示控件，并且停止旋转也会显示，只是没有在转动而已，没有设置或者设置为YES的时候，刚进入页面不会显示
+//          _activityIndicator.hidesWhenStopped = NO;
+        [self.view addSubview:_activityIndicator];
+    }
+
+    return _activityIndicator;
+  
 }
 @end

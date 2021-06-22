@@ -134,6 +134,7 @@
 		FE2358FB25CF8996008C8280 /* UIView+Toast.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+Toast.m"; sourceTree = "<group>"; };
 		FE2DFFDA25EC95A7006FF01F /* ScPoc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScPoc.framework; path = "../../Library/Developer/Xcode/DerivedData/yzExpoIOS-cetntlaslizrjzbialxwrdrppcbg/Build/Products/Release-iphoneos/ScPoc.framework"; sourceTree = "<group>"; };
 		FE4B4C5925F5F7D300409335 /* ScPoc.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = ScPoc.xcframework; sourceTree = "<group>"; };
+		FE4CAE14268039EB00843841 /* yzExpoIOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "yzExpoIOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		FE50798C25FEF6850013FFCB /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		FE50798D25FEF6850013FFCB /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		FE50798F25FF09700013FFCB /* TPNSInAppMessage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TPNSInAppMessage.framework; path = TPNS/InAppMessage/TPNSInAppMessage.framework; sourceTree = "<group>"; };
@@ -250,6 +251,7 @@
 				5FC66B642589E26300312A87 /* TabThird.m */,
 				5F508DD62592E449004A0D64 /* TabFourth.h */,
 				5F508DD72592E449004A0D64 /* TabFourth.m */,
+				FE4CAE14268039EB00843841 /* yzExpoIOS-Bridging-Header.h */,
 			);
 			path = yzExpoIOS;
 			sourceTree = "<group>";
@@ -458,6 +460,7 @@
 				TargetAttributes = {
 					150C8C73229CCFE1004E9B1C = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1250;
 					};
 				};
 			};
@@ -646,10 +649,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = yzExpoIOS/yzExpoIOS.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Yangzhou Yuanbo Investment Development Co., Ltd. (KZW9D97FJ7)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = KZW9D97FJ7;
 				ENABLE_BITCODE = NO;
 				EXCLUDED_ARCHS = "";
@@ -688,6 +692,8 @@
 				PROVISIONING_PROFILE_SPECIFIER = yzExpo;
 				REEXPORTED_LIBRARY_PATHS = "";
 				SUPPORTS_MACCATALYST = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "yzExpoIOS/yzExpoIOS-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_WORKSPACE = YES;
 			};

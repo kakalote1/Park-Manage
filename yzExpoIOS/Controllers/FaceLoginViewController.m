@@ -69,6 +69,7 @@ typedef NS_ENUM(NSInteger, AVCamSetupResult) {
 @implementation FaceLoginViewController
 
 - (void)viewDidLoad {
+    NSLog(@"[UIScreen mainScreen].bounds.size.height: %f", [UIScreen mainScreen].bounds.size.height);
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
@@ -298,7 +299,7 @@ typedef NS_ENUM(NSInteger, AVCamSetupResult) {
 
     // 有人脸数据
     if ([self.code  isEqual: @"0"]) {
-        NSString *url = [FACE_LOGIN_URL stringByAppendingFormat:@"%@", accessToken];;
+        NSString *url = [FACE_LOGIN_URL stringByAppendingFormat:@"%@", accessToken];
         NSDictionary *param = @{@"GroupIds" : @[@"yzExpo-App"] , @"Image": image_base64};
         [[HttpManager shareInstance] postRequestWithUrl:url andParam:param andHeaders:nil andSuccess:^(id responseObject) {
             NSDictionary *data = responseObject[@"data"];
@@ -366,6 +367,7 @@ typedef NS_ENUM(NSInteger, AVCamSetupResult) {
     if (!self.code) {
         self.code = [NSString new];
     }
+    
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     NSString *accessToken = [user objectForKey:@"accessToken"];
     NSString *url = [FACE_INFO_URL stringByAppendingFormat:@"%@", accessToken];
@@ -375,6 +377,7 @@ typedef NS_ENUM(NSInteger, AVCamSetupResult) {
     NSDictionary *param = @{@"uid" : uid};
     [[HttpManager shareInstance] postRequestWithUrl:url andParam:param andHeaders:nil andSuccess:^(id responseObject) {
             NSInteger errorcode = [responseObject[@"errorcode"] integerValue];
+        NSLog(@"errorcode: %@", responseObject);
             if (errorcode == 0) {
                 NSInteger ret = [responseObject[@"ret"] integerValue];
                 NSLog(@"ret: %@", responseObject[@"ret"]);
@@ -386,11 +389,17 @@ typedef NS_ENUM(NSInteger, AVCamSetupResult) {
                     self.code = @"1";
                     [self.view makeToast:@"您还没有录入人脸"];
                 }
+            } else {
+                [self dismissViewControllerAnimated:YES completion:^{
+                                [self.view makeToast:@"人脸识别异常，请稍后重试"];
+                }];
             }
             
         } andFail:^(id error) {
             self.code = @"2";
-            [self.view makeToast:@"暂时无法进行人脸识别"];
+            [self dismissViewControllerAnimated:YES completion:^{
+                            [self.view makeToast:@"请重新登录"];
+            }];
         }];
     NSLog(@"asdkjnqwdj: %@", self.code);
 }

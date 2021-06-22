@@ -271,6 +271,7 @@ alpha:1.0]
 
 -(void)login:(UIButton *)sender {
     [self.activityIndicator startAnimating];
+
     NSString *username = self.usernameField.text;
     NSString *password = self.passwordField.text;
     NSLog(@"用户名: %@, 密码: %@", username, password);

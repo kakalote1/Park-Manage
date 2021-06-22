@@ -67,7 +67,7 @@ NSString *strlongitude;//纬度
 //
 //    [filemanager createFileAtPath:plistPath contents:nil attributes:nil];
     
-    [[HttpManager shareInstance]postRequestWithUrl:@"https://service.yzyby2018.com/jiekou/common-api/common/login/getAccessToken" andParam:@{
+    [[HttpManager shareInstance] postRequestWithUrl:@"https://service.yzyby2018.com/jiekou/common-api/common/login/getAccessToken" andParam:@{
         @"source": @"APP"} andHeaders:nil andSuccess:^(id responseObject) {
         NSLog(@"获取成功：%@", responseObject);
         NSString *str = responseObject[@"data"];
