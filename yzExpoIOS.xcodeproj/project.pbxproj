@@ -38,7 +38,6 @@
 		FE2358F725CF7A6E008C8280 /* CallKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE2358F525CF7A29008C8280 /* CallKit.framework */; };
 		FE2358F825CF7A73008C8280 /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE2358F625CF7A35008C8280 /* PushKit.framework */; };
 		FE2358FC25CF8996008C8280 /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = FE2358FB25CF8996008C8280 /* UIView+Toast.m */; };
-		FE2DFFDB25EC95A7006FF01F /* ScPoc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE2DFFDA25EC95A7006FF01F /* ScPoc.framework */; };
 		FE50798E25FEF6850013FFCB /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE50798D25FEF6850013FFCB /* LoginViewController.m */; };
 		FE50799025FF09700013FFCB /* TPNSInAppMessage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE50798F25FF09700013FFCB /* TPNSInAppMessage.framework */; };
 		FE50799225FF09CA0013FFCB /* libXG-SDK-Cloud.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AC2C28E49FA7AC42C85BDE /* libXG-SDK-Cloud.a */; };
@@ -50,9 +49,9 @@
 		FE999C4D2602EF04003F2239 /* FaceLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE999C4C2602EF04003F2239 /* FaceLoginViewController.m */; };
 		FE999C5126083C6D003F2239 /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FE999C5026083C6C003F2239 /* UserModel.m */; };
 		FEA3EB312621EFCC00873539 /* VideoMeetingCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FEA3EB302621EFCC00873539 /* VideoMeetingCollectionViewCell.m */; };
-		FEA8AB0E26155A4E006EDE41 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEA8AB0D26155A4D006EDE41 /* CoreLocation.framework */; };
 		FEB4FBFA2615A65B000C242C /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FEB4FBF92615A65B000C242C /* WebViewController.m */; };
 		FEB4FBFD261C460E000C242C /* AudioMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FEB4FBFC261C460E000C242C /* AudioMeetingViewController.m */; };
+		FEC2AED826A7F31B00A4F321 /* ScPoc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE2DFFDA25EC95A7006FF01F /* ScPoc.framework */; };
 		FED31A23262037C500E82B52 /* VideoMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FED31A22262037C500E82B52 /* VideoMeetingViewController.m */; };
 		FED31A262620413C00E82B52 /* MeetingMember.m in Sources */ = {isa = PBXBuildFile; fileRef = FED31A252620413C00E82B52 /* MeetingMember.m */; };
 		FED31A38262051C300E82B52 /* AudioMeetingCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FED31A37262051C300E82B52 /* AudioMeetingCollectionViewCell.m */; };
@@ -158,6 +157,7 @@
 		FEB4FBFB261C460E000C242C /* AudioMeetingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioMeetingViewController.h; sourceTree = "<group>"; };
 		FEB4FBFC261C460E000C242C /* AudioMeetingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioMeetingViewController.m; sourceTree = "<group>"; };
 		FEBB350E25DFCADF00C41A7B /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		FEC2AEDA26A7F36C00A4F321 /* libc++abi.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++abi.tbd"; path = "usr/lib/libc++abi.tbd"; sourceTree = SDKROOT; };
 		FED31A21262037C500E82B52 /* VideoMeetingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoMeetingViewController.h; sourceTree = "<group>"; };
 		FED31A22262037C500E82B52 /* VideoMeetingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoMeetingViewController.m; sourceTree = "<group>"; };
 		FED31A242620413B00E82B52 /* MeetingMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeetingMember.h; sourceTree = "<group>"; };
@@ -173,7 +173,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FEA8AB0E26155A4E006EDE41 /* CoreLocation.framework in Frameworks */,
 				FE50799325FF09EC0013FFCB /* XGMTACloud.framework in Frameworks */,
 				153C8B07229E52B80042CDCE /* libc++.1.dylib in Frameworks */,
 				153C8B05229E529A0042CDCE /* libsqlite3.dylib in Frameworks */,
@@ -182,8 +181,8 @@
 				FE2358F825CF7A73008C8280 /* PushKit.framework in Frameworks */,
 				FE2358E025CE8D66008C8280 /* Bugly.framework in Frameworks */,
 				153C8AFF229E51F80042CDCE /* CFNetwork.framework in Frameworks */,
+				FEC2AED826A7F31B00A4F321 /* ScPoc.framework in Frameworks */,
 				FE50799225FF09CA0013FFCB /* libXG-SDK-Cloud.a in Frameworks */,
-				FE2DFFDB25EC95A7006FF01F /* ScPoc.framework in Frameworks */,
 				FE999C41260098E5003F2239 /* ScPoc.xcframework in Frameworks */,
 				153C8AFD229E51F00042CDCE /* CoreTelephony.framework in Frameworks */,
 				FE2358F725CF7A6E008C8280 /* CallKit.framework in Frameworks */,
@@ -277,6 +276,7 @@
 		2769C1D52D81F1288D212326 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FEC2AEDA26A7F36C00A4F321 /* libc++abi.tbd */,
 				FEA8AB0D26155A4D006EDE41 /* CoreLocation.framework */,
 				FE50798F25FF09700013FFCB /* TPNSInAppMessage.framework */,
 				FE2DFFDA25EC95A7006FF01F /* ScPoc.framework */,
@@ -651,9 +651,9 @@
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = yzExpoIOS/yzExpoIOS.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Yangzhou Yuanbo Investment Development Co., Ltd. (KZW9D97FJ7)";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = KZW9D97FJ7;
 				ENABLE_BITCODE = NO;
 				EXCLUDED_ARCHS = "";
@@ -680,7 +680,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/TPNS",
 				);
-				MARKETING_VERSION = 1.7;
+				MARKETING_VERSION = 1.9.1;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				OTHER_LDFLAGS = (
@@ -689,7 +689,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.data.yzExpo;
 				PRODUCT_NAME = "扬州世园会";
-				PROVISIONING_PROFILE_SPECIFIER = yzExpo;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				REEXPORTED_LIBRARY_PATHS = "";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "yzExpoIOS/yzExpoIOS-Bridging-Header.h";

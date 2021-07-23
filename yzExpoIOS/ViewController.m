@@ -79,7 +79,8 @@
         [[self getSipContext] loginWithUid:uid host:ip port:portNum tls:true];
         [[self getSipContext].settings setVideoTransUseUdp: FALSE];
         [[self getSipContext].settings setQosPrefVideoSize:2];
-        [[self getSipContext].settings setVideoEncoderBitrate:1200];
+        [[self getSipContext].settings setVideoEncoderBitrate:1500];
+        [[self getSipContext].settings setVideoEncoderFps:15];
     }
   
 
@@ -587,10 +588,18 @@
 
     UIGraphicsEndImageContext();
 
-    UIImageWriteToSavedPhotosAlbum(viewImage, nil, nil, nil);
+//    UIImageWriteToSavedPhotosAlbum(viewImage, nil, nil, nil);
 
+    UIImageWriteToSavedPhotosAlbum(viewImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    
+//    [self.view makeToast:@"保存成功!"];
+
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
     [self.view makeToast:@"保存成功!"];
-
+    NSLog(@"image = %@, error = %@, contextInfo = %@", image, error, contextInfo);
 }
 
 // 检查权限

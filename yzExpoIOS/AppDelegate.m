@@ -38,7 +38,12 @@ CLLocationManager *locationmanager;//定位服务
 NSString *strlatitude;//经度
 
 NSString *strlongitude;//纬度
+    
+    SystemSoundID soundID;
 }
+
+@property(nonatomic, strong) AVAudioPlayer *audioPlayer;
+
 
 @property (strong, nonatomic) AFHTTPSessionManager *sessionManager;
 
@@ -231,6 +236,43 @@ NSString *strlongitude;//纬度
     NSLog(@"登录：code[%d] reason[%@]", event.code, event.reason);
 }
 
+-(void)createSystemSoundWithName:(NSString *)soundName soundType:(NSString *)soundType
+{
+    NSString *path = [NSString stringWithFormat:@"/System/Library/Audio/UISounds/%@.%@",soundName,soundType];
+if (path) {
+              AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL fileURLWithPath:path], &soundID);
+  AudioServicesPlaySystemSound(soundID);
+
+  }
+}
+
+- (void) shoudStartRing {
+    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+    //默认情况按静音或者锁屏键会静音
+    [audioSession setCategory:AVAudioSessionCategorySoloAmbient error:nil];
+    [audioSession setActive:YES error:nil];
+        NSString *path = [[NSBundle mainBundle] resourcePath];
+        NSString *filePath = [NSString stringWithFormat:@"%@/%@",path, @"Resource.bundle/ring.caf"];
+        NSURL *mp3Url = [NSURL fileURLWithPath:filePath];
+    NSURL *url = [[NSBundle mainBundle] URLForResource:@"ring" withExtension:@"mp3"];
+    NSError *error = nil;
+    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:mp3Url error:&error];
+    if (!error) {
+        self.audioPlayer.numberOfLoops = -1;
+        self.audioPlayer.volume = 1.0;
+        [self.audioPlayer prepareToPlay];
+        [self.audioPlayer play];
+    }
+}
+
+- (void)shouldStopRing {
+    if (self.audioPlayer) {
+        [self.audioPlayer stop];
+        self.audioPlayer = nil;
+        [[AVAudioSession sharedInstance] setActive:NO withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];
+    }
+}
+
 // 处理呼叫事件通知
 - (void)handleInviteEventNotify: (NSNotification *)notification {
     SipInviteEvent *event = [notification object];
@@ -254,6 +296,7 @@ NSString *strlongitude;//纬度
             // 呼出正在处理
         case INPROGRESS:
             [[IphoneControl shareInstance] startRing];
+            [self shoudStartRing];
             [[IphoneControl shareInstance] startVibrator];
             if ([sipSession isMeeting]) {
                 [self showMeetingView:sipSession];
@@ -268,6 +311,7 @@ NSString *strlongitude;//纬度
             // 建立通话中
         case CONNECTING:
             [[IphoneControl shareInstance] stopRing];
+            [self shouldStopRing];
             [[IphoneControl shareInstance] stopVibrator];
             NSLog(@"建立通话中");
             break;
@@ -279,6 +323,7 @@ NSString *strlongitude;//纬度
         case TERMINATED:
             // 移除当前通话的session
             [[IphoneControl shareInstance] stopRing];
+            [self shouldStopRing];
             [[IphoneControl shareInstance] stopVibrator];
 //            [[SipContext sharedInstance] removeCurrentSession];
             NSLog(@"通话结束");
@@ -320,8 +365,10 @@ NSString *strlongitude;//纬度
             AudioMeetingViewController *audioVc = [[AudioMeetingViewController alloc] init];
             vc = audioVc;
         }
+        dispatch_async(dispatch_get_main_queue(), ^{
         vc.modalPresentationStyle = UIModalPresentationFullScreen;
         [self.navigationController presentViewController:vc animated:YES completion:nil];
+        });
     });
 }
 

@@ -38,7 +38,7 @@
 
 
 
-// relesde
+// release
 #define WEB_URL @"https://oss.yzyby2018.com/"
 #define LOGIN_URL @"https://oss.yzyby2018.com/usrv/user/admin/auth-by-account?access_token="
 #define USER_INFO_URL @"https://oss.yzyby2018.com/usrv/user/admin/detail-by-username?access_token="
