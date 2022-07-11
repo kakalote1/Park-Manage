@@ -1,0 +1,260 @@
+2021-03-31 07:55:55 +0000  Initial pipeline context: <IDEDistributionProcessingPipelineContext: 0x7fefe6ce3ae0; archive(resolved)='<IDEArchive: 0x7fefede80430>', distributionTask(resolved)='2', distributionDestination(resolved)='1', distributionMethod(resolved)='<IDEDistributionMethodiOSAppStoreDistribution: 0x7feff1775650>', team(resolved)='<IDEProvisioningDisambiguatableBasicTeam: 0x7ff006f4b1e0; teamID='KZW9D97FJ7', teamName='Yangzhou Yuanbo Investment Development Co., Ltd. ', teamType='Company', username='289617014@qq.com', isFreeProvisioningTeam='0'>'>
+	Chain (12, self inclusive):
+	<IDEDistributionProcessingPipelineContext: 0x7fefe6ce3ae0; archive = '<IDEArchive: 0x7fefede80430>', distributionMethod='<IDEDistributionMethodiOSAppStoreDistribution: 0x7feff1775650>', team='<IDEProvisioningDisambiguatableBasicTeam: 0x7ff006f4b1e0; teamID='KZW9D97FJ7', teamName='Yangzhou Yuanbo Investment Development Co., Ltd. ', teamType='Company', username='289617014@qq.com', isFreeProvisioningTeam='0'>'>
+	<IDEDistributionProcessingPipelineContext: 0x7fefda437a40; archive = '<IDEArchive: 0x7fefede80430>', distributionMethod='<IDEDistributionMethodiOSAppStoreDistribution: 0x7feff1775650>', team='<IDEProvisioningDisambiguatableBasicTeam: 0x7ff006f4b1e0; teamID='KZW9D97FJ7', teamName='Yangzhou Yuanbo Investment Development Co., Ltd. ', teamType='Company', username='289617014@qq.com', isFreeProvisioningTeam='0'>'>
+	<IDEDistributionContext: 0x7fefd5b59670; archive = '<IDEArchive: 0x7fefede80430>', distributionMethod='<IDEDistributionMethodiOSAppStoreDistribution: 0x7feff1775650>', team='<IDEProvisioningDisambiguatableBasicTeam: 0x7ff006f4b1e0; teamID='KZW9D97FJ7', teamName='Yangzhou Yuanbo Investment Development Co., Ltd. ', teamType='Company', username='289617014@qq.com', isFreeProvisioningTeam='0'>'>
+	<IDEDistributionContext: 0x7fefd868fa60; archive = '<IDEArchive: 0x7fefede80430>', distributionMethod='<IDEDistributionMethodiOSAppStoreDistribution: 0x7feff1775650>', team='<IDEProvisioningDisambiguatableBasicTeam: 0x7ff006f4b1e0; teamID='KZW9D97FJ7', teamName='Yangzhou Yuanbo Investment Development Co., Ltd. ', teamType='Company', username='289617014@qq.com', isFreeProvisioningTeam='0'>'>
+	<IDEDistributionContext: 0x7feff1aea1d0; archive = '<IDEArchive: 0x7fefede80430>', distributionMethod='<IDEDistributionMethodiOSAppStoreDistribution: 0x7feff1775650>', team='<IDEProvisioningDisambiguatableBasicTeam: 0x7ff006f4b1e0; teamID='KZW9D97FJ7', teamName='Yangzhou Yuanbo Investment Development Co., Ltd. ', teamType='Company', username='289617014@qq.com', isFreeProvisioningTeam='0'>'>
+	<IDEDistributionContext: 0x7fefd4f3a720; archive = '<IDEArchive: 0x7fefede80430>', distributionMethod='<IDEDistributionMethodiOSAppStoreDistribution: 0x7feff1775650>', team='<IDEProvisioningDisambiguatableBasicTeam: 0x7ff006f4b1e0; teamID='KZW9D97FJ7', teamName='Yangzhou Yuanbo Investment Development Co., Ltd. ', teamType='Company', username='289617014@qq.com', isFreeProvisioningTeam='0'>'>
+	<IDEDistributionContext: 0x7fefd773a520; archive = '<IDEArchive: 0x7fefede80430>', distributionMethod='<IDEDistributionMethodiOSAppStoreDistribution: 0x7feff1775650>', team='<IDEProvisioningDisambiguatableBasicTeam: 0x7ff006f4b1e0; teamID='KZW9D97FJ7', teamName='Yangzhou Yuanbo Investment Development Co., Ltd. ', teamType='Company', username='289617014@qq.com', isFreeProvisioningTeam='0'>'>
+	<IDEDistributionContext: 0x7fefd773ccd0; archive = '<IDEArchive: 0x7fefede80430>', distributionMethod='<IDEDistributionMethodiOSAppStoreDistribution: 0x7feff1775650>', team='<IDEProvisioningDisambiguatableBasicTeam: 0x7ff006f4b1e0; teamID='KZW9D97FJ7', teamName='Yangzhou Yuanbo Investment Development Co., Ltd. ', teamType='Company', username='289617014@qq.com', isFreeProvisioningTeam='0'>'>
+	<IDEDistributionContext: 0x7fefeba4c700; archive = '<IDEArchive: 0x7fefede80430>', distributionMethod='<IDEDistributionMethodiOSAppStoreDistribution: 0x7feff1775650>', team='<IDEProvisioningDisambiguatableBasicTeam: 0x7ff006f4b1e0; teamID='KZW9D97FJ7', teamName='Yangzhou Yuanbo Investment Development Co., Ltd. ', teamType='Company', username='289617014@qq.com', isFreeProvisioningTeam='0'>'>
+	<IDEDistributionContext: 0x7fefdb48e2f0; archive = '<IDEArchive: 0x7fefede80430>', distributionMethod='<IDEDistributionMethodiOSAppStoreDistribution: 0x7feff1775650>', team='(null)'>
+	<IDEDistributionContext: 0x7fefdb340bc0; archive = '<IDEArchive: 0x7fefede80430>', distributionMethod='<IDEDistributionMethodiOSAppStoreDistribution: 0x7feff1775650>', team='(null)'>
+	<IDEDistributionContext: 0x7fefed19fb50; archive = '<IDEArchive: 0x7fefede80430>', distributionMethod='(null)', team='(null)'>
+</IDEDistributionProcessingPipelineContext: 0x7fefe6ce3ae0>
+2021-03-31 07:55:55 +0000  Processing step: IDEDistributionCreateDestRootStep
+2021-03-31 07:55:55 +0000  Processing step: IDEDistributionCopyItemStep
+2021-03-31 07:55:55 +0000  Running /usr/bin/ditto '-V' '/Users/bonustrack/Library/Developer/Xcode/Archives/2021-03-31/扬州世园会 2021-3-31, 3.54 PM.xcarchive/Products/Applications/扬州世园会.app' '/var/folders/p2/cxvv7t312r7_0r53kpc0tnj40000gn/T/XcodeDistPipeline.~~~bxzdpy/Root/Payload/扬州世园会.app'
+2021-03-31 07:55:55 +0000  >>> Copying /Users/bonustrack/Library/Developer/Xcode/Archives/2021-03-31/扬州世园会 2021-3-31, 3.54 PM.xcarchive/Products/Applications/扬州世园会.app 
+2021-03-31 07:55:55 +0000  copying file ./_CodeSignature/CodeResources ... 
+2021-03-31 07:55:55 +0000  7673 bytes for ./_CodeSignature/CodeResources
+2021-03-31 07:55:55 +0000  copying file ./LaunchImage-1100-Portrait-2436h@3x.png ... 
+2021-03-31 07:55:55 +0000  1029795 bytes for ./LaunchImage-1100-Portrait-2436h@3x.png
+2021-03-31 07:55:55 +0000  copying file ./AudioCallViewController.nib ... 
+2021-03-31 07:55:55 +0000  5232 bytes for ./AudioCallViewController.nib
+copying file ./AppIcon60x60@2x.png ... 
+2021-03-31 07:55:55 +0000  10223 bytes for ./AppIcon60x60@2x.png
+copying file ./LaunchImage-800-667h@2x.png ... 
+2021-03-31 07:55:55 +0000  412062 bytes for ./LaunchImage-800-667h@2x.png
+copying file ./扬州世园会 ... 
+2021-03-31 07:55:55 +0000  1511904 bytes for ./扬州世园会
+copying file ./LaunchImage-1200-Portrait-2688h@3x.png ... 
+2021-03-31 07:55:55 +0000  1239644 bytes for ./LaunchImage-1200-Portrait-2688h@3x.png
+2021-03-31 07:55:55 +0000  copying file ./Base.lproj/Main.storyboardc/UIViewController-BYZ-38-t0r.nib ... 
+2021-03-31 07:55:55 +0000  916 bytes for ./Base.lproj/Main.storyboardc/UIViewController-BYZ-38-t0r.nib
+copying file ./Base.lproj/Main.storyboardc/BYZ-38-t0r-view-8bC-Xf-vdC.nib ... 
+2021-03-31 07:55:55 +0000  1173 bytes for ./Base.lproj/Main.storyboardc/BYZ-38-t0r-view-8bC-Xf-vdC.nib
+copying file ./Base.lproj/Main.storyboardc/Info.plist ... 
+2021-03-31 07:55:55 +0000  258 bytes for ./Base.lproj/Main.storyboardc/Info.plist
+2021-03-31 07:55:55 +0000  copying file ./Assets.car ... 
+2021-03-31 07:55:55 +0000  856847 bytes for ./Assets.car
+2021-03-31 07:55:55 +0000  copying file ./LaunchImage-800-Portrait-736h@3x.png ... 
+2021-03-31 07:55:55 +0000  1021428 bytes for ./LaunchImage-800-Portrait-736h@3x.png
+copying file ./LaunchImage-1200-Portrait-1792h@2x.png ... 
+2021-03-31 07:55:55 +0000  590620 bytes for ./LaunchImage-1200-Portrait-1792h@2x.png
+2021-03-31 07:55:55 +0000  copying file ./Frameworks/ScPoc.framework/_CodeSignature/CodeResources ... 
+2021-03-31 07:55:55 +0000  2662 bytes for ./Frameworks/ScPoc.framework/_CodeSignature/CodeResources
+2021-03-31 07:55:55 +0000  copying file ./Frameworks/ScPoc.framework/config_auto.h.in ... 
+2021-03-31 07:55:55 +0000  2423 bytes for ./Frameworks/ScPoc.framework/config_auto.h.in
+copying file ./Frameworks/ScPoc.framework/ScPoc ... 
+2021-03-31 07:55:55 +0000  5427456 bytes for ./Frameworks/ScPoc.framework/ScPoc
+copying file ./Frameworks/ScPoc.framework/os_auto.h.in ... 
+2021-03-31 07:55:55 +0000  6222 bytes for ./Frameworks/ScPoc.framework/os_auto.h.in
+copying file ./Frameworks/ScPoc.framework/sip_autoconf.h.in ... 
+2021-03-31 07:55:55 +0000  1441 bytes for ./Frameworks/ScPoc.framework/sip_autoconf.h.in
+copying file ./Frameworks/ScPoc.framework/m_auto.h.in ... 
+2021-03-31 07:55:55 +0000  1800 bytes for ./Frameworks/ScPoc.framework/m_auto.h.in
+copying file ./Frameworks/ScPoc.framework/Info.plist ... 
+2021-03-31 07:55:55 +0000  806 bytes for ./Frameworks/ScPoc.framework/Info.plist
+2021-03-31 07:55:55 +0000  copying file ./Frameworks/AFNetworking.framework/_CodeSignature/CodeResources ... 
+2021-03-31 07:55:55 +0000  1798 bytes for ./Frameworks/AFNetworking.framework/_CodeSignature/CodeResources
+2021-03-31 07:55:55 +0000  copying file ./Frameworks/AFNetworking.framework/AFNetworking ... 
+2021-03-31 07:55:55 +0000  1732448 bytes for ./Frameworks/AFNetworking.framework/AFNetworking
+2021-03-31 07:55:55 +0000  copying file ./Frameworks/AFNetworking.framework/Info.plist ... 
+2021-03-31 07:55:55 +0000  744 bytes for ./Frameworks/AFNetworking.framework/Info.plist
+2021-03-31 07:55:55 +0000  copying file ./embedded.mobileprovision ... 
+2021-03-31 07:55:55 +0000  7516 bytes for ./embedded.mobileprovision
+copying file ./Info.plist ... 
+2021-03-31 07:55:55 +0000  2114 bytes for ./Info.plist
+2021-03-31 07:55:55 +0000  copying file ./PkgInfo ... 
+2021-03-31 07:55:55 +0000  8 bytes for ./PkgInfo
+2021-03-31 07:55:55 +0000  /usr/bin/ditto exited with 0
+2021-03-31 07:55:55 +0000  Processing step: IDEDistributionEmbedProfileStep
+2021-03-31 07:55:55 +0000  Skipping profile for item: <IDEDistributionItem: 0x7feff01eba80; bundleID='com.alamofire.AFNetworking', path='<DVTFilePath:0x7fefee817230:'/Users/bonustrack/Library/Developer/Xcode/Archives/2021-03-31/扬州世园会 2021-3-31, 3.54 PM.xcarchive/Products/Applications/扬州世园会.app/Frameworks/AFNetworking.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fefed786e70; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fefd6d16190; name='iPhone Developer: wei ni (5Z835M4LPS)', hash='A1DB2B2123DB6C6720A88A8823AE1CE23BE9E168', serialNumber='<DVTSigningCertificateSerialNumber: 0x7fefe5296c40>', certificateKinds='(
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-02-01 01:56:30 +0000''>', entitlements='(null)', teamID='KZW9D97FJ7', identifier='com.alamofire.AFNetworking', executablePath='<DVTFilePath:0x7fefd9d9dcf0:'/Users/bonustrack/Library/Developer/Xcode/Archives/2021-03-31/扬州世园会 2021-3-31, 3.54 PM.xcarchive/Products/Applications/扬州世园会.app/Frameworks/AFNetworking.framework/AFNetworking'>', hardenedRuntime='0'>'>
+2021-03-31 07:55:55 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fefd47828d0; bundleID='cn.scooper.ScSip', path='<DVTFilePath:0x7fefd5e35430:'/Users/bonustrack/Library/Developer/Xcode/Archives/2021-03-31/扬州世园会 2021-3-31, 3.54 PM.xcarchive/Products/Applications/扬州世园会.app/Frameworks/ScPoc.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fefed7893a0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fefed4be1c0; name='iPhone Developer: wei ni (5Z835M4LPS)', hash='A1DB2B2123DB6C6720A88A8823AE1CE23BE9E168', serialNumber='<DVTSigningCertificateSerialNumber: 0x7fefef718ec0>', certificateKinds='(
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-02-01 01:56:30 +0000''>', entitlements='(null)', teamID='KZW9D97FJ7', identifier='cn.scooper.ScSip', executablePath='<DVTFilePath:0x7fefd5e6bcd0:'/Users/bonustrack/Library/Developer/Xcode/Archives/2021-03-31/扬州世园会 2021-3-31, 3.54 PM.xcarchive/Products/Applications/扬州世园会.app/Frameworks/ScPoc.framework/ScPoc'>', hardenedRuntime='0'>'>
+2021-03-31 07:55:55 +0000  Processing step: IDEDistributionInfoPlistStep
+2021-03-31 07:55:55 +0000  Skipping step: IDEDistributionInfoPlistStep because it said so
+2021-03-31 07:55:55 +0000  Skipping step: IDEDistributionInfoPlistStep because it said so
+2021-03-31 07:55:55 +0000  Skipping step: IDEDistributionInfoPlistStep because it said so
+2021-03-31 07:55:55 +0000  Processing step: IDEDistributionItemRemovalStep
+2021-03-31 07:55:55 +0000  Processing step: IDEDistributionAppThinningPlistStep
+2021-03-31 07:55:55 +0000  Skipping step: IDEDistributionAppThinningPlistStep because it said so
+2021-03-31 07:55:55 +0000  Processing step: IDEDistributionCompileBitcodeStep
+2021-03-31 07:55:55 +0000  Skipping step: IDEDistributionCompileBitcodeStep because it said so
+2021-03-31 07:55:55 +0000  Processing step: IDEDistributionCodeSlimmingStep
+2021-03-31 07:55:55 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip '/var/folders/p2/cxvv7t312r7_0r53kpc0tnj40000gn/T/XcodeDistPipeline.~~~bxzdpy/Root/Payload/扬州世园会.app/Frameworks/AFNetworking.framework/AFNetworking' '-r' '-o' '/var/folders/p2/cxvv7t312r7_0r53kpc0tnj40000gn/T/XcodeDistPipeline.~~~bxzdpy/Root/Payload/扬州世园会.app/Frameworks/AFNetworking.framework/AFNetworking'
+2021-03-31 07:55:55 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip exited with 0
+2021-03-31 07:55:55 +0000  Processing step: IDEDistributionCopyBCSymbolMapsStep
+2021-03-31 07:55:55 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2021-03-31 07:55:55 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2021-03-31 07:55:55 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2021-03-31 07:55:55 +0000  Processing step: IDEDistributionSymbolsStep
+2021-03-31 07:55:55 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2021-03-31 07:55:55 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2021-03-31 07:55:55 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2021-03-31 07:55:55 +0000  Processing step: IDEDistributionCopyAppleProvidedContentStep
+2021-03-31 07:55:55 +0000  Processing step: IDEDistributionAppThinningStep
+2021-03-31 07:55:55 +0000  Skipping step: IDEDistributionAppThinningStep because it said so
+2021-03-31 07:55:55 +0000  Processing step: IDEDistributionArchThinningStep
+2021-03-31 07:55:55 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/p2/cxvv7t312r7_0r53kpc0tnj40000gn/T/XcodeDistPipeline.~~~bxzdpy/Root/Payload/扬州世园会.app/Frameworks/AFNetworking.framework/AFNetworking' '-verify_arch' 'arm64e'
+2021-03-31 07:55:55 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2021-03-31 07:55:55 +0000  Skipping architecture thinning for item "AFNetworking" because arch "arm64e" wasn't found
+2021-03-31 07:55:55 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/p2/cxvv7t312r7_0r53kpc0tnj40000gn/T/XcodeDistPipeline.~~~bxzdpy/Root/Payload/扬州世园会.app/Frameworks/ScPoc.framework/ScPoc' '-verify_arch' 'arm64e'
+2021-03-31 07:55:55 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2021-03-31 07:55:55 +0000  Skipping architecture thinning for item "ScPoc" because arch "arm64e" wasn't found
+2021-03-31 07:55:55 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/p2/cxvv7t312r7_0r53kpc0tnj40000gn/T/XcodeDistPipeline.~~~bxzdpy/Root/Payload/扬州世园会.app/扬州世园会' '-verify_arch' 'arm64e'
+2021-03-31 07:55:55 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2021-03-31 07:55:55 +0000  Skipping architecture thinning for item "扬州世园会" because arch "arm64e" wasn't found
+2021-03-31 07:55:55 +0000  Processing step: IDEDistributionODRStep
+2021-03-31 07:55:55 +0000  Processing step: IDEDistributionStripXattrsStep
+2021-03-31 07:55:55 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7feff01eba80; bundleID='com.alamofire.AFNetworking', path='<DVTFilePath:0x7fefee817230:'/Users/bonustrack/Library/Developer/Xcode/Archives/2021-03-31/扬州世园会 2021-3-31, 3.54 PM.xcarchive/Products/Applications/扬州世园会.app/Frameworks/AFNetworking.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fefed786e70; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fefed4be1c0; name='iPhone Developer: wei ni (5Z835M4LPS)', hash='A1DB2B2123DB6C6720A88A8823AE1CE23BE9E168', serialNumber='<DVTSigningCertificateSerialNumber: 0x7fefed4d1930>', certificateKinds='(
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-02-01 01:56:30 +0000''>', entitlements='(null)', teamID='KZW9D97FJ7', identifier='com.alamofire.AFNetworking', executablePath='<DVTFilePath:0x7fefd9d9dcf0:'/Users/bonustrack/Library/Developer/Xcode/Archives/2021-03-31/扬州世园会 2021-3-31, 3.54 PM.xcarchive/Products/Applications/扬州世园会.app/Frameworks/AFNetworking.framework/AFNetworking'>', hardenedRuntime='0'>'>
+2021-03-31 07:55:55 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fefd47828d0; bundleID='cn.scooper.ScSip', path='<DVTFilePath:0x7fefd5e35430:'/Users/bonustrack/Library/Developer/Xcode/Archives/2021-03-31/扬州世园会 2021-3-31, 3.54 PM.xcarchive/Products/Applications/扬州世园会.app/Frameworks/ScPoc.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fefed7893a0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fefed4be1c0; name='iPhone Developer: wei ni (5Z835M4LPS)', hash='A1DB2B2123DB6C6720A88A8823AE1CE23BE9E168', serialNumber='<DVTSigningCertificateSerialNumber: 0x7fefed44e9a0>', certificateKinds='(
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-02-01 01:56:30 +0000''>', entitlements='(null)', teamID='KZW9D97FJ7', identifier='cn.scooper.ScSip', executablePath='<DVTFilePath:0x7fefd5e6bcd0:'/Users/bonustrack/Library/Developer/Xcode/Archives/2021-03-31/扬州世园会 2021-3-31, 3.54 PM.xcarchive/Products/Applications/扬州世园会.app/Frameworks/ScPoc.framework/ScPoc'>', hardenedRuntime='0'>'>
+2021-03-31 07:55:55 +0000  Running /usr/bin/xattr '-crs' '/var/folders/p2/cxvv7t312r7_0r53kpc0tnj40000gn/T/XcodeDistPipeline.~~~bxzdpy/Root/Payload/扬州世园会.app'
+2021-03-31 07:55:56 +0000  /usr/bin/xattr exited with 0
+2021-03-31 07:55:56 +0000  Processing step: IDEDistributionCodesignStep
+2021-03-31 07:55:56 +0000  Entitlements for <IDEDistributionItem: 0x7feff01eba80; bundleID='com.alamofire.AFNetworking', path='<DVTFilePath:0x7fefee817230:'/Users/bonustrack/Library/Developer/Xcode/Archives/2021-03-31/扬州世园会 2021-3-31, 3.54 PM.xcarchive/Products/Applications/扬州世园会.app/Frameworks/AFNetworking.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fefed786e70; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fefef17fff0; name='iPhone Developer: wei ni (5Z835M4LPS)', hash='A1DB2B2123DB6C6720A88A8823AE1CE23BE9E168', serialNumber='<DVTSigningCertificateSerialNumber: 0x7fefe944f590>', certificateKinds='(
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-02-01 01:56:30 +0000''>', entitlements='(null)', teamID='KZW9D97FJ7', identifier='com.alamofire.AFNetworking', executablePath='<DVTFilePath:0x7fefd9d9dcf0:'/Users/bonustrack/Library/Developer/Xcode/Archives/2021-03-31/扬州世园会 2021-3-31, 3.54 PM.xcarchive/Products/Applications/扬州世园会.app/Frameworks/AFNetworking.framework/AFNetworking'>', hardenedRuntime='0'>'>: {
+}
+2021-03-31 07:55:56 +0000  Entitlements for <IDEDistributionItem: 0x7feff01eba80; bundleID='com.alamofire.AFNetworking', path='<DVTFilePath:0x7fefee817230:'/Users/bonustrack/Library/Developer/Xcode/Archives/2021-03-31/扬州世园会 2021-3-31, 3.54 PM.xcarchive/Products/Applications/扬州世园会.app/Frameworks/AFNetworking.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fefed786e70; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fefd86a7350; name='iPhone Developer: wei ni (5Z835M4LPS)', hash='A1DB2B2123DB6C6720A88A8823AE1CE23BE9E168', serialNumber='<DVTSigningCertificateSerialNumber: 0x7feff0136770>', certificateKinds='(
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-02-01 01:56:30 +0000''>', entitlements='(null)', teamID='KZW9D97FJ7', identifier='com.alamofire.AFNetworking', executablePath='<DVTFilePath:0x7fefd9d9dcf0:'/Users/bonustrack/Library/Developer/Xcode/Archives/2021-03-31/扬州世园会 2021-3-31, 3.54 PM.xcarchive/Products/Applications/扬州世园会.app/Frameworks/AFNetworking.framework/AFNetworking'>', hardenedRuntime='0'>'> are: {
+}
+2021-03-31 07:55:56 +0000  Writing entitlements for <IDEDistributionItem: 0x7feff01eba80; bundleID='com.alamofire.AFNetworking', path='<DVTFilePath:0x7fefee817230:'/Users/bonustrack/Library/Developer/Xcode/Archives/2021-03-31/扬州世园会 2021-3-31, 3.54 PM.xcarchive/Products/Applications/扬州世园会.app/Frameworks/AFNetworking.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fefed786e70; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7feff19704f0; name='iPhone Developer: wei ni (5Z835M4LPS)', hash='A1DB2B2123DB6C6720A88A8823AE1CE23BE9E168', serialNumber='<DVTSigningCertificateSerialNumber: 0x7fefed4492b0>', certificateKinds='(
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-02-01 01:56:30 +0000''>', entitlements='(null)', teamID='KZW9D97FJ7', identifier='com.alamofire.AFNetworking', executablePath='<DVTFilePath:0x7fefd9d9dcf0:'/Users/bonustrack/Library/Developer/Xcode/Archives/2021-03-31/扬州世园会 2021-3-31, 3.54 PM.xcarchive/Products/Applications/扬州世园会.app/Frameworks/AFNetworking.framework/AFNetworking'>', hardenedRuntime='0'>'> to: /var/folders/p2/cxvv7t312r7_0r53kpc0tnj40000gn/T/XcodeDistPipeline.~~~bxzdpy/entitlements~~~2AsIi7
+2021-03-31 07:55:56 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '3C0760F95F49498CB3E13CAEE275A3C11B395009' '--entitlements' '/var/folders/p2/cxvv7t312r7_0r53kpc0tnj40000gn/T/XcodeDistPipeline.~~~bxzdpy/entitlements~~~2AsIi7' '--preserve-metadata=identifier,flags,runtime' '/var/folders/p2/cxvv7t312r7_0r53kpc0tnj40000gn/T/XcodeDistPipeline.~~~bxzdpy/Root/Payload/扬州世园会.app/Frameworks/AFNetworking.framework'
+2021-03-31 07:55:56 +0000  /var/folders/p2/cxvv7t312r7_0r53kpc0tnj40000gn/T/XcodeDistPipeline.~~~bxzdpy/Root/Payload/扬州世园会.app/Frameworks/AFNetworking.framework: signed bundle with Mach-O universal (arm64) [com.alamofire.AFNetworking]
+2021-03-31 07:55:56 +0000  /usr/bin/codesign exited with 0
+2021-03-31 07:55:56 +0000  Entitlements for <IDEDistributionItem: 0x7fefd47828d0; bundleID='cn.scooper.ScSip', path='<DVTFilePath:0x7fefd5e35430:'/Users/bonustrack/Library/Developer/Xcode/Archives/2021-03-31/扬州世园会 2021-3-31, 3.54 PM.xcarchive/Products/Applications/扬州世园会.app/Frameworks/ScPoc.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fefed7893a0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fefee88f440; name='iPhone Developer: wei ni (5Z835M4LPS)', hash='A1DB2B2123DB6C6720A88A8823AE1CE23BE9E168', serialNumber='<DVTSigningCertificateSerialNumber: 0x7fefed46aef0>', certificateKinds='(
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-02-01 01:56:30 +0000''>', entitlements='(null)', teamID='KZW9D97FJ7', identifier='cn.scooper.ScSip', executablePath='<DVTFilePath:0x7fefd5e6bcd0:'/Users/bonustrack/Library/Developer/Xcode/Archives/2021-03-31/扬州世园会 2021-3-31, 3.54 PM.xcarchive/Products/Applications/扬州世园会.app/Frameworks/ScPoc.framework/ScPoc'>', hardenedRuntime='0'>'>: {
+}
+2021-03-31 07:55:56 +0000  Entitlements for <IDEDistributionItem: 0x7fefd47828d0; bundleID='cn.scooper.ScSip', path='<DVTFilePath:0x7fefd5e35430:'/Users/bonustrack/Library/Developer/Xcode/Archives/2021-03-31/扬州世园会 2021-3-31, 3.54 PM.xcarchive/Products/Applications/扬州世园会.app/Frameworks/ScPoc.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fefed7893a0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fefd8f4ddc0; name='iPhone Developer: wei ni (5Z835M4LPS)', hash='A1DB2B2123DB6C6720A88A8823AE1CE23BE9E168', serialNumber='<DVTSigningCertificateSerialNumber: 0x7fefed5a8380>', certificateKinds='(
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-02-01 01:56:30 +0000''>', entitlements='(null)', teamID='KZW9D97FJ7', identifier='cn.scooper.ScSip', executablePath='<DVTFilePath:0x7fefd5e6bcd0:'/Users/bonustrack/Library/Developer/Xcode/Archives/2021-03-31/扬州世园会 2021-3-31, 3.54 PM.xcarchive/Products/Applications/扬州世园会.app/Frameworks/ScPoc.framework/ScPoc'>', hardenedRuntime='0'>'> are: {
+}
+2021-03-31 07:55:56 +0000  Writing entitlements for <IDEDistributionItem: 0x7fefd47828d0; bundleID='cn.scooper.ScSip', path='<DVTFilePath:0x7fefd5e35430:'/Users/bonustrack/Library/Developer/Xcode/Archives/2021-03-31/扬州世园会 2021-3-31, 3.54 PM.xcarchive/Products/Applications/扬州世园会.app/Frameworks/ScPoc.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fefed7893a0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fefec38a180; name='iPhone Developer: wei ni (5Z835M4LPS)', hash='A1DB2B2123DB6C6720A88A8823AE1CE23BE9E168', serialNumber='<DVTSigningCertificateSerialNumber: 0x7feff027f560>', certificateKinds='(
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-02-01 01:56:30 +0000''>', entitlements='(null)', teamID='KZW9D97FJ7', identifier='cn.scooper.ScSip', executablePath='<DVTFilePath:0x7fefd5e6bcd0:'/Users/bonustrack/Library/Developer/Xcode/Archives/2021-03-31/扬州世园会 2021-3-31, 3.54 PM.xcarchive/Products/Applications/扬州世园会.app/Frameworks/ScPoc.framework/ScPoc'>', hardenedRuntime='0'>'> to: /var/folders/p2/cxvv7t312r7_0r53kpc0tnj40000gn/T/XcodeDistPipeline.~~~bxzdpy/entitlements~~~RQUIif
+2021-03-31 07:55:56 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '3C0760F95F49498CB3E13CAEE275A3C11B395009' '--entitlements' '/var/folders/p2/cxvv7t312r7_0r53kpc0tnj40000gn/T/XcodeDistPipeline.~~~bxzdpy/entitlements~~~RQUIif' '--preserve-metadata=identifier,flags,runtime' '/var/folders/p2/cxvv7t312r7_0r53kpc0tnj40000gn/T/XcodeDistPipeline.~~~bxzdpy/Root/Payload/扬州世园会.app/Frameworks/ScPoc.framework'
+2021-03-31 07:55:56 +0000  /var/folders/p2/cxvv7t312r7_0r53kpc0tnj40000gn/T/XcodeDistPipeline.~~~bxzdpy/Root/Payload/扬州世园会.app/Frameworks/ScPoc.framework: replacing existing signature
+2021-03-31 07:55:56 +0000  /var/folders/p2/cxvv7t312r7_0r53kpc0tnj40000gn/T/XcodeDistPipeline.~~~bxzdpy/Root/Payload/扬州世园会.app/Frameworks/ScPoc.framework: signed bundle with Mach-O thin (arm64) [cn.scooper.ScSip]
+2021-03-31 07:55:56 +0000  /usr/bin/codesign exited with 0
+2021-03-31 07:55:56 +0000  Entitlements for <IDEDistributionItem: 0x7fefdb31bf70; bundleID='com.data.yzExpo', path='<DVTFilePath:0x7fefd5ed1b40:'/Users/bonustrack/Library/Developer/Xcode/Archives/2021-03-31/扬州世园会 2021-3-31, 3.54 PM.xcarchive/Products/Applications/扬州世园会.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fefd771f310; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fefec38a180; name='iPhone Developer: wei ni (5Z835M4LPS)', hash='A1DB2B2123DB6C6720A88A8823AE1CE23BE9E168', serialNumber='<DVTSigningCertificateSerialNumber: 0x7fefedb0b3e0>', certificateKinds='(
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-02-01 01:56:30 +0000''>', entitlements='{
+    "application-identifier" = "KZW9D97FJ7.com.data.yzExpo";
+    "aps-environment" = development;
+    "com.apple.developer.team-identifier" = KZW9D97FJ7;
+    "get-task-allow" = 1;
+}', teamID='KZW9D97FJ7', identifier='com.data.yzExpo', executablePath='<DVTFilePath:0x7fefd9d52300:'/Users/bonustrack/Library/Developer/Xcode/Archives/2021-03-31/扬州世园会 2021-3-31, 3.54 PM.xcarchive/Products/Applications/扬州世园会.app/扬州世园会'>', hardenedRuntime='0'>'>: {
+    "application-identifier" = "KZW9D97FJ7.com.data.yzExpo";
+    "aps-environment" = production;
+    "beta-reports-active" = 1;
+    "com.apple.developer.team-identifier" = KZW9D97FJ7;
+    "get-task-allow" = 0;
+}
+2021-03-31 07:55:56 +0000  Entitlements for <IDEDistributionItem: 0x7fefdb31bf70; bundleID='com.data.yzExpo', path='<DVTFilePath:0x7fefd5ed1b40:'/Users/bonustrack/Library/Developer/Xcode/Archives/2021-03-31/扬州世园会 2021-3-31, 3.54 PM.xcarchive/Products/Applications/扬州世园会.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fefd771f310; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7feff19704f0; name='iPhone Developer: wei ni (5Z835M4LPS)', hash='A1DB2B2123DB6C6720A88A8823AE1CE23BE9E168', serialNumber='<DVTSigningCertificateSerialNumber: 0x7fefed4492b0>', certificateKinds='(
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-02-01 01:56:30 +0000''>', entitlements='{
+    "application-identifier" = "KZW9D97FJ7.com.data.yzExpo";
+    "aps-environment" = development;
+    "com.apple.developer.team-identifier" = KZW9D97FJ7;
+    "get-task-allow" = 1;
+}', teamID='KZW9D97FJ7', identifier='com.data.yzExpo', executablePath='<DVTFilePath:0x7fefd9d52300:'/Users/bonustrack/Library/Developer/Xcode/Archives/2021-03-31/扬州世园会 2021-3-31, 3.54 PM.xcarchive/Products/Applications/扬州世园会.app/扬州世园会'>', hardenedRuntime='0'>'> are: {
+    "application-identifier" = "KZW9D97FJ7.com.data.yzExpo";
+    "aps-environment" = production;
+    "beta-reports-active" = 1;
+    "com.apple.developer.team-identifier" = KZW9D97FJ7;
+    "get-task-allow" = 0;
+}
+2021-03-31 07:55:56 +0000  Writing entitlements for <IDEDistributionItem: 0x7fefdb31bf70; bundleID='com.data.yzExpo', path='<DVTFilePath:0x7fefd5ed1b40:'/Users/bonustrack/Library/Developer/Xcode/Archives/2021-03-31/扬州世园会 2021-3-31, 3.54 PM.xcarchive/Products/Applications/扬州世园会.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fefd771f310; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fefd7413330; name='iPhone Developer: wei ni (5Z835M4LPS)', hash='A1DB2B2123DB6C6720A88A8823AE1CE23BE9E168', serialNumber='<DVTSigningCertificateSerialNumber: 0x7fefed456820>', certificateKinds='(
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-02-01 01:56:30 +0000''>', entitlements='{
+    "application-identifier" = "KZW9D97FJ7.com.data.yzExpo";
+    "aps-environment" = development;
+    "com.apple.developer.team-identifier" = KZW9D97FJ7;
+    "get-task-allow" = 1;
+}', teamID='KZW9D97FJ7', identifier='com.data.yzExpo', executablePath='<DVTFilePath:0x7fefd9d52300:'/Users/bonustrack/Library/Developer/Xcode/Archives/2021-03-31/扬州世园会 2021-3-31, 3.54 PM.xcarchive/Products/Applications/扬州世园会.app/扬州世园会'>', hardenedRuntime='0'>'> to: /var/folders/p2/cxvv7t312r7_0r53kpc0tnj40000gn/T/XcodeDistPipeline.~~~bxzdpy/entitlements~~~IEuJPQ
+2021-03-31 07:55:56 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '3C0760F95F49498CB3E13CAEE275A3C11B395009' '--entitlements' '/var/folders/p2/cxvv7t312r7_0r53kpc0tnj40000gn/T/XcodeDistPipeline.~~~bxzdpy/entitlements~~~IEuJPQ' '--preserve-metadata=identifier,flags,runtime' '/var/folders/p2/cxvv7t312r7_0r53kpc0tnj40000gn/T/XcodeDistPipeline.~~~bxzdpy/Root/Payload/扬州世园会.app'
+2021-03-31 07:55:56 +0000  /var/folders/p2/cxvv7t312r7_0r53kpc0tnj40000gn/T/XcodeDistPipeline.~~~bxzdpy/Root/Payload/扬州世园会.app: replacing existing signature
+2021-03-31 07:55:56 +0000  /var/folders/p2/cxvv7t312r7_0r53kpc0tnj40000gn/T/XcodeDistPipeline.~~~bxzdpy/Root/Payload/扬州世园会.app: signed app bundle with Mach-O thin (arm64) [com.data.yzExpo]
+2021-03-31 07:55:56 +0000  /usr/bin/codesign exited with 0
+2021-03-31 07:55:56 +0000  Processing step: IDEDistributionZipODRItemStep
+2021-03-31 07:55:56 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2021-03-31 07:55:56 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2021-03-31 07:55:56 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2021-03-31 07:55:56 +0000  Processing step: IDEDistributionCreateIPAStep
+2021-03-31 07:55:56 +0000  Running /usr/bin/ditto '-V' '-c' '-k' '--norsrc' '/var/folders/p2/cxvv7t312r7_0r53kpc0tnj40000gn/T/XcodeDistPipeline.~~~bxzdpy/Root' '/var/folders/p2/cxvv7t312r7_0r53kpc0tnj40000gn/T/XcodeDistPipeline.~~~bxzdpy/Packages/扬州世园会.ipa'
+2021-03-31 07:55:56 +0000  >>> Copying /var/folders/p2/cxvv7t312r7_0r53kpc0tnj40000gn/T/XcodeDistPipeline.~~~bxzdpy/Root 
+2021-03-31 07:55:56 +0000  copying file ./Payload/扬州世园会.app/_CodeSignature/CodeResources ... 
+2021-03-31 07:55:56 +0000  7673 bytes for ./Payload/扬州世园会.app/_CodeSignature/CodeResources
+copying file ./Payload/扬州世园会.app/LaunchImage-1100-Portrait-2436h@3x.png ... 
+2021-03-31 07:55:56 +0000  1029795 bytes for ./Payload/扬州世园会.app/LaunchImage-1100-Portrait-2436h@3x.png
+copying file ./Payload/扬州世园会.app/AudioCallViewController.nib ... 
+2021-03-31 07:55:56 +0000  5232 bytes for ./Payload/扬州世园会.app/AudioCallViewController.nib
+copying file ./Payload/扬州世园会.app/AppIcon60x60@2x.png ... 
+2021-03-31 07:55:56 +0000  10223 bytes for ./Payload/扬州世园会.app/AppIcon60x60@2x.png
+copying file ./Payload/扬州世园会.app/LaunchImage-800-667h@2x.png ... 
+2021-03-31 07:55:56 +0000  412062 bytes for ./Payload/扬州世园会.app/LaunchImage-800-667h@2x.png
+copying file ./Payload/扬州世园会.app/扬州世园会 ... 
+2021-03-31 07:55:56 +0000  1512016 bytes for ./Payload/扬州世园会.app/扬州世园会
+copying file ./Payload/扬州世园会.app/LaunchImage-1200-Portrait-2688h@3x.png ... 
+2021-03-31 07:55:56 +0000  1239644 bytes for ./Payload/扬州世园会.app/LaunchImage-1200-Portrait-2688h@3x.png
+2021-03-31 07:55:56 +0000  copying file ./Payload/扬州世园会.app/Base.lproj/Main.storyboardc/UIViewController-BYZ-38-t0r.nib ... 
+916 bytes for ./Payload/扬州世园会.app/Base.lproj/Main.storyboardc/UIViewController-BYZ-38-t0r.nib
+copying file ./Payload/扬州世园会.app/Base.lproj/Main.storyboardc/BYZ-38-t0r-view-8bC-Xf-vdC.nib ... 
+2021-03-31 07:55:56 +0000  1173 bytes for ./Payload/扬州世园会.app/Base.lproj/Main.storyboardc/BYZ-38-t0r-view-8bC-Xf-vdC.nib
+copying file ./Payload/扬州世园会.app/Base.lproj/Main.storyboardc/Info.plist ... 
+258 bytes for ./Payload/扬州世园会.app/Base.lproj/Main.storyboardc/Info.plist
+2021-03-31 07:55:56 +0000  copying file ./Payload/扬州世园会.app/Assets.car ... 
+2021-03-31 07:55:56 +0000  856847 bytes for ./Payload/扬州世园会.app/Assets.car
+copying file ./Payload/扬州世园会.app/LaunchImage-800-Portrait-736h@3x.png ... 
+2021-03-31 07:55:57 +0000  1021428 bytes for ./Payload/扬州世园会.app/LaunchImage-800-Portrait-736h@3x.png
+copying file ./Payload/扬州世园会.app/LaunchImage-1200-Portrait-1792h@2x.png ... 
+2021-03-31 07:55:57 +0000  590620 bytes for ./Payload/扬州世园会.app/LaunchImage-1200-Portrait-1792h@2x.png
+2021-03-31 07:55:57 +0000  copying file ./Payload/扬州世园会.app/Frameworks/ScPoc.framework/_CodeSignature/CodeResources ... 
+2021-03-31 07:55:57 +0000  2662 bytes for ./Payload/扬州世园会.app/Frameworks/ScPoc.framework/_CodeSignature/CodeResources
+2021-03-31 07:55:57 +0000  copying file ./Payload/扬州世园会.app/Frameworks/ScPoc.framework/config_auto.h.in ... 
+2021-03-31 07:55:57 +0000  2423 bytes for ./Payload/扬州世园会.app/Frameworks/ScPoc.framework/config_auto.h.in
+copying file ./Payload/扬州世园会.app/Frameworks/ScPoc.framework/ScPoc ... 
+2021-03-31 07:55:57 +0000  5427760 bytes for ./Payload/扬州世园会.app/Frameworks/ScPoc.framework/ScPoc
+copying file ./Payload/扬州世园会.app/Frameworks/ScPoc.framework/os_auto.h.in ... 
+2021-03-31 07:55:57 +0000  6222 bytes for ./Payload/扬州世园会.app/Frameworks/ScPoc.framework/os_auto.h.in
+copying file ./Payload/扬州世园会.app/Frameworks/ScPoc.framework/sip_autoconf.h.in ... 
+1441 bytes for ./Payload/扬州世园会.app/Frameworks/ScPoc.framework/sip_autoconf.h.in
+copying file ./Payload/扬州世园会.app/Frameworks/ScPoc.framework/m_auto.h.in ... 
+2021-03-31 07:55:57 +0000  1800 bytes for ./Payload/扬州世园会.app/Frameworks/ScPoc.framework/m_auto.h.in
+copying file ./Payload/扬州世园会.app/Frameworks/ScPoc.framework/Info.plist ... 
+806 bytes for ./Payload/扬州世园会.app/Frameworks/ScPoc.framework/Info.plist
+2021-03-31 07:55:57 +0000  copying file ./Payload/扬州世园会.app/Frameworks/AFNetworking.framework/_CodeSignature/CodeResources ... 
+2021-03-31 07:55:57 +0000  1798 bytes for ./Payload/扬州世园会.app/Frameworks/AFNetworking.framework/_CodeSignature/CodeResources
+copying file ./Payload/扬州世园会.app/Frameworks/AFNetworking.framework/AFNetworking ... 
+2021-03-31 07:55:57 +0000  554752 bytes for ./Payload/扬州世园会.app/Frameworks/AFNetworking.framework/AFNetworking
+copying file ./Payload/扬州世园会.app/Frameworks/AFNetworking.framework/Info.plist ... 
+2021-03-31 07:55:57 +0000  744 bytes for ./Payload/扬州世园会.app/Frameworks/AFNetworking.framework/Info.plist
+copying file ./Payload/扬州世园会.app/embedded.mobileprovision ... 
+2021-03-31 07:55:57 +0000  7520 bytes for ./Payload/扬州世园会.app/embedded.mobileprovision
+copying file ./Payload/扬州世园会.app/Info.plist ... 
+2021-03-31 07:55:57 +0000  2114 bytes for ./Payload/扬州世园会.app/Info.plist
+copying file ./Payload/扬州世园会.app/PkgInfo ... 
+8 bytes for ./Payload/扬州世园会.app/PkgInfo
+2021-03-31 07:55:57 +0000  /usr/bin/ditto exited with 0
+2021-03-31 07:55:57 +0000  Processing step: IDEDistributionAppStoreInformationStep
+2021-03-31 07:55:57 +0000  Skipping step: IDEDistributionAppStoreInformationStep because it said so
+2021-03-31 07:55:57 +0000  Processing step: IDEDistributionGenerateProcessedDistributionItems
+2021-03-31 07:55:57 +0000  IDEDistributionItem init <DVTFilePath:0x7fefe8e12040:'/var/folders/p2/cxvv7t312r7_0r53kpc0tnj40000gn/T/XcodeDistPipeline.~~~bxzdpy/Root/Payload/扬州世园会.app/Frameworks/ScPoc.framework'>
+2021-03-31 07:55:57 +0000  IDEDistributionItem init <DVTFilePath:0x7fefed175c60:'/var/folders/p2/cxvv7t312r7_0r53kpc0tnj40000gn/T/XcodeDistPipeline.~~~bxzdpy/Root/Payload/扬州世园会.app/Frameworks/AFNetworking.framework'>
+2021-03-31 07:55:57 +0000  IDEDistributionItem init <DVTFilePath:0x7feff0073fb0:'/var/folders/p2/cxvv7t312r7_0r53kpc0tnj40000gn/T/XcodeDistPipeline.~~~bxzdpy/Root/Payload/扬州世园会.app'>
+2021-03-31 07:55:57 +0000  Processing step: IDEDistributionCreateManifestStep
+2021-03-31 07:55:57 +0000  Skipping step: IDEDistributionCreateManifestStep because it said so

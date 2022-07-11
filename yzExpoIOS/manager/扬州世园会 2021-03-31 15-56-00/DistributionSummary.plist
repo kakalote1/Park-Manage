@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>扬州世园会.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>arm64</string>
+			</array>
+			<key>bitcode</key>
+			<false/>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>3C0760F95F49498CB3E13CAEE275A3C11B395009</string>
+				<key>dateExpires</key>
+				<string>2022/1/31</string>
+				<key>type</key>
+				<string>iOS Distribution</string>
+			</dict>
+			<key>embeddedBinaries</key>
+			<array>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>bitcode</key>
+					<false/>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>3C0760F95F49498CB3E13CAEE275A3C11B395009</string>
+						<key>dateExpires</key>
+						<string>2022/1/31</string>
+						<key>type</key>
+						<string>iOS Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>AFNetworking.framework</string>
+					<key>symbols</key>
+					<false/>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>KZW9D97FJ7</string>
+						<key>name</key>
+						<string>Yangzhou Yuanbo Investment Development Co., Ltd. </string>
+					</dict>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>bitcode</key>
+					<false/>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>3C0760F95F49498CB3E13CAEE275A3C11B395009</string>
+						<key>dateExpires</key>
+						<string>2022/1/31</string>
+						<key>type</key>
+						<string>iOS Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>ScPoc.framework</string>
+					<key>symbols</key>
+					<false/>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>KZW9D97FJ7</string>
+						<key>name</key>
+						<string>Yangzhou Yuanbo Investment Development Co., Ltd. </string>
+					</dict>
+				</dict>
+			</array>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>KZW9D97FJ7.com.data.yzExpo</string>
+				<key>aps-environment</key>
+				<string>production</string>
+				<key>beta-reports-active</key>
+				<true/>
+				<key>com.apple.developer.team-identifier</key>
+				<string>KZW9D97FJ7</string>
+				<key>get-task-allow</key>
+				<false/>
+			</dict>
+			<key>name</key>
+			<string>扬州世园会.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>de2ca410-e719-402b-b395-cf5899b46a90</string>
+				<key>name</key>
+				<string>yzExpo</string>
+			</dict>
+			<key>symbols</key>
+			<false/>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>KZW9D97FJ7</string>
+				<key>name</key>
+				<string>Yangzhou Yuanbo Investment Development Co., Ltd. </string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>

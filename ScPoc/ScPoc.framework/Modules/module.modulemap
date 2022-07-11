@@ -1,6 +1,0 @@
-framework module ScPoc {
-  umbrella header "ScPoc.h"
-
-  export *
-  module * { export * }
-}
